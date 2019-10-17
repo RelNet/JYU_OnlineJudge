@@ -5,8 +5,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class CompileGPP extends CompileMain {
-    public CompileGPP(File inFile, String inSubmitID) {
+public class CompileJAVA extends CompileMain {
+    public CompileJAVA(File inFile, String inSubmitID) {
         super(inFile, inSubmitID);
     }
 
@@ -14,7 +14,7 @@ public class CompileGPP extends CompileMain {
     public void compileIt() {
         Process order;
         try {
-            order = Runtime.getRuntime().exec("g++ -o " + INITIAL_FILE_ADDRESS + "/" + submitID + "/t" + submitID + sourceCodeFile.toString());
+            order = Runtime.getRuntime().exec("javac " + INITIAL_FILE_ADDRESS + "/" + submitID + "/t" + submitID + sourceCodeFile.toString());
             BufferedReader inError = new BufferedReader(new InputStreamReader(order.getInputStream()));
             String str;
             while ((str = inError.readLine()) != null) {
