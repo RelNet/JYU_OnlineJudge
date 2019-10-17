@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d562fd9d-a3cb-4718-9dd7-dd687e65dea6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/CompileFile/CompileJAVA.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CompileFile/Test/TestCompileJAVA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CompileFile/CompileGPP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CompileFile/CompileGPP.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -84,7 +81,7 @@
       <workItem from="1571239891578" duration="15000" />
       <workItem from="1571285033982" duration="2463000" />
       <workItem from="1571298540349" duration="1239000" />
-      <workItem from="1571307178140" duration="8317000" />
+      <workItem from="1571307178140" duration="8956000" />
     </task>
     <servers />
   </component>
