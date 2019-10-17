@@ -21,6 +21,7 @@ public abstract class CompileMain {
     List<String> errorCodes;
 
     static final String INITIAL_FILE_ADDRESS = "/submit";
+//    static final String INITIAL_FILE_ADDRESS = "C:\\User\\H\\Desktop\\OJTest\\submit";
 
     CompileMain(File inFile, String inSubmitID) {
         sourceCodeFile = inFile;

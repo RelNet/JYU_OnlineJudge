@@ -14,14 +14,18 @@ public class CompileGPP extends CompileMain {
     public void compileIt() {
         Process order;
         try {
-            order = Runtime.getRuntime().exec("g++ -o " + INITIAL_FILE_ADDRESS + "/" + submitID + "/t" + submitID + " " + sourceCodeFile.toString());
+            String[] commandStrings = {"sh", "-c"
+                    , "g++ -o " + INITIAL_FILE_ADDRESS + "/" + submitID + "/t" + submitID + " " + sourceCodeFile.toString()};
+
+            order = Runtime.getRuntime().exec(commandStrings);
+            order.waitFor();
             BufferedReader inError = new BufferedReader(new InputStreamReader(order.getInputStream()));
             String str;
             while ((str = inError.readLine()) != null) {
                 errorCodes.add(str);
             }
             inError.close();
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }

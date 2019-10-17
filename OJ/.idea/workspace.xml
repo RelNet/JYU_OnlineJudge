@@ -3,6 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="d562fd9d-a3cb-4718-9dd7-dd687e65dea6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Backend/CompileFile/CompileGPP.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Backend/CompileFile/CompileGPP.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Backend/CompileFile/CompileMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Backend/CompileFile/CompileMain.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Backend/CompileFile/Test/TestCompileGPP.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Backend/CompileFile/Test/TestCompileGPP.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CompileFile/CompileGPP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CompileFile/CompileGPP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CompileFile/CompileMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CompileFile/CompileMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CompileFile/Test/TestCompileGPP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CompileFile/Test/TestCompileGPP.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,6 +38,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunDashboard">
@@ -81,7 +88,7 @@
       <workItem from="1571239891578" duration="15000" />
       <workItem from="1571285033982" duration="2463000" />
       <workItem from="1571298540349" duration="1239000" />
-      <workItem from="1571307178140" duration="8956000" />
+      <workItem from="1571307178140" duration="16271000" />
     </task>
     <servers />
   </component>
@@ -140,5 +147,21 @@
         <option value="1" />
       </set>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/CompileFile/CompileGPP.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/CompileFile/CompileGPP.java</url>
+          <line>26</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
