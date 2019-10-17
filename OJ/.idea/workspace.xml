@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d562fd9d-a3cb-4718-9dd7-dd687e65dea6" name="Default Changelist" comment="" />
+    <list default="true" id="d562fd9d-a3cb-4718-9dd7-dd687e65dea6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CompileFile/CompileGPP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CompileFile/CompileGPP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CompileFile/Test/TestCompileGPP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CompileFile/Test/TestCompileGPP.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,6 +85,8 @@
       <workItem from="1571285033982" duration="2463000" />
       <workItem from="1571298540349" duration="1239000" />
       <workItem from="1571307178140" duration="16788000" />
+      <workItem from="1571328247198" duration="267000" />
+      <workItem from="1571328860426" duration="243000" />
     </task>
     <servers />
   </component>

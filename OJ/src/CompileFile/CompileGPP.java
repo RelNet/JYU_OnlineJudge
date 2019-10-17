@@ -14,8 +14,8 @@ public class CompileGPP extends CompileMain {
     public void compileIt() {
         Process order;
         try {
-            String[] commandStrings = {"g++", "-o"
-                    , INITIAL_FILE_ADDRESS + "/" + submitID + "/t" + submitID, sourceCodeFile.toString()};
+            String[] commandStrings = {"/bin/sh", "-c",
+                    "g++ -o " + INITIAL_FILE_ADDRESS + "/" + submitID + "/t" + submitID + " " + sourceCodeFile.toString()};
 
             order = Runtime.getRuntime().exec(commandStrings);
             order.waitFor();

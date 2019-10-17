@@ -9,6 +9,11 @@ import java.util.List;
 public class TestCompileGPP {
     public static void main(String[] args) {
         File f = new File("/home/h/Desktop/test.cpp");
+        if (f.exists()) {
+            System.out.println("exist!");
+        } else {
+            return;
+        }
         CompileMain test = new CompileGPP(f, "1");
 
         test.compileIt();
