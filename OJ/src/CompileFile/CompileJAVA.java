@@ -1,5 +1,7 @@
 package CompileFile;
 
+import RunScript.RunLinuxCMD;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -12,16 +14,20 @@ public class CompileJAVA extends CompileMain {
 
     @Override
     public void compileIt() {
-        Process order;
+        RunLinuxCMD order;
         try {
-            order = Runtime.getRuntime().exec("javac " + INITIAL_FILE_ADDRESS + "/" + submitID + "/t" + submitID + " " + sourceCodeFile.toString());
-            BufferedReader inError = new BufferedReader(new InputStreamReader(order.getInputStream()));
+            String[] commandStrings = {"/bin/sh", "-c",
+                    "javac " + INITIAL_FILE_ADDRESS + "/" + submitID + "/t" + submitID + " " + sourceCodeFile.toString()};
+
+            order = new RunLinuxCMD(commandStrings);
+            order.waitFor();
+            BufferedReader inError = new BufferedReader(new InputStreamReader(order.getErrorStream()));
             String str;
             while ((str = inError.readLine()) != null) {
                 errorCodes.add(str);
             }
             inError.close();
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }

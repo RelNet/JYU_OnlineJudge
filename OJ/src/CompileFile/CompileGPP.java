@@ -1,5 +1,7 @@
 package CompileFile;
 
+import RunScript.RunLinuxCMD;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -12,14 +14,14 @@ public class CompileGPP extends CompileMain {
 
     @Override
     public void compileIt() {
-        Process order;
+        RunLinuxCMD order;
         try {
             String[] commandStrings = {"/bin/sh", "-c",
                     "g++ -o " + INITIAL_FILE_ADDRESS + "/" + submitID + "/t" + submitID + " " + sourceCodeFile.toString()};
 
-            order = Runtime.getRuntime().exec(commandStrings);
+            order = new RunLinuxCMD(commandStrings);
             order.waitFor();
-            BufferedReader inError = new BufferedReader(new InputStreamReader(order.getInputStream()));
+            BufferedReader inError = new BufferedReader(new InputStreamReader(order.getErrorStream()));
             String str;
             while ((str = inError.readLine()) != null) {
                 errorCodes.add(str);
