@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d562fd9d-a3cb-4718-9dd7-dd687e65dea6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/RunJudgeProgram/Run.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/RunJudgeProgram/RunJAVA.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/RunWeb/Run.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/RunWeb/Spring/Config/OJWebAppInitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/RunWeb/Spring/Config/RootConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/RunWeb/Spring/Config/WebConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/RunWeb/Spring/mvc/HomeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CompileFile/CompileMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CompileFile/CompileMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/sites/home.jsp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,18 +29,31 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1SHwKcAW3GEcjq5euNYQwlu8Kju" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Project\JYU_OnlineJudge\OJ\web\sites" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -50,7 +67,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Maven.test">
     <configuration name="TestCompileGPP" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="CompileFile.Test.TestCompileGPP" />
       <module name="Backend" />
@@ -64,6 +81,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="test" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list />
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.TestCompileGPP" />
+      <item itemvalue="Maven.test" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.TestCompileGPP" />
@@ -88,7 +132,12 @@
       <workItem from="1571307178140" duration="16788000" />
       <workItem from="1571328247198" duration="267000" />
       <workItem from="1571328860426" duration="5033000" />
-      <workItem from="1571373064433" duration="7657000" />
+      <workItem from="1571373064433" duration="8245000" />
+      <workItem from="1571386067067" duration="117000" />
+      <workItem from="1571388042962" duration="47000" />
+      <workItem from="1571389360798" duration="2000" />
+      <workItem from="1571391413424" duration="446000" />
+      <workItem from="1571396211362" duration="9986000" />
     </task>
     <servers />
   </component>
@@ -147,5 +196,8 @@
         <option value="1" />
       </set>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
