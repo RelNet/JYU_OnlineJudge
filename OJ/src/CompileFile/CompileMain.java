@@ -20,7 +20,7 @@ public abstract class CompileMain {
     // 接收编译信息
     List<String> errorCodes;
 
-    static final String INITIAL_FILE_ADDRESS = "/submit";
+    static final public String INITIAL_FILE_ADDRESS = "/submit";
 //    static final String INITIAL_FILE_ADDRESS = "C:\\User\\H\\Desktop\\OJTest\\submit";
 
     CompileMain(File inFile, String inSubmitID) {
