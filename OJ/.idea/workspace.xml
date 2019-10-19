@@ -1,40 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d562fd9d-a3cb-4718-9dd7-dd687e65dea6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/javax_servlet_api_3_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/commons-lang3-3.9-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/commons-lang3-3.9-test-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/commons-lang3-3.9-tests.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/commons-lang3-3.9.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/javax.servlet-api-3.1.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/java/RunWeb/Spring/Data/OJ.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/java/RunWeb/Spring/Data/OJRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/java/RunWeb/Spring/Web/OJControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/OJWeb/HomeControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Backend/CompileFile/CompileGPP.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Backend/CompileFile/CompileJAVA.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Backend/CompileFile/CompileMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Backend/CompileFile/Test/TestCompileGPP.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Backend/CompileFile/Test/TestCompileJAVA.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CompileFile/CompileGPP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/CompileFile/CompileGPP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CompileFile/CompileJAVA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/CompileFile/CompileJAVA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CompileFile/CompileMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/CompileFile/CompileMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CompileFile/Test/TestCompileGPP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/CompileFile/Test/TestCompileGPP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CompileFile/Test/TestCompileJAVA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/CompileFile/Test/TestCompileJAVA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RunJudgeProgram/Run.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/RunJudgeProgram/Run.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RunJudgeProgram/RunJAVA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/RunJudgeProgram/RunJAVA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RunScript/RunLinuxCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/RunScript/RunLinuxCMD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RunWeb/Run.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/RunWeb/Run.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RunWeb/Spring/Config/OJWebAppInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/RunWeb/Spring/Config/OJWebAppInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RunWeb/Spring/Config/RootConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/RunWeb/Spring/Config/RootConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RunWeb/Spring/Config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/RunWeb/Spring/Config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RunWeb/Spring/mvc/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/RunWeb/Spring/Web/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../problems/1/p.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../problems/1/p.txt" afterDir="false" />
-    </list>
+    <list default="true" id="d562fd9d-a3cb-4718-9dd7-dd687e65dea6" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +148,7 @@
       <workItem from="1571388042962" duration="47000" />
       <workItem from="1571389360798" duration="2000" />
       <workItem from="1571391413424" duration="446000" />
-      <workItem from="1571396211362" duration="18375000" />
+      <workItem from="1571396211362" duration="18453000" />
     </task>
     <servers />
   </component>
