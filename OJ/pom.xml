@@ -20,14 +20,14 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
-            <version>${mockito.version}</version>
+            <version>1.10.19</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+            <version>3.0.1</version>
         </dependency>
 
         <!-- JSP文件需要的依赖-->
@@ -255,12 +255,12 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- kaptcha -->
-        <dependency>
-            <groupId>com.google</groupId>
-            <artifactId>kaptcha</artifactId>
-            <version>2.3.2</version>
-        </dependency>
+<!--        &lt;!&ndash; kaptcha &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.google</groupId>-->
+<!--            <artifactId>kaptcha</artifactId>-->
+<!--            <version>2.3.2</version>-->
+<!--        </dependency>-->
 
         <!-- kryo -->
         <dependency>
@@ -304,12 +304,12 @@
             <version>1.2.3</version>
         </dependency>
 
-        <!-- ojdbc6 -->
-        <dependency>
-            <groupId>ojdbc6</groupId>
-            <artifactId>ojdbc6</artifactId>
-            <version>1.0</version>
-        </dependency>
+<!--        &lt;!&ndash; ojdbc6 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>ojdbc6</groupId>-->
+<!--            <artifactId>ojdbc6</artifactId>-->
+<!--            <version>1.0</version>-->
+<!--        </dependency>-->
 
         <!-- quartz -->
         <dependency>
@@ -363,6 +363,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
+            <version>4.3.18.RELEASE</version>
         </dependency>
 
         <!-- standard -->
@@ -372,18 +373,37 @@
             <version>1.1.2</version>
         </dependency>
 
-        <!-- ueditor -->
         <dependency>
-            <groupId>com.baidu</groupId>
-            <artifactId>ueditor</artifactId>
-            <version>1.0</version>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <version>2.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <version>2.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.10.19</version>
+            <scope>compile</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.baidu</groupId>
-            <artifactId>ueditor-mini</artifactId>
-            <version>1.0.0</version>
-        </dependency>
+        <!--        &lt;!&ndash; ueditor &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.baidu</groupId>-->
+<!--            <artifactId>ueditor</artifactId>-->
+<!--            <version>1.0</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>com.baidu</groupId>-->
+<!--            <artifactId>ueditor-mini</artifactId>-->
+<!--            <version>1.0.0</version>-->
+<!--        </dependency>-->
     </dependencies>
 
     <developers>

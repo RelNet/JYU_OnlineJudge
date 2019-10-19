@@ -5,12 +5,14 @@ import javax.xml.crypto.Data;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import java.util.Date;
+
 public class OJ {
     private final Long ID;
     private final String[] messages;
-    private final Data time;
+    private final Date time;
 
-    public OJ(Long inID, String[] inMessages, Data inTime) {
+    public OJ(Long inID, String[] inMessages, Date inTime) {
         this.ID = inID;
         this.messages = inMessages;
         time = inTime;
@@ -24,7 +26,7 @@ public class OJ {
         return messages;
     }
 
-    public Data getTime() {
+    public Date getTime() {
         return time;
     }
 
