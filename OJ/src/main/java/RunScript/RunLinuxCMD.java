@@ -1,4 +1,4 @@
-package java.RunScript;
+package RunScript;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 /*
     用于运行脚本和命令行指令
  */
-public class RunLinuxCMD {
+public class RunLinuxCMD extends Thread{
     private String[] commands;
 
     // 运行脚本的进程

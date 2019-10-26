@@ -1,7 +1,7 @@
-package java.RunJudgeProgram;
+package RunJudgeProgram;
 
-import java.CompileFile.CompileMain;
-import java.RunScript.RunLinuxCMD;
+import CompileFile.CompileMain;
+import RunScript.RunLinuxCMD;
 
 import java.io.*;
 import java.util.concurrent.TimeUnit;

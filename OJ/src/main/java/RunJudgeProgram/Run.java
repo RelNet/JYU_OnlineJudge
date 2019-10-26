@@ -1,6 +1,6 @@
-package java.RunJudgeProgram;
+package RunJudgeProgram;
 
-import java.CompileFile.CompileMain;
+import CompileFile.CompileMain;
 
 import java.io.File;
 
@@ -15,7 +15,8 @@ abstract public class Run {
 
     boolean hasInput;
 
-    public static final String PROBLEM_SET_ADDRESS = "/problems";
+    // 这个是暂定的问题存放路径
+    public static final String PROBLEM_SET_PATH = "/problems";
 
     Run(long time, String inID, String inProblemID, boolean hasIn) {
         timeout = time;
@@ -30,7 +31,7 @@ abstract public class Run {
     }
 
     File[] getInputFileList() {
-        File dir = new File(PROBLEM_SET_ADDRESS + "/" + problemID + "/in");
+        File dir = new File(PROBLEM_SET_PATH + "/" + problemID + "/in");
         return dir.listFiles();
     }
 

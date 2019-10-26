@@ -1,7 +1,7 @@
-package java.CompileFile.Test;
+package CompileFile.Test;
 
-import java.CompileFile.CompileJAVA;
-import java.CompileFile.CompileMain;
+import CompileFile.CompileJAVA;
+import CompileFile.CompileMain;
 
 import java.io.File;
 import java.util.List;

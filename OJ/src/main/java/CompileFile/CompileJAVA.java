@@ -1,6 +1,6 @@
-package java.CompileFile;
+package CompileFile;
 
-import java.RunScript.RunLinuxCMD;
+import RunScript.RunLinuxCMD;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -35,7 +35,7 @@ public class CompileJAVA extends CompileMain {
     @Override
     // 检查errorCodes，如果出现子串"error"则说明编译出错
     public boolean hasCompileError() {
-        for (var errorCode : errorCodes) {
+        for (String errorCode : errorCodes) {
             if (errorCode.contains("error")) {
                 return true;
             }

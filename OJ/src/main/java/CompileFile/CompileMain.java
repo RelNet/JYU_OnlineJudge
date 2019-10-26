@@ -1,4 +1,4 @@
-package java.CompileFile;
+package CompileFile;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public abstract class CompileMain {
     CompileMain(File inFile, String inSubmitID) {
         sourceCodeFile = inFile;
         submitID = inSubmitID;
-        errorCodes = new ArrayList<>();
+        errorCodes = new ArrayList<String>();
 
         // 这个应该放在读取那里
 //        File dir = new File(INITIAL_FILE_ADDRESS + "/" + submitID);
