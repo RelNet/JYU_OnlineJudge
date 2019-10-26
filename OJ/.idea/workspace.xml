@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2eabada9-1faa-4eb7-91c4-4baa90e30a7b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CompileFile/CompileGPP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CompileFile/CompileGPP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CompileFile/CompileJAVA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CompileFile/CompileJAVA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CompileFile/CompileMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CompileFile/CompileMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CompileFile/Test/TestCompileGPP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CompileFile/Test/TestCompileGPP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CompileFile/Test/TestCompileJAVA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CompileFile/Test/TestCompileJAVA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RunJudgeProgram/Run.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RunJudgeProgram/Run.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RunJudgeProgram/RunJAVA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RunJudgeProgram/RunJAVA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RunScript/RunLinuxCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RunScript/RunLinuxCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +37,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="http.proxy" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -76,7 +67,9 @@
       <workItem from="1571873027517" duration="2358000" />
       <workItem from="1571971373179" duration="4809000" />
       <workItem from="1572027318344" duration="204000" />
-      <workItem from="1572028270994" duration="278000" />
+      <workItem from="1572028270994" duration="1073000" />
+      <workItem from="1572093927926" duration="392000" />
+      <workItem from="1572094333542" duration="3687000" />
     </task>
     <servers />
   </component>
