@@ -2,6 +2,7 @@ package Data.Users;
 
 import java.io.Serializable;
 
+// 存放用户数据
 public class MainUser implements Serializable {
     private String username;
     private String password;
