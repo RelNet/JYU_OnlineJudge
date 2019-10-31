@@ -9,8 +9,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class CompileJAVA extends CompileMain {
-    public CompileJAVA(File inFile, String inSubmitID) {
-        super(inFile, inSubmitID);
+    public CompileJAVA(Long inSubmitID) {
+        super(inSubmitID);
     }
 
     @Override
@@ -18,17 +18,10 @@ public class CompileJAVA extends CompileMain {
         RunLinuxCMD order;
         try {
             String[] commandStrings = {"/bin/sh", "-c",
-                    "javac " + INITIAL_FILE_ADDRESS + "/" + submitID + "/t" + submitID + " " + sourceCodeFile.toString()};
+                    "javac " + INITIAL_FILE_ADDRESS + "/" + submitID.toString() + "/" + submitID.toString() + ".java"};
 
             order = new RunLinuxCMD(commandStrings);
-            order.waitFor();
-            BufferedReader inError = new BufferedReader(new InputStreamReader(order.getErrorStream()));
-            String str;
-            while ((str = inError.readLine()) != null) {
-                errorCodes.add(str);
-            }
-            inError.close();
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -42,5 +35,19 @@ public class CompileJAVA extends CompileMain {
             }
         }
         return false;
+    }
+
+    @Override
+    public void setErrorCodes() {
+        try {
+            BufferedReader inError = new BufferedReader(new InputStreamReader(order.getErrorStream()));
+            String str;
+            while ((str = inError.readLine()) != null) {
+                errorCodes.add(str);
+            }
+            inError.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
