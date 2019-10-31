@@ -8,8 +8,9 @@ import JudgeSystem.CompileFile.CompileMain;
 import java.util.Queue;
 
 public class StartJudge {
-    private Queue<MainSubmit> submitQueue;
+    private volatile Queue<MainSubmit> submitQueue;
     private Object lockCompile = new Object();
+    CompileMain compiler;
 
 
     /*
@@ -19,25 +20,26 @@ public class StartJudge {
     void compile() {
         Object lockErrorStream = new Object();
         MainSubmit topSubmit = submitQueue.remove();
-        synchronized (lockErrorStream) {
-            new Thread(() -> {
-                CompileMain compiler;
-                switch (topSubmit.getLanguage()) {
-                    case GPP:
-                        compiler = new CompileGPP(topSubmit.getSubmitID());
-                        break;
-                    case JAVA:
-                        compiler = new CompileJAVA(topSubmit.getSubmitID());
-                    case PYTHON:
-                    default:
-                        throw new NullPointerException("未定义的语言类型");
-                }
-                try {
-                    compiler.getOrder().waitFor();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            });
+        synchronized (lockCompile) {
+            synchronized (lockErrorStream) {
+                new Thread(() -> {
+                    switch (topSubmit.getLanguage()) {
+                        case GPP:
+                            compiler = new CompileGPP(topSubmit.getSubmitID());
+                            break;
+                        case JAVA:
+                            compiler = new CompileJAVA(topSubmit.getSubmitID());
+                        case PYTHON:
+                        default:
+                            throw new NullPointerException("未定义的语言类型");
+                    }
+                    try {
+                        compiler.getOrder().waitFor();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
         }
 
         synchronized (lockErrorStream) {
