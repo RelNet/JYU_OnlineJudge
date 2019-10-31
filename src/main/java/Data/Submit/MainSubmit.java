@@ -1,17 +1,19 @@
-package Data.Problem;
+package Data.Submit;
+
+import JudgeSystem.JudgeLanguage;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 // 存放problem数据
-public class MainProblem implements Serializable {
+public class MainSubmit implements Serializable {
     private ArrayList<String> courseCodes;
     private Integer submitMode;
     private String username;
     private Long submitID;
     private Date submitDate;
+    private JudgeLanguage language;
 
     public Date getSubmitDate() {
         return submitDate;
@@ -47,6 +49,14 @@ public class MainProblem implements Serializable {
 
     public String getUsername() {
         return username;
+    }
+
+    public JudgeLanguage getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(JudgeLanguage language) {
+        this.language = language;
     }
 
     public Long getSubmitID() {

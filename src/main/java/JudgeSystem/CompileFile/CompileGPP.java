@@ -8,26 +8,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class CompileGPP extends CompileMain {
-    public CompileGPP(File inFile, String inSubmitID) {
-        super(inFile, inSubmitID);
+    public CompileGPP(Long inSubmitID) {
+        super(inSubmitID);
     }
 
     @Override
     public void compileIt() {
-        RunLinuxCMD order;
         try {
             String[] commandStrings = {"/bin/sh", "-c",
-                    "g++ -o " + INITIAL_FILE_ADDRESS + "/" + submitID + "/t" + submitID + " " + sourceCodeFile.toString()};
+                    "g++ -o " + INITIAL_FILE_ADDRESS + "/" + submitID.toString() + "/" + submitID.toString() + ".cpp"};
 
             order = new RunLinuxCMD(commandStrings);
-            order.waitFor();
-            BufferedReader inError = new BufferedReader(new InputStreamReader(order.getErrorStream()));
-            String str;
-            while ((str = inError.readLine()) != null) {
-                errorCodes.add(str);
-            }
-            inError.close();
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -41,5 +33,19 @@ public class CompileGPP extends CompileMain {
             }
         }
         return false;
+    }
+
+    @Override
+    public void setErrorCodes() {
+        try {
+            BufferedReader inError = new BufferedReader(new InputStreamReader(order.getErrorStream()));
+            String str;
+            while ((str = inError.readLine()) != null) {
+                errorCodes.add(str);
+            }
+            inError.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
