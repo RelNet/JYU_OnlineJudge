@@ -1,0 +1,6 @@
+# Spring Boot配置文件
+
+# 激活环境配置
+spring:
+  profiles:
+    active: dev
