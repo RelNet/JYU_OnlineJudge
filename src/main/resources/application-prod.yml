@@ -6,3 +6,7 @@ spring:
     encoding:
       charset: UTF-8
       force: true
+    # Thymeleaf配置
+  thymeleaf:
+    encoding: UTF-8
+    mode: LEGACYHTML5
