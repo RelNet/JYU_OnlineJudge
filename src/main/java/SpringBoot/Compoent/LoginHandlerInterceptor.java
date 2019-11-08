@@ -7,9 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 登陆拦截器，没有进行登陆就不能进入控制面板
+ * 登陆拦截器，没有进行登陆就不能进行一些用户操作
  */
 public class LoginHandlerInterceptor implements HandlerInterceptor {
+    // 预先检查
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Object user = request.getSession().getAttribute("loginUser");

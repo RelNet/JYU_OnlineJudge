@@ -1,23 +1,50 @@
 package SpringBoot.Controllers;
 
+import Data.Users.MainUser;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Controller
 public class HomeController {
-    @RequestMapping(path = "problemset", method = RequestMethod.GET)
-    public String goProblemSet() {
+    @GetMapping(path = "problemset")
+    public String toProblemSet() {
         return "problemset";
     }
 
-    @RequestMapping(path = "contests", method = RequestMethod.GET)
-    public String goContests() {
+    @GetMapping(path = "contests")
+    public String toContests() {
         return "contests";
     }
 
-    @RequestMapping(path = "status", method = RequestMethod.GET)
-    public String goStatus() {
+    @GetMapping(path = "status")
+    public String toStatus() {
         return "status";
+    }
+
+    @GetMapping(path = "userpage")
+    public String toUserPage() {
+        return "userpage";
+    }
+
+    @GetMapping(path = "register")
+    public String toRegister(){
+        return "register";
+    }
+
+    @GetMapping(path = "/")
+    public String toHome(){
+        return "index";
+    }
+
+    // 提交登陆表单之后刷新
+    @PostMapping("/")
+    public String login(MainUser user,
+                              Map<String, Object> informationMap, HttpSession session) {
+        session.setAttribute("loginUser", user.getUsername());
+        return "index";
     }
 }

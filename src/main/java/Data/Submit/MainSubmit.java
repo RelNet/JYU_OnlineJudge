@@ -3,7 +3,9 @@ package Data.Submit;
 import Data.Problems.MainProblem;
 import Data.Users.MainUser;
 import JudgeSystem.JudgeLanguage;
+import JudgeSystem.JudgeMode;
 import JudgeSystem.JudgeSystemConstant;
+import JudgeSystem.ProblemType;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,14 +14,30 @@ import java.util.List;
 // 存放problem数据
 public class MainSubmit implements Serializable {
     private List<String> courseCodes;
-    private Integer submitMode;     // 记录是ACM还是IO判断方式
+    private JudgeMode judgeMode;     // 记录是ACM还是IO判断方式
     private MainUser user;
     private Long submitID;
     private Date submitDate;
     private JudgeLanguage languageType;
     private MainProblem problem;
     private JudgeSystemConstant controlCode;
-    private List<JudgeSystemConstant> sampleControlCodeList;
+    private ProblemType problemType;
+
+    public JudgeMode getJudgeMode() {
+        return judgeMode;
+    }
+
+    public void setJudgeMode(JudgeMode judgeMode) {
+        this.judgeMode = judgeMode;
+    }
+
+    public ProblemType getProblemType() {
+        return problemType;
+    }
+
+    public void setProblemType(ProblemType problemType) {
+        this.problemType = problemType;
+    }
 
     public MainProblem getProblem() {
         return problem;
@@ -27,14 +45,6 @@ public class MainSubmit implements Serializable {
 
     public JudgeSystemConstant getControlCode() {
         return controlCode;
-    }
-
-    public List<JudgeSystemConstant> getSampleControlCodeList() {
-        return sampleControlCodeList;
-    }
-
-    public void setSampleControlCodeList(List<JudgeSystemConstant> sampleControlCodeList) {
-        this.sampleControlCodeList = sampleControlCodeList;
     }
 
     public void setControlCode(JudgeSystemConstant controlCode) {
@@ -61,16 +71,8 @@ public class MainSubmit implements Serializable {
         this.courseCodes = courseCodes;
     }
 
-    public void setSubmitMode(Integer submitMode) {
-        this.submitMode = submitMode;
-    }
-
     public void setSubmitID(Long submitID) {
         this.submitID = submitID;
-    }
-
-    public Integer getSubmitMode() {
-        return submitMode;
     }
 
     public MainUser getUser() {
