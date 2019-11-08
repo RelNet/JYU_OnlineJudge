@@ -8,10 +8,14 @@ import java.util.List;
 
 public class TestCompileJAVA {
 <<<<<<< HEAD
+<<<<<<< HEAD
     public static void main(String[] args) {
 =======
 //    public static void main(String[] args) {
 >>>>>>> 6e9b4a50a74e5b7d464672ac8a59ffb6352bfaad
+=======
+//    public static void main(String[] args) {
+>>>>>>> Backend-database
 //        File f = new File("/home/h/Desktop/testJ.java");
 //        CompileMain test = new CompileJAVA(f, "1");
 //
@@ -23,8 +27,12 @@ public class TestCompileJAVA {
 //            }
 //        }
 <<<<<<< HEAD
+<<<<<<< HEAD
     }
 =======
 //    }
 >>>>>>> 6e9b4a50a74e5b7d464672ac8a59ffb6352bfaad
+=======
+//    }
+>>>>>>> Backend-database
 }
