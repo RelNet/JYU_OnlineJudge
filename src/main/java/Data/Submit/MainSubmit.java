@@ -1,19 +1,59 @@
 package Data.Submit;
 
+import Data.Problems.MainProblem;
+import Data.Users.MainUser;
 import JudgeSystem.JudgeLanguage;
+import JudgeSystem.JudgeMode;
+import JudgeSystem.JudgeSystemConstant;
+import JudgeSystem.ProblemType;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 // 存放problem数据
 public class MainSubmit implements Serializable {
-    private ArrayList<String> courseCodes;
-    private Integer submitMode;
-    private String username;
+    private List<String> courseCodes;
+    private JudgeMode judgeMode;     // 记录是ACM还是IO判断方式
+    private MainUser user;
     private Long submitID;
     private Date submitDate;
-    private JudgeLanguage language;
+    private JudgeLanguage languageType;
+    private MainProblem problem;
+    private JudgeSystemConstant controlCode;
+    private ProblemType problemType;
+
+    public JudgeMode getJudgeMode() {
+        return judgeMode;
+    }
+
+    public void setJudgeMode(JudgeMode judgeMode) {
+        this.judgeMode = judgeMode;
+    }
+
+    public ProblemType getProblemType() {
+        return problemType;
+    }
+
+    public void setProblemType(ProblemType problemType) {
+        this.problemType = problemType;
+    }
+
+    public MainProblem getProblem() {
+        return problem;
+    }
+
+    public JudgeSystemConstant getControlCode() {
+        return controlCode;
+    }
+
+    public void setControlCode(JudgeSystemConstant controlCode) {
+        this.controlCode = controlCode;
+    }
+
+    public void setProblem(MainProblem problem) {
+        this.problem = problem;
+    }
 
     public Date getSubmitDate() {
         return submitDate;
@@ -23,40 +63,32 @@ public class MainSubmit implements Serializable {
         this.submitDate = submitDate;
     }
 
-    public ArrayList<String> getCourseCodes() {
+    public List<String> getCourseCodes() {
         return courseCodes;
     }
 
-    public void setCourseCodes(ArrayList<String> courseCodes) {
+    public void setCourseCodes(List<String> courseCodes) {
         this.courseCodes = courseCodes;
-    }
-
-    public void setSubmitMode(Integer submitMode) {
-        this.submitMode = submitMode;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public void setSubmitID(Long submitID) {
         this.submitID = submitID;
     }
 
-    public Integer getSubmitMode() {
-        return submitMode;
+    public MainUser getUser() {
+        return user;
     }
 
-    public String getUsername() {
-        return username;
+    public void setUser(MainUser user) {
+        this.user = user;
     }
 
-    public JudgeLanguage getLanguage() {
-        return language;
+    public JudgeLanguage getLanguageType() {
+        return languageType;
     }
 
-    public void setLanguage(JudgeLanguage language) {
-        this.language = language;
+    public void setLanguageType(JudgeLanguage languageType) {
+        this.languageType = languageType;
     }
 
     public Long getSubmitID() {

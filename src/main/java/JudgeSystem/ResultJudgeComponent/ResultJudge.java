@@ -52,14 +52,14 @@ public class ResultJudge {
                             unCheckFileStringIndex++;
                         }
                         if (standardFileStringCharAt + 1 == standardFileStrings.get(standardFileStringIndex).length() && standardFileStringIndex + 1 == standardFileStrings.size()) {
-                            for (;unCheckFileStringIndex<unCheckFileStrings.size ();unCheckFileStringIndex++) {
+                            for (; unCheckFileStringIndex < unCheckFileStrings.size(); unCheckFileStringIndex++) {
 
-                                for(;unCheckFileStringCharAt < unCheckFileStrings.get(unCheckFileStringIndex).length();unCheckFileStringCharAt++){
+                                for (; unCheckFileStringCharAt < unCheckFileStrings.get(unCheckFileStringIndex).length(); unCheckFileStringCharAt++) {
                                     if (!Character.isSpaceChar(unCheckFileStrings.get(unCheckFileStringIndex).charAt(unCheckFileStringCharAt))) {
                                         return JudgeSystemConstant.WA;
                                     }
                                 }
-                                unCheckFileStringCharAt=0;
+                                unCheckFileStringCharAt = 0;
                             }
                         }
                     }
