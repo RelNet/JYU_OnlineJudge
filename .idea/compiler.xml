@@ -10,12 +10,9 @@
       </profile>
     </annotationProcessing>
   </component>
-<<<<<<< HEAD
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="OnlineJudge" options="-parameters" />
     </option>
   </component>
-=======
->>>>>>> Backend-database
 </project>
