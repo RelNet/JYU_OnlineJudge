@@ -7,7 +7,11 @@ import java.io.File;
 import java.util.List;
 
 public class TestCompileGPP {
+<<<<<<< HEAD
     public static void main(String[] args) {
+=======
+//    public static void main(String[] args) {
+>>>>>>> 6e9b4a50a74e5b7d464672ac8a59ffb6352bfaad
 //        File f = new File("/home/h/Desktop/test.cpp");
 //        if (f.exists()) {
 //            System.out.println("exist!");
@@ -23,5 +27,9 @@ public class TestCompileGPP {
 //                System.out.println(i);
 //            }
 //        }
+<<<<<<< HEAD
     }
+=======
+//    }
+>>>>>>> 6e9b4a50a74e5b7d464672ac8a59ffb6352bfaad
 }
