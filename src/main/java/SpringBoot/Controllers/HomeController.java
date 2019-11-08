@@ -2,6 +2,7 @@ package SpringBoot.Controllers;
 
 import Data.Users.MainUser;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -25,25 +26,26 @@ public class HomeController {
         return "status";
     }
 
-    @GetMapping(path = "userpage")
-    public String toUserPage() {
-        return "userpage";
-    }
-
     @GetMapping(path = "register")
-    public String toRegister(){
+    public String toRegister() {
         return "register";
     }
 
     @GetMapping(path = "/")
-    public String toHome(){
+    public String toHome(Model model, HttpSession session) {
+        // 检查有没有登陆
+        Object username = session.getAttribute("loginUser");
+        if (username != null) {
+            // 登陆过就修改主页显示
+            model.addAttribute(username);
+        }
         return "index";
     }
 
     // 提交登陆表单之后刷新
     @PostMapping("/")
     public String login(MainUser user,
-                              Map<String, Object> informationMap, HttpSession session) {
+                        Map<String, Object> informationMap, HttpSession session) {
         session.setAttribute("loginUser", user.getUsername());
         return "index";
     }

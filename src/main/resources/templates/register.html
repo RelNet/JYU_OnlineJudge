@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>注册</title>
 </head>
 <body>
     <h1>注册</h1><br/>
-    <form action="/userpage" method="post">
+    <form th:action="@{/userpage/} + ${user.name}" method="post">
         <input type="text" name="username" value="username"/><br/>
         <input type="text" name="password" value="password"/><br/>
         <input type="submit"/>
