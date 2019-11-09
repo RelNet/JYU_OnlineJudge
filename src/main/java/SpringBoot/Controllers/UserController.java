@@ -6,15 +6,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpSession;
+
 // 用户控制面板控制器
 @Controller
 public class UserController {
     @GetMapping(path = "userpage/{username}")
-    public String toUserPage(@PathVariable("username") String username, Model module) {
-        // 缺少获取已经存在的用户的信息类
-        MainUser user = null;
+    public String toUserPage(@PathVariable("username") String username, Model module, HttpSession session) {
+        Object user = session.getAttribute("loginUser");
+        String stringUsername = String.valueOf(user);
+        if (user == null || !stringUsername.equals(username)) {
+            username = "null";
+        }
 
-        module.addAttribute("user", user);
+        module.addAttribute("user", username);
 
         return "userpage";
     }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8">
+		<title>登录页面</title>
+
+		<style th:inline="css">
+
+			.dowebok { position: absolute; left: 50%; top: 50%; width: 430px; height: 550px; margin: -300px 0 0 -215px;overflow: hidden;}
+			.logo { width: 104px; height: 104px; margin: 50px auto 80px; background: url(./img/JYUlogo.png) 0 0 no-repeat; }
+			.form-item { position: relative; width: 360px; margin: 0 auto; padding-bottom: 30px;font-family: 微软雅黑;font-style: oblique;font-size: 50px;color: #2a6496}
+		</style>
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<!-- Add custom CSS here -->
+		<link href="css/sb-admin.css" rel="stylesheet">
+		<link rel="stylesheet" media="screen" th:href="@{/css/laopo.css}"/>
+		<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+	</head>
+	<body>
+	<form action="welcome_to_join_us.html" method="pass">
+		<div class="dowebok">
+			<div class="logo"></div>
+			<div class="form-item" >
+				<p class="tip"> 欢迎来到JYU Online Judge</p>
+			</div>
+			<div class="reg-bar">
+			</div>
+		</div>
+	</form>
+	</body>
+</html>

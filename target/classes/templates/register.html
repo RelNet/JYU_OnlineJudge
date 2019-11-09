@@ -1,15 +1,69 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>注册</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico" type="icon">
+    <title>JYU Online Judge</title>
+    <script type="text/css" >
+        div{
+            background-image: url("./laopo2.jpeg");
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+    </script>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Add custom CSS here -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 </head>
 <body>
-    <h1>注册</h1><br/>
-    <form th:action="@{/userpage/} + ${user.name}" method="post">
-        <input type="text" name="username" value="username"/><br/>
-        <input type="text" name="password" value="password"/><br/>
-        <input type="submit"/>
-    </form>
+<div class="modal fade in"  id="hide2" tabindex="-1" role="dialog" style="display: block; padding-right: 16px;" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="registerLabel">注册</h4>
+            </div>
+            <div class="modal-body">
+                <form action="welcome_to_join_us.html" id="register-form" method="post">
+                    <div class="form-group">
+                        <!--<label for="login-username" class="form-control-label">Username:</label>-->
+                        <input type="text" class="form-control" id="register-ID" name="ID" placeholder="学号">
+                    </div>
+
+                    <div class="form-group">
+                        <!--<label for="login-username" class="form-control-label">Username:</label>-->
+                        <input type="text" class="form-control" id="register-realname" name="realname" placeholder="真实姓名">
+                    </div>
+                    <div class="form-group">
+                        <!--<label for="login-username" class="form-control-label">Username:</label>-->
+                        <input type="text" class="form-control" id="register-class " name="class" placeholder="班级">
+                    </div>
+                    <div class="form-group">
+                        <!--<label for="login-username" class="form-control-label">Username:</label>-->
+                        <input type="text" class="form-control" id="register-team" name="team" placeholder="学院">
+                    </div>
+                    <div class="form-group">
+                        <!--<label for="login-password" class="form-control-label">Password:</label>-->
+                        <input type="password" class="form-control" id="register-password" name="password" placeholder="密码">
+                    </div>
+                    <div class="form-group">
+                        <!--<label for="login-username" class="form-control-label">Username:</label>-->
+                        <input type="password" class="form-control" id="register-repeatpsd" name="repeatpsd" placeholder="确认密码">
+                    </div>
+                    <input type="submit" style="display: none" >
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="alert alert-danger" role="alert" id="register-alert" style="display: none;"></div>
+                <button type="button" class="btn btn-primary" id="btn-register" onclick="location.href='login.html'">注册</button>
+            </div>
+        </div>
+    </div>
+</div><!-- /#wrapper -->
 </body>
 </html>
