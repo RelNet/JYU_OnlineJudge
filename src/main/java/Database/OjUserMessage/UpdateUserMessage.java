@@ -1,6 +1,5 @@
 package Database.OjUserMessage;
 
-
 import Database.JdbcConnection;
 
 import java.sql.Connection;
@@ -8,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserLogin {
+public class UpdateUserMessage {
     /** public boolean CheckUserName(String UserName);
      * 查询用户名有没有重复
      * true表示用户名在数据库存在可用
@@ -42,36 +41,27 @@ public class UserLogin {
     }
 
 
-    /**
-     * CheckUserLogin方法就是检查数据库有没有存在传进来的UserName和password相对于的行
-     */
-
-    public boolean CheckUserLogin(String UserName , String password){
+    public boolean UpdatePassword(String UserName , String NewPassword){
         Connection GetConnectionDatabase = null;
         PreparedStatement GetPreparedStatement = null;
-        ResultSet GetResultSet = null;
-        boolean flag  = false;
         JdbcConnection JdbcLink = new JdbcConnection();
+        int count = 0;
+        boolean flag  = true;
         try {
             GetConnectionDatabase = JdbcLink.Get_Connection();
-            //在t_student表里找与UserName 和 password都对应上的行
-            String sql  = "select user_name from t_student where user_name = ? and password = ?";
-            //获取数据库操作对象
+            String sql = "update t_student set password = ? where user_name = ?";
             GetPreparedStatement = GetConnectionDatabase.prepareStatement(sql);
-            GetPreparedStatement.setString(1,UserName);
-            GetPreparedStatement.setString(2,password);
-            GetResultSet = GetPreparedStatement.executeQuery();
-            //能找出一行，说明在数据库存在
-            if(GetResultSet.next()){
-                flag = true;
+            GetPreparedStatement.setString(1,NewPassword);
+            GetPreparedStatement.setString(2,UserName);
+            count = GetPreparedStatement.executeUpdate();
+            if(count == 0){
+               flag  = false;
             }
         } catch (SQLException e) {
-            flag = true;
             e.printStackTrace();
-        }finally {
-            JdbcLink.Free(GetResultSet,GetPreparedStatement,GetConnectionDatabase);
         }
         return flag;
+
     }
 
 }
