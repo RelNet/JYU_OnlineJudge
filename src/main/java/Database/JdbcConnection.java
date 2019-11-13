@@ -1,8 +1,9 @@
 package Database;
 
 import java.sql.*;
+
 /*
-* 工具类，连接数据库*/
+ * 工具类，连接数据库*/
 public class JdbcConnection {
 
     static {//注册驱动
@@ -13,27 +14,28 @@ public class JdbcConnection {
         }
     }
 
-    public    Connection Get_Connection()throws SQLException {
+    public Connection Get_Connection() throws SQLException {
         //获取链接
         return DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/ojtext_database?serverTimezone=UTC",
-                "root", "cy6666330"  );
+                "root", "cy6666330");
     }
-    public   void Free( ResultSet rs  , Statement stm,Connection con){
-        if(rs != null){
+
+    public void Free(ResultSet rs, Statement stm, Connection con) {
+        if (rs != null) {
             try {
                 rs.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        if(stm != null){
+        if (stm != null) {
             try {
                 stm.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        if(con != null){
+        if (con != null) {
             try {
                 con.close();
             } catch (SQLException e) {
@@ -42,15 +44,15 @@ public class JdbcConnection {
         }
     }
 
-    public static  void Free( Statement stm,Connection con){
-        if(stm != null){
+    public static void Free(Statement stm, Connection con) {
+        if (stm != null) {
             try {
                 stm.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        if(con != null){
+        if (con != null) {
             try {
                 con.close();
             } catch (SQLException e) {

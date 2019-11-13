@@ -12,13 +12,13 @@ import java.util.List;
 import java.util.Queue;
 
 public class StartJudge {
-    private volatile Queue<MainSubmit> submitQueue = new LinkedList<>();     // 提交的队列
-    private final Object lockCompile = new Object();
-    private volatile Queue<MainTask> waitingJudgeQueue = new LinkedList<>();     // 等待判定队列
-    private volatile Queue<MainSubmit> finishedQueue = new LinkedList<>();       // 完成了的队列，等待写入数据库
+    private static volatile Queue<MainSubmit> submitQueue = new LinkedList<>();     // 提交的队列
+    private static final Object lockCompile = new Object();
+    private static volatile Queue<MainTask> waitingJudgeQueue = new LinkedList<>();     // 等待判定队列
+    private static volatile Queue<MainSubmit> finishedQueue = new LinkedList<>();       // 完成了的队列，等待写入数据库
 
-    private final Long MAX_NUMBER_OF_JUDGING_TASK = 10L;    // 允许同时judge的列表容量
-    private volatile List<MainTask> judgingList = new ArrayList<>();
+    private static final Long MAX_NUMBER_OF_JUDGING_TASK = 10L;    // 允许同时judge的列表容量
+    private volatile List<MainTask> judgingList = new ArrayList<>();    // 正在判断的列表
 
 
     /*
