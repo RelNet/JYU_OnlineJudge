@@ -44,7 +44,8 @@
 
             <ul class="nav navbar-nav navbar-right navbar-user">
                 <li class="dropdown user-dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 登录 <b
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" th:text="${session.loginUser}"><i
+                            class="fa fa-user"></i> 登录 <b
                             class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a onclick="divSW()"><i class="fa fa-user"></i> 登录</a></li>
@@ -84,10 +85,10 @@
                 <h4 class="modal-title" id="loginModalLabel">登录</h4>
             </div>
             <div class="modal-body">
-                <form id="login-form" method="post" action="index.html">
+                <form id="login-form" method="post" action="/">
                     <div class="form-group">
                         <!--<label for="login-username" class="form-control-label">Username:</label>-->
-                        <input type="text" class="form-control" id="login-username" name="username" placeholder="学号">
+                        <input type="text" class="form-control" id="login-username" name="username" placeholder="用户名">
                     </div>
                     <div class="form-group">
                         <!--<label for="login-password" class="form-control-label">Password:</label>-->
