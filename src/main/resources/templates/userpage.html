@@ -1,11 +1,191 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" >
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico" type="icon">
+    <title>JYU Online Judge</title>
+    <script type="text/javascript"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Add custom CSS here -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 </head>
-<body>
-    <h3>成功进入用户控制面板</h3><br/>
-    <p th:text="${user}"/>
+//onkeydown="noRefresh(event)"
+<body style="background-color: rgb(34,34,34)">
+
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <ul class="nav navbar-nav navbar-right navbar-user">
+                <li><a class="navbar-brand" href="Home.html">Home</a></li>
+                <li><a class="navbar-brand" href="problem.html"> 问题</a></li>
+                <li><a class="navbar-brand" href="contest.html" > 比赛/考试</a></li>
+                <li><a class="navbar-brand" href="status.html"> 提交状态</a></li>
+                <li><a class="navbar-brand" href="team.html"> 团队</a></li>
+        </div>
+
+
+        <ul class="nav navbar-nav navbar-right navbar-user">
+            <li class="dropdown user-dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 登录 <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" onclick="divSW()"><i class="fa fa-user"></i> 登录</a></li>
+                    <li class="divider"></li>
+                    <li><a href="register.html"><i class="fa fa-gear"></i>注册</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#"><i class="fa fa-power-off"></i> 注销</a></li>
+                </ul>
+            </li>
+        </ul>
+</div><!-- /.navbar-collapse -->
+</nav>
+
+
+</div><!-- /#wrapper -->
+<div class="modal fade in"  id="hide" tabindex="-1" role="dialog" style="display: block; padding-right: 16px; display: none" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"  data-dismiss="modal" onclick="divSW()">
+                    <span>×</span>
+                </button>
+                <h4 class="modal-title" id="loginModalLabel">登录</h4>
+            </div>
+            <div class="modal-body">
+                <form id="login-form">
+                    <div class="form-group">
+                        <!--<label for="login-username" class="form-control-label">Username:</label>-->
+                        <input type="text" class="form-control" id="login-username" placeholder="学号">
+                    </div>
+                    <div class="form-group">
+                        <!--<label for="login-password" class="form-control-label">Password:</label>-->
+                        <input type="password" class="form-control" id="login-password" placeholder="密码">
+                    </div>
+                    <input type="submit" style="display: none">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="alert alert-danger" role="alert" id="login-alert" style="display: none;"></div>
+                <button type="button" class="btn btn-primary" id="btn-login">登录</button>
+            </div>
+        </div>
+    </div>
+</div><!-- /#wrapper -->
+
+<div id="page-wrapper" >
+    <div class="col-lg-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-clock-o"></i> Recent Activity</h3>
+            </div>
+            <div class="panel-body">
+                <div class="list-group">
+                    <a href="#" class="list-group-item">
+                        <span class="badge">just now</span>
+                        <i class="fa fa-calendar"></i> Calendar updated
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge">4 minutes ago</span>
+                        <i class="fa fa-comment"></i> Commented on a post
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge">23 minutes ago</span>
+                        <i class="fa fa-truck"></i> Order 392 shipped
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge">46 minutes ago</span>
+                        <i class="fa fa-money"></i> Invoice 653 has been paid
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge">1 hour ago</span>
+                        <i class="fa fa-user"></i> A new user has been added
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge">2 hours ago</span>
+                        <i class="fa fa-check"></i> Completed task: "pick up dry cleaning"
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge">yesterday</span>
+                        <i class="fa fa-globe"></i> Saved the world
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge">two days ago</span>
+                        <i class="fa fa-check"></i> Completed task: "fix error on sales page"
+                    </a>
+                </div>
+                <div class="text-right">
+                    <a href="#">View All Activity <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-3">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-6 text-right">
+                        <p class="announcement-heading">15</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="panel panel-warning">
+            <div class="panel-heading" style="background-color: rgba(49,23,255,0.59) ; border-color: rgba(0,0,0,0.53)">
+                <div class="row">
+                    <div class="col-xs-6 text-right">
+                        <p class="announcement-heading" style="color: white">95</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="panel panel-danger">
+            <div class="panel-heading" style="background-color:#626062">
+                <div class="row">
+                    <div class="col-xs-6 text-right">
+                        <p class="announcement-heading" style="color: white">456</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-6 text-right">
+                        <p class="announcement-heading">56</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- /#page-wrapper -->
+
+
+<!-- JavaScript -->
+<script src="js/jquery-1.10.2.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/fun/divSW.js"></script>
+<script src="js/fun/divSW1.js"></script>
 </body>
 </html>

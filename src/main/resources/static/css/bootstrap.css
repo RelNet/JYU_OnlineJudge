@@ -810,8 +810,14 @@ pre code {
 .row {
   margin-right: -15px;
   margin-left: -15px;
+   width: 50%;
+   left: 350px;
 }
-
+.row1{
+  margin-right: -15px;
+  margin-left: -15px;
+  width: 80%;
+}
 .row:before,
 .row:after {
   display: table;
