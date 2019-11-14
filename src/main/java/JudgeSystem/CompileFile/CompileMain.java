@@ -1,8 +1,7 @@
 package JudgeSystem.CompileFile;
 
-import JudgeSystem.RunScript.RunLinuxCMD;
+import JudgeSystem.run.script.RunLinuxCMD;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 

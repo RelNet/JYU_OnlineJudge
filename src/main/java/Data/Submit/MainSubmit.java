@@ -6,12 +6,13 @@ import JudgeSystem.JudgeLanguage;
 import JudgeSystem.JudgeMode;
 import JudgeSystem.JudgeSystemConstant;
 import JudgeSystem.ProblemType;
+import lombok.Getter;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-// 存放problem数据
+// 存放submit数据
 public class MainSubmit implements Serializable {
     private List<String> courseCodes;
     private JudgeMode judgeMode;     // 记录是ACM还是IO判断方式
@@ -22,6 +23,7 @@ public class MainSubmit implements Serializable {
     private MainProblem problem;
     private JudgeSystemConstant controlCode;
     private ProblemType problemType;
+    private Long contestID;
 
     public JudgeMode getJudgeMode() {
         return judgeMode;

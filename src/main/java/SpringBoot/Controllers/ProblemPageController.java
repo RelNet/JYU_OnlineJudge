@@ -1,6 +1,7 @@
 package SpringBoot.Controllers;
 
 import Data.Users.MainUser;
+import JudgeSystem.StartJudge;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,8 @@ import java.util.Map;
 
 @Controller
 public class ProblemPageController {
+    static StartJudge startJudge = new StartJudge();
+
     // 从problempage提交之后，转到状态页面
     @PostMapping(path = "status")
     public String submitCourseCodes(List<Object> submitDataList) {

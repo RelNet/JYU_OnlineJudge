@@ -2,6 +2,8 @@ package SpringBoot.Controllers;
 
 import Data.Users.MainUser;
 import Database.OjUserMessage.UserLogin;
+import JudgeSystem.StartJudge;
+import SpringBoot.SessionAndModelConstant;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,13 +17,13 @@ import java.util.Map;
 public class HomeController {
     @GetMapping(path = "/")
     public String toHome(Model model, HttpSession session) {
-        // 检查有没有登陆
-        Object username = session.getAttribute("loginUser");
-        model.addAttribute("path", "/");
-        if (username != null) {
-            // 登陆过就修改主页显示
-            model.addAttribute(username);
-        }
+//        // 检查有没有登陆
+//        Object username = session.getAttribute(SessionAndModelConstant.LoginUserString);
+//        model.addAttribute("path", "/");
+//        if (username != null) {
+//            // 登陆过就修改主页显示
+//            model.addAttribute(username);
+//        }
         return "index";
     }
 
@@ -30,17 +32,18 @@ public class HomeController {
                         Model model, HttpSession session) {
 
         // 将登陆过的用户删除
-        if (session.getAttribute("loginUser") != null) {
-            session.removeAttribute("loginUser");
+        if (session.getAttribute(SessionAndModelConstant.LoginUserString) != null) {
+            session.removeAttribute(SessionAndModelConstant.LoginUserString);
         }
 
         // 在数据库中检查登陆数据
         UserLogin userLogin = new UserLogin();
         if (userLogin.CheckUserName(user.getUsername())) {
-            if (userLogin.CheckUserLogin(user.getUsername(), user.getPassword()))
-                session.setAttribute("loginUser", user.getUsername());
+            if (userLogin.CheckUserLogin(user.getUsername(), user.getPassword())) {
+                session.setAttribute(SessionAndModelConstant.LoginUserString, user.getUsername());
+            }
         } else {
-            model.addAttribute("errorMessage", "用户名或者密码错误");
+            model.addAttribute(SessionAndModelConstant.ErrorMessageString, "用户名或者密码错误");
         }
         return "index";
     }
@@ -50,16 +53,17 @@ public class HomeController {
     public String login(@PathVariable String path, MainUser user,
                         Model model, HttpSession session) {
 
-        if (session.getAttribute("loginUser") != null) {
-            session.removeAttribute("loginUser");
+        if (session.getAttribute(SessionAndModelConstant.LoginUserString) != null) {
+            session.removeAttribute(SessionAndModelConstant.LoginUserString);
         }
 
         UserLogin userLogin = new UserLogin();
         if (userLogin.CheckUserName(user.getUsername())) {
-            if (userLogin.CheckUserLogin(user.getUsername(), user.getPassword()))
-                session.setAttribute("loginUser", user.getUsername());
+            if (userLogin.CheckUserLogin(user.getUsername(), user.getPassword())) {
+                session.setAttribute(SessionAndModelConstant.LoginUserString, user.getUsername());
+            }
         } else {
-            model.addAttribute("errorMessage", "用户名或者密码错误");
+            model.addAttribute(SessionAndModelConstant.ErrorMessageString, "用户名或者密码错误");
         }
 
         // 检查路径以此选择显示页面

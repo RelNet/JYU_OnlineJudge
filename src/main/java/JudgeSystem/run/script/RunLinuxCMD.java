@@ -1,4 +1,4 @@
-package JudgeSystem.RunScript;
+package JudgeSystem.run.script;
 
 import java.io.File;
 import java.io.IOException;
