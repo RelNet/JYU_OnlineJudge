@@ -22,17 +22,13 @@ public class MainProblem {
         this.problemType = problemType;
     }
 
-    public void setProblemID(Long problemID) {
-        this.problemID = problemID;
-    }
+    public void setProblemID(Long problemID) { this.problemID = problemID; }
 
     public List<String> getProblemContent() {
         return problemContent;
     }
 
-    public void setProblemContent(List<String> problemContent) {
-        this.problemContent = problemContent;
-    }
+    public void setProblemContent(List<String> problemContent) { this.problemContent = problemContent; }
 
     public List<ProblemIOInfo> getIOList() {
         return IOList;
