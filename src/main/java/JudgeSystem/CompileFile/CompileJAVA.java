@@ -1,10 +1,8 @@
 package JudgeSystem.CompileFile;
 
-import JudgeSystem.CompileFile.CompileMain;
-import JudgeSystem.RunScript.RunLinuxCMD;
+import JudgeSystem.run.script.RunLinuxCMD;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 

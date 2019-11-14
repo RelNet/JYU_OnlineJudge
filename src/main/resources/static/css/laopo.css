@@ -1,5 +1,5 @@
-body{
-    background-image: url('../laopo.png');
+body {
+    background-image: url('img/laopo.png');
     background-size: 100%;
     background-repeat: no-repeat;
     backdrop-filter: blur(100px);

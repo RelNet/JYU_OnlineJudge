@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="favicon.ico" type="icon">
+    <link rel="icon" href="../static/img/favicon.ico" type="icon">
     <title>JYU Online Judge</title>
     <script type="text/javascript">
     </script>
@@ -36,7 +36,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li><a href="problemset.html"><i class="fa fa-dashboard" ></i> 问题</a></li>
+                <li><a href="problemset.html"><i class="fa fa-dashboard"></i> 问题</a></li>
                 <li><a href="contest.html"><i class="fa fa-bar-chart-o"></i> 比赛/考试</a></li>
                 <li><a href="status.html"><i class="fa fa-table"></i> 提交状态</a></li>
                 <li><a href="team.html"><i class="fa fa-edit"></i> 团队</a></li>
@@ -44,7 +44,8 @@
 
             <ul class="nav navbar-nav navbar-right navbar-user">
                 <li class="dropdown user-dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 登录 <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 登录 <b
+                            class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#" onclick="divSW()"><i class="fa fa-user"></i> 登录</a></li>
                         <li class="divider"></li>
@@ -72,11 +73,12 @@
     </div><!-- /#page-wrapper -->
 
 </div><!-- /#wrapper -->
-<div class="modal fade in"  id="hide" tabindex="-1" role="dialog" style="display: block; padding-right: 16px; display: none" >
+<div class="modal fade in" id="hide" tabindex="-1" role="dialog"
+     style="display: block; padding-right: 16px; display: none">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close"  data-dismiss="modal" onclick="divSW()">
+                <button type="button" class="close" data-dismiss="modal" onclick="divSW()">
                     <span>×</span>
                 </button>
                 <h4 class="modal-title" id="loginModalLabel">登录</h4>
@@ -102,17 +104,18 @@
     </div>
 </div><!-- /#wrapper -->
 
-<div class="modal fade in"  id="hide2" tabindex="-1" role="dialog" style="display: block; padding-right: 16px; display: none" >
+<div class="modal fade in" id="hide2" tabindex="-1" role="dialog"
+     style="display: block; padding-right: 16px; display: none">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close"  data-dismiss="modal" onclick="divSW1()">
+                <button type="button" class="close" data-dismiss="modal" onclick="divSW1()">
                     <span>×</span>
                 </button>
                 <h4 class="modal-title" id="registerLabel">注册</h4>
             </div>
             <div class="modal-body">
-                <form id="register-form" method="post" action="home.html" >
+                <form id="register-form" method="post" action="home.html">
                     <div class="form-group">
                         <!--<label for="login-username" class="form-control-label">Username:</label>-->
                         <input type="text" class="form-control" id="register-ID" name="ID" placeholder="学号">
@@ -120,7 +123,8 @@
 
                     <div class="form-group">
                         <!--<label for="login-username" class="form-control-label">Username:</label>-->
-                        <input type="text" class="form-control" id="register-realname" name="realname" placeholder="真实姓名">
+                        <input type="text" class="form-control" id="register-realname" name="realname"
+                               placeholder="真实姓名">
                     </div>
                     <div class="form-group">
                         <!--<label for="login-username" class="form-control-label">Username:</label>-->
@@ -132,18 +136,20 @@
                     </div>
                     <div class="form-group">
                         <!--<label for="login-password" class="form-control-label">Password:</label>-->
-                        <input type="password" class="form-control" id="register-password" name="password" placeholder="密码">
+                        <input type="password" class="form-control" id="register-password" name="password"
+                               placeholder="密码">
                     </div>
                     <div class="form-group">
                         <!--<label for="login-username" class="form-control-label">Username:</label>-->
-                        <input type="password" class="form-control" id="register-repeatpsd" name="repeatpsd" placeholder="确认密码">
+                        <input type="password" class="form-control" id="register-repeatpsd" name="repeatpsd"
+                               placeholder="确认密码">
                     </div>
                     <input type="submit" style="display: none">
                 </form>
             </div>
             <div class="modal-footer">
                 <div class="alert alert-danger" role="alert" id="register-alert" style="display: none;"></div>
-                <button type="button" class="btn btn-primary" id="btn-register" >注册</button>
+                <button type="button" class="btn btn-primary" id="btn-register">注册</button>
             </div>
         </div>
     </div>

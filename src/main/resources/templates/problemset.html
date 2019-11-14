@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="favicon.ico" type="icon">
+    <link rel="icon" href="../static/img/favicon.ico" type="icon">
     <title>JYU Online Judge Problem Set</title>
     <script type="text/javascript">
         /*
@@ -13,75 +13,63 @@
 */
         var flag = false;   // flag 如果为true（即用户名合法）就允许表单提交， 如果为false（即用户名不合法）阻止提交
         // 当鼠标聚焦于用户名
-        function focus_username()
-        {
+        function focus_username() {
             // 找到后面的div, id = result_name
             var nameObj = document.getElementById("one");
             nameObj.innerHTML = "用户名不能包含特殊字符且为5~20位";
-            nameObj.style.color="#ff0a00";
-            <span>输入</span>
+            nameObj.style.color = "#ff0a00";
+        <
+            span > 输入 < /span>
         }
+
         // 当鼠标不聚焦于用户名input
-        function blur_username()
-        {
+        function blur_username() {
             // 找到id=result_name的div
             var nameObj = document.getElementById("one");
             // 判断用户名是否合法
             var str2 = check_user_name(document.form1.username.value);
-            nameObj.style.color="red";
-            if ("该用户名合法" ==  str2)
-            {
+            nameObj.style.color = "red";
+            if ("该用户名合法" == str2) {
                 flag = true;
                 nameObj.innerHTML = str2;
-            }
-            else
-            {
+            } else {
                 nameObj.innerHTML = str2;
             }
 
         }
+
         // 检查用户名是否合法        合法就返回"该用户名合法"
-        function check_user_name(str)
-        {
+        function check_user_name(str) {
             var str2 = "该用户名合法";
-            if ("" == str)
-            {
+            if ("" == str) {
                 str2 = "用户名为空";
                 return str2;
-            }
-            else if ((str.length < 5) || (str.length > 20))
-            {
+            } else if ((str.length < 5) || (str.length > 20)) {
                 str2 = "用户名必须为5 ~ 20位";
                 return str2;
-            }
-            else if (check_other_char(str))
-            {
+            } else if (check_other_char(str)) {
                 str2 = "不能含有特殊字符";
                 return str2;
             }
             return str2;
         }
+
         // 验证用户名是否含有特殊字符
-        function check_other_char(str)
-        {
+        function check_other_char(str) {
             var arr = ["&", "\\", "/", "*", ">", "<", "@", "!"];
-            for (var i = 0; i < arr.length; i++)
-            {
-                for (var j = 0; j < str.length; j++)
-                {
-                    if (arr[i] == str.charAt(j))
-                    {
+            for (var i = 0; i < arr.length; i++) {
+                for (var j = 0; j < str.length; j++) {
+                    if (arr[i] == str.charAt(j)) {
                         return true;
                     }
                 }
             }
             return false;
         }
+
         // 根据验证结果确认是否提交
-        function check_submit()
-        {
-            if (flag == false)
-            {
+        function check_submit() {
+            if (flag == false) {
                 return false;
             }
             return true;
@@ -114,7 +102,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li><a href="problemset.html"><i class="fa fa-dashboard" ></i> 问题</a></li>
+                <li><a href="problemset.html"><i class="fa fa-dashboard"></i> 问题</a></li>
                 <li><a href="contest.html"><i class="fa fa-bar-chart-o"></i> 比赛/考试</a></li>
                 <li><a href="status.html"><i class="fa fa-table"></i> 提交状态</a></li>
                 <li><a href="team.html"><i class="fa fa-edit"></i> 团队</a></li>
@@ -122,7 +110,8 @@
 
             <ul class="nav navbar-nav navbar-right navbar-user">
                 <li class="dropdown user-dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 登录 <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 登录 <b
+                            class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#" onclick="divSW()"><i class="fa fa-user"></i> 登录</a></li>
                         <li class="divider"></li>
@@ -152,11 +141,12 @@
 </div><!-- /#wrapper -->
 
 <!-- JavaScript -->
-<div class="modal fade in"  id="hide" tabindex="-1" role="dialog" style="display: block; padding-right: 16px; display: none" >
+<div class="modal fade in" id="hide" tabindex="-1" role="dialog"
+     style="display: block; padding-right: 16px; display: none">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close"  data-dismiss="modal" onclick="divSW()">
+                <button type="button" class="close" data-dismiss="modal" onclick="divSW()">
                     <span>×</span>
                 </button>
                 <h4 class="modal-title" id="loginModalLabel">登录</h4>
@@ -165,38 +155,47 @@
                 <form id="login-form" name="form1" onsubmit="return check_submit()">
                     <div class="form-group">
                         <!--<label for="login-username" class="form-control-label">Username:</label>-->
-                        <input type="text" class="form-control" id="login-username" name="uername" onblur="blur_username()" onfocus="focus_username()">
+                        <input type="text" class="form-control" id="login-username" name="uername"
+                               onblur="blur_username()" onfocus="focus_username()">
                     </div><!-- placeholder="学生:s_+学号 教师:t_+教工号"-->
-                    <td><div id="one"></div></td>
+                    <td>
+                        <div id="one"></div>
+                    </td>
 
 
                     <div class="form-group">
                         <!--<label for="login-password" class="form-control-label">Password:</label>-->
-                        <input type="password" class="form-control" id="login-password" name="pswname" onblur="blur_username()" onfocus="focus_username()">
+                        <input type="password" class="form-control" id="login-password" name="pswname"
+                               onblur="blur_username()" onfocus="focus_username()">
                     </div><!--placeholder="密码"-->
-                    <td><div id="two"></div></td>
+                    <td>
+                        <div id="two"></div>
+                    </td>
                     <input type="submit" style="display: none">
                 </form>
             </div>
             <div class="modal-footer">
                 <div class="alert alert-danger" role="alert" id="login-alert" style="display: none;"></div>
-                <button type="button" class="btn btn-primary" id="btn-login" οnclick="window.location.href='http://www.baidu.com'">登录</button>
+                <button type="button" class="btn btn-primary" id="btn-login"
+                        οnclick="window.location.href='http://www.baidu.com'">登录
+                </button>
             </div>
         </div>
     </div>
 </div><!-- /#wrapper -->
 
-<div class="modal fade in"  id="hide2" tabindex="-1" role="dialog" style="display: block; padding-right: 16px; display: none" >
+<div class="modal fade in" id="hide2" tabindex="-1" role="dialog"
+     style="display: block; padding-right: 16px; display: none">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close"  data-dismiss="modal" onclick="divSW1()">
+                <button type="button" class="close" data-dismiss="modal" onclick="divSW1()">
                     <span>×</span>
                 </button>
                 <h4 class="modal-title" id="registerLabel">注册</h4>
             </div>
             <div class="modal-body">
-                <form id="register-form" method="post" action="home.html" >
+                <form id="register-form" method="post" action="home.html">
                     <div class="form-group">
                         <!--<label for="login-username" class="form-control-label">Username:</label>-->
                         <input type="text" class="form-control" id="register-ID" name="ID" placeholder="学号">
@@ -204,7 +203,8 @@
 
                     <div class="form-group">
                         <!--<label for="login-username" class="form-control-label">Username:</label>-->
-                        <input type="text" class="form-control" id="register-realname" name="realname" placeholder="真实姓名">
+                        <input type="text" class="form-control" id="register-realname" name="realname"
+                               placeholder="真实姓名">
                     </div>
                     <div class="form-group">
                         <!--<label for="login-username" class="form-control-label">Username:</label>-->
@@ -216,18 +216,20 @@
                     </div>
                     <div class="form-group">
                         <!--<label for="login-password" class="form-control-label">Password:</label>-->
-                        <input type="password" class="form-control" id="register-password" name="password" placeholder="密码">
+                        <input type="password" class="form-control" id="register-password" name="password"
+                               placeholder="密码">
                     </div>
                     <div class="form-group">
                         <!--<label for="login-username" class="form-control-label">Username:</label>-->
-                        <input type="password" class="form-control" id="register-repeatpsd" name="repeatpsd" placeholder="确认密码">
+                        <input type="password" class="form-control" id="register-repeatpsd" name="repeatpsd"
+                               placeholder="确认密码">
                     </div>
                     <input type="submit" style="display: none">
                 </form>
             </div>
             <div class="modal-footer">
                 <div class="alert alert-danger" role="alert" id="register-alert" style="display: none;"></div>
-                <button type="button" class="btn btn-primary" id="btn-register" >注册</button>
+                <button type="button" class="btn btn-primary" id="btn-register">注册</button>
             </div>
         </div>
     </div>

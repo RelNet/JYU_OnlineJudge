@@ -3,6 +3,7 @@ package SpringBoot.Controllers;
 import Data.Users.MainUser;
 import Data.Users.StudentUser;
 import Database.OjUserMessage.UserRegister;
+import SpringBoot.SessionAndModelConstant;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,22 +12,40 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.servlet.http.HttpSession;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 public class RegisterController {
+    // 注册信息写入数据库的线程池
+    static int MAX_REGISTER_CORE_TASK_NUMBER = 1;
+    static int MAX_REGISTER_TASK_NUMBER = 30;
+    static long REGISTER_KEEP_ALIVE_TIME = 5L;
+    // 等待注册的队列长度
+    static int MAX_WAITING_REGISTER_SIZE = 100;
+    ExecutorService registerThreadPool = new ThreadPoolExecutor(MAX_REGISTER_CORE_TASK_NUMBER, MAX_REGISTER_TASK_NUMBER, REGISTER_KEEP_ALIVE_TIME, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(MAX_WAITING_REGISTER_SIZE));
+
+    @GetMapping(path = "register")
+    public String toRegister() {
+        return "register";
+    }
+
     @PostMapping(path = "welcome")
     public String registerUser(StudentUser studentInformation, Model model, HttpSession session) {
-        // 插入数据库
-        boolean checkDatabaseAction = new UserRegister().register(studentInformation.getUsername(),
-                studentInformation.getPassword(), studentInformation.getClassName(), studentInformation.getRealName(),
-                studentInformation.getCollegeName(), studentInformation.getStudentID());
+        registerThreadPool.execute(new Runnable() {
+            @Override
+            public void run() {
+                // 插入数据库
+                new UserRegister().register(studentInformation.getUsername(),
+                        studentInformation.getPassword(), studentInformation.getClassName(), studentInformation.getRealName(),
+                        studentInformation.getCollegeName(), studentInformation.getID());
+            }
+        });
 
-        // 检查是否成功
-        if (checkDatabaseAction) {
-            session.setAttribute("loginUser", studentInformation.getUsername());
-        } else {
+        session.setAttribute(SessionAndModelConstant.LoginUserString, studentInformation.getUsername());
 
-        }
         return "welcome_to_join_us";
     }
 

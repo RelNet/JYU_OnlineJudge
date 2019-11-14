@@ -7,8 +7,8 @@ import java.io.File;
 
 public class TestResultJudge {
     public static void main(String[] args) {
-        ResultJudge AAA = new ResultJudge(new File("D:/text.txt"),new File("D:/Right.txt"));
-        JudgeSystemConstant MM=AAA.runJudge();
+        ResultJudge AAA = new ResultJudge(new File("D:/text.txt"), new File("D:/Right.txt"));
+        JudgeSystemConstant MM = AAA.runJudge();
         System.out.println(MM);
     }
 }
