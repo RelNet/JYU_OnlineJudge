@@ -57,19 +57,12 @@ public class JdbcConnection {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-<<<<<<< HEAD
         //获取链接
         return DriverManager.getConnection("jdbc:mysql://"+ip+":"+port+"/"+databasename+"?serverTimezone=UTC",
                 use, password);
-=======
+
     }
 
-    public Connection Get_Connection() throws SQLException {
-        //获取链接
-        return DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/ojtext_database?serverTimezone=UTC",
-                "root", "cy6666330");
->>>>>>> dcd63d6314ae4f6bbc24242c63ac69c0ab392cae
-    }
 
     public void Free(ResultSet rs, Statement stm, Connection con) {
         if (rs != null) {

@@ -57,13 +57,9 @@ public class UpdateUserMessage {
             GetPreparedStatement.setString(1, NewPassword);
             GetPreparedStatement.setString(2, UserName);
             count = GetPreparedStatement.executeUpdate();
-<<<<<<< HEAD
+
             if(count == 0){
                 flag  = false;
-=======
-            if (count == 0) {
-                flag = false;
->>>>>>> dcd63d6314ae4f6bbc24242c63ac69c0ab392cae
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -58,11 +58,9 @@ public class GetUserMessage {
             GetPreparedStatement = GetConnectionDatabase.prepareStatement(sql);
             GetPreparedStatement.setString(1, UserName);
             GetResultSet = GetPreparedStatement.executeQuery();
-<<<<<<< HEAD
+
             if(GetResultSet.next()) {
-=======
-            if (GetResultSet.next()) {
->>>>>>> dcd63d6314ae4f6bbc24242c63ac69c0ab392cae
+
                 UserClass = GetResultSet.getString("class");
             }
         } catch (SQLException e) {
@@ -156,7 +154,6 @@ public class GetUserMessage {
         }
         return Password;
     }
-<<<<<<< HEAD
 
     public String GetUserID(String UserName){
         Connection GetConnectionDatabase = null;
@@ -188,6 +185,3 @@ public class GetUserMessage {
 
 
 }
-=======
-}
->>>>>>> dcd63d6314ae4f6bbc24242c63ac69c0ab392cae
