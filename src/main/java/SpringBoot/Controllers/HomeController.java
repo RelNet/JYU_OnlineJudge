@@ -15,15 +15,10 @@ import java.util.Map;
 
 @Controller
 public class HomeController {
+    // 发起主页get请求
     @GetMapping(path = "/")
     public String toHome(Model model, HttpSession session) {
-//        // 检查有没有登陆
-//        Object username = session.getAttribute(SessionAndModelConstant.LoginUserString);
-//        model.addAttribute("path", "/");
-//        if (username != null) {
-//            // 登陆过就修改主页显示
-//            model.addAttribute(username);
-//        }
+
         return "index";
     }
 

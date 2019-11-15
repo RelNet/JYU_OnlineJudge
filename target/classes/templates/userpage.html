@@ -1,11 +1,180 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico" type="icon">
+    <title>JYU Online Judge</title>
+    <script type="text/javascript">
+    </script>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Add custom CSS here -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 </head>
-<body>
-<h3>成功进入用户控制面板</h3><br/>
-<p th:text="${userData}"/>
+<body style="background-color: rgb(34,34,34)">
+
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li><a href="problemset.html"><i class="fa fa-dashboard" ></i> 问题</a></li>
+                <li><a href="contest.html"><i class="fa fa-bar-chart-o"></i> 比赛/考试</a></li>
+                <li><a href="status.html"><i class="fa fa-table"></i> 提交状态</a></li>
+                <li><a href="team.html"><i class="fa fa-edit"></i> 团队</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right navbar-user" th:if="$(session.login.username)">
+                <li class="dropdown user-dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-user"></i> 登录 <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a onclick="divSW()"><i class="fa fa-user"></i> 登录</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/welcome"><i class="fa fa-gear"></i>注册</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="fa fa-power-off"></i> 注销</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right navbar-user" th:if="$(not #session.login.username)">
+                <li class="dropdown user-dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-user"></i>  <span th:text="login.username">用户名</span><b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="fa fa-power-off"></i> 注销</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+</nav>
+
+
+</div><!-- /#wrapper -->
+<div class="modal fade in"  id="hide" tabindex="-1" role="dialog" style="display: block; padding-right: 16px; display: none" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"  data-dismiss="modal" onclick="divSW()">
+                    <span>×</span>
+                </button>
+                <h4 class="modal-title" id="loginModalLabel">登录</h4>
+            </div>
+            <div class="modal-body">
+                <form id="login-form">
+                    <div class="form-group">
+                        <!--<label for="login-username" class="form-control-label">Username:</label>-->
+                        <input type="text" class="form-control" id="login-username" placeholder="学号">
+                    </div>
+                    <div class="form-group">
+                        <!--<label for="login-password" class="form-control-label">Password:</label>-->
+                        <input type="password" class="form-control" id="login-password" placeholder="密码">
+                    </div>
+                    <input type="submit" style="display: none">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="alert alert-danger" role="alert" id="login-alert" style="display: none;"></div>
+                <button type="button" class="btn btn-primary" id="btn-login">登录</button>
+            </div>
+        </div>
+    </div>
+</div><!-- /#wrapper -->
+
+<div id="page-wrapper" >
+    <div class="col-lg-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-clock-o"></i> 个人信息</h3>
+            </div>
+            <div class="panel-body">
+                <div class="list-group">
+                    <a href="#" class="list-group-item">
+                        <span class="badge" th:text="${session.login.realname}"></span>
+                        <i class="fa fa-calendar"></i> 姓名
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge" th:text$="{session.login.class}"></span>
+                        <i class="fa fa-comment"></i> 班级
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge" th:text$="{session.login.college}"></span>
+                        <i class="fa fa-truck"></i> 学院
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge" th:text="${session.login.ID}"></span>
+                        <i class="fa fa-money"></i> 学号
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge" th:text="${session.problemnum}"></span>
+                        <i class="fa fa-user"></i> 提交题目数
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge" th:text="${session.passnum}"></span>
+                        <i class="fa fa-check"></i> 通过题目数
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--</div>-->
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="panel panel-info" >
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6 text-right">
+                            <a class="announcement-heading"  style="text-decoration: none ;cursor:pointer">团队信息</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="panel panel-warning" >
+                <div class="panel-heading" style="background-color: rgba(49,23,255,0.59) ; border-color: rgba(0,0,0,0.53)">
+                    <div class="row">
+                        <div class="col-xs-6 text-right">
+                            <a class="announcement-heading" style="color: white ; text-decoration: none ;cursor:pointer"">信息修改</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="panel panel-danger" >
+                <div class="panel-heading" style="background-color:#626062">
+                    <div class="row">
+                        <div class="col-xs-6 text-right">
+                            <a class="announcement-heading" style="color: white ;text-decoration: none ;cursor:pointer" >刷题记录</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6 text-right">
+                            <a class="announcement-heading" style="text-decoration: none ;cursor:pointer">比赛记录</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- /#page-wrapper -->
+</div>
+
+<!-- JavaScript -->
+<script src="js/jquery-1.10.2.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/fun/divSW.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/3.0.1/js/bootstrap.js"></script>
 </body>
 </html>

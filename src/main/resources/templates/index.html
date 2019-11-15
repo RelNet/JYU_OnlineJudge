@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" href="favicon.ico" type="icon">
     <title>JYU Online Judge</title>
     <script language="javascript">
     </script>
@@ -14,10 +15,9 @@
     <!-- Add custom CSS here -->
     <link href="css/sb-admin.css" rel="stylesheet">
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
-    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
 </head>
 
-<body onkeydown="document.onkeydown(even)">
+<body onkeydown="document.onkeydown(even)" >
 
 <div id="wrapper">
 
@@ -42,16 +42,44 @@
                 <li><a href="team.html"><i class="fa fa-edit"></i> 团队</a></li>
             </ul>
 
-            <ul class="nav navbar-nav navbar-right navbar-user">
+    <!-- Sidebar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Home</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li><a href="problemset.html"><i class="fa fa-dashboard" ></i> 问题</a></li>
+                <li><a href="contest.html"><i class="fa fa-bar-chart-o"></i> 比赛/考试</a></li>
+                <li><a href="status.html"><i class="fa fa-table"></i> 提交状态</a></li>
+                <li><a href="team.html"><i class="fa fa-edit"></i> 团队</a></li>
+            </ul>
+
+            <!--/*@thymesVar id="loginUser" type=""*/-->
+            <ul class="nav navbar-nav navbar-right navbar-user" >
+                <li class="dropdown user-dropdown" th:if="${loginUser != null}">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-user"></i> 登录 <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a onclick="divSW()"><i class="fa fa-user"></i> 登录</a></li>
+                    <li class="divider"></li>
+                    <li><a href="/welcome"><i class="fa fa-gear"></i>注册</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#"><i class="fa fa-power-off"></i> 注销</a></li>
+                </ul>
+            </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right navbar-user" th:if="${loginUser != null}">
                 <li class="dropdown user-dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" th:text="${session.loginUser}"><i
-                            class="fa fa-user"></i> 登录 <b
-                            class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-user"></i>  <span th:text="${loginUser}">用户名</span><b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a onclick="divSW()"><i class="fa fa-user"></i> 登录</a></li>
-                        <li class="divider"></li>
-                        <li><a onclick="divSW1()" href="/welcome"><i class="fa fa-gear"></i>注册</a></li>
-                        <li class="divider"></li>
                         <li><a href="#"><i class="fa fa-power-off"></i> 注销</a></li>
                     </ul>
                 </li>
@@ -74,26 +102,24 @@
 </div><!-- /#page-wrapper -->
 
 
-<div class="modal fade in" id="hide" tabindex="-1" role="dialog"
-     style="display: block; padding-right: 16px; display: none">
+<div class="modal fade in"  id="hide" tabindex="-1" role="dialog" style="display: block; padding-right: 16px; display: none" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" onclick="divSW()">
+                <button type="button" class="close"  data-dismiss="modal" onclick="divSW()">
                     <span>×</span>
                 </button>
-                <h4 class="modal-title" id="loginModalLabel">登录</h4>
+<!--                <h4 class="modal-title" id="loginModalLabel" th:if="$session.login.username ">登录</h4>-->
             </div>
             <div class="modal-body">
-                <form id="login-form" method="post" action="/">
+                <form id="login-form" method="post" action="index.html">
                     <div class="form-group">
                         <!--<label for="login-username" class="form-control-label">Username:</label>-->
-                        <input type="text" class="form-control" id="login-username" name="username" placeholder="用户名">
+                        <input type="text" class="form-control" id="login-username" name="username" placeholder="学号">
                     </div>
                     <div class="form-group">
                         <!--<label for="login-password" class="form-control-label">Password:</label>-->
-                        <input type="password" class="form-control" id="login-password" name="password"
-                               placeholder="密码">
+                        <input type="password" class="form-control" id="login-password" name="password" placeholder="密码">
                     </div>
                     <input type="submit" style="display: none">
                 </form>
@@ -106,52 +132,48 @@
     </div>
 </div><!-- /#wrapper -->
 
-<div class="modal fade in" id="hide2" tabindex="-1" role="dialog"
-     style="display: block; padding-right: 16px; display: none">
+<div class="modal fade in"  id="hide2" tabindex="-1" role="dialog" style="display: block; padding-right: 16px; display: none" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" onclick="divSW1()">
+                <button type="button" class="close"  data-dismiss="modal" onclick="divSW1()" >
                     <span>×</span>
                 </button>
                 <h4 class="modal-title" id="registerLabel">注册</h4>
             </div>
             <div class="modal-body">
-                <form id="register-form" method="post" action="home.html">
+                <form id="register-form" method="post" action="home.html" >
                     <div class="form-group">
                         <!--<label for="login-username" class="form-control-label">Username:</label>-->
                         <input type="text" class="form-control" id="register-ID" name="ID" placeholder="学号">
                     </div>
 
                     <div class="form-group">
-                        <!--<label for="login-username" class="form-control-label">Username:</label>-->
-                        <input type="text" class="form-control" id="register-realname" name="realname"
-                               placeholder="真实姓名">
+                    <!--<label for="login-username" class="form-control-label">Username:</label>-->
+                    <input type="text" class="form-control" id="register-realname" name="realname" placeholder="真实姓名">
                     </div>
                     <div class="form-group">
-                        <!--<label for="login-username" class="form-control-label">Username:</label>-->
-                        <input type="text" class="form-control" id="register-class " name="class" placeholder="班级">
+                    <!--<label for="login-username" class="form-control-label">Username:</label>-->
+                    <input type="text" class="form-control" id="register-class " name="class" placeholder="班级">
                     </div>
                     <div class="form-group">
                         <!--<label for="login-username" class="form-control-label">Username:</label>-->
                         <input type="text" class="form-control" id="register-team" name="team" placeholder="学院">
                     </div>
                     <div class="form-group">
-                        <!--<label for="login-password" class="form-control-label">Password:</label>-->
-                        <input type="password" class="form-control" id="register-password" name="password"
-                               placeholder="密码">
+                    <!--<label for="login-password" class="form-control-label">Password:</label>-->
+                    <input type="password" class="form-control" id="register-password" name="password" placeholder="密码">
                     </div>
                     <div class="form-group">
                         <!--<label for="login-username" class="form-control-label">Username:</label>-->
-                        <input type="password" class="form-control" id="register-repeatpsd" name="repeatpsd"
-                               placeholder="确认密码">
+                        <input type="password" class="form-control" id="register-repeatpsd" name="repeatpsd" placeholder="确认密码">
                     </div>
                     <input type="submit" style="display: none">
                 </form>
             </div>
             <div class="modal-footer">
                 <div class="alert alert-danger" role="alert" id="register-alert" style="display: none;"></div>
-                <button type="button" class="btn btn-primary" id="btn-register">注册</button>
+                <button type="button" class="btn btn-primary" id="btn-register" >注册</button>
             </div>
         </div>
     </div>
@@ -164,64 +186,47 @@
 <script src="js/fun/divSW.js"></script>
 <script src="js/fun/divSW1.js"></script>
 <script>
-    function document
+    function   document.oncontextmenu(){event.returnValue=false;}//屏蔽鼠标右键
 
-    .oncontextmenu()
-    {
-        event.returnValue = false;
-    }//屏蔽鼠标右键
+    function   window.onhelp(){return false;}       //屏蔽F1帮助
 
-    function window
+    function   document.onkeydown(){
 
-    .onhelp()
-    {
-        return false;
-    }       //屏蔽F1帮助
+        if((window.event.altKey)&&
 
-    function document
+            ((window.event.keyCode==37)||            //屏蔽Alt+方向键←
 
-    .onkeydown()
-    {
-
-        if ((window.event.altKey) &&
-
-            ((window.event.keyCode == 37) ||            //屏蔽Alt+方向键←
-
-                (window.event.keyCode == 39))) {            //屏蔽Alt+方向键→
+                (window.event.keyCode==39))){            //屏蔽Alt+方向键→
 
             alert("不准你使用ALT+方向键前进或后退网页！");
 
-            event.returnValue = false;
+            event.returnValue=false;
+
+        }         if((event.keyCode==8)||                    //屏蔽退格删除键
+
+            (event.keyCode==116)||                   //屏蔽F5刷新键
+
+            (event.ctrlKey && event.keyCode==82)){   //Ctrl+R
+
+            event.keyCode=0;
+
+            event.returnValue=false;
 
         }
-        if ((event.keyCode == 8) ||                    //屏蔽退格删除键
 
-            (event.keyCode == 116) ||                   //屏蔽F5刷新键
+        if(event.keyCode==122){event.keyCode=0;event.returnValue=false;}    //屏蔽F11
 
-            (event.ctrlKey && event.keyCode == 82)) {   //Ctrl+R
+        if(event.ctrlKey && event.keyCode==78)event.returnValue=false;      //屏蔽Ctrl+n
 
-            event.keyCode = 0;
+        if(event.shiftKey && event.keyCode==121)event.returnValue=false;    //屏蔽shift+F10
 
-            event.returnValue = false;
+        if(window.event.srcElement.tagName=="A" && window.event.shiftKey)
 
-        }
+            window.event.returnValue=false;       //屏蔽shift加鼠标左键新开一网页
 
-        if (event.keyCode == 122) {
-            event.keyCode = 0;
-            event.returnValue = false;
-        }    //屏蔽F11
+        if((window.event.altKey)&&(window.event.keyCode==115)){             //屏蔽Alt+F4
 
-        if (event.ctrlKey && event.keyCode == 78) event.returnValue = false;      //屏蔽Ctrl+n
-
-        if (event.shiftKey && event.keyCode == 121) event.returnValue = false;    //屏蔽shift+F10
-
-        if (window.event.srcElement.tagName == "A" && window.event.shiftKey)
-
-            window.event.returnValue = false;       //屏蔽shift加鼠标左键新开一网页
-
-        if ((window.event.altKey) && (window.event.keyCode == 115)) {             //屏蔽Alt+F4
-
-            window.showModelessDialog("about:blank", "", "dialogWidth:1px;dialogheight:1px");
+            window.showModelessDialog("about:blank","","dialogWidth:1px;dialogheight:1px");
 
             return false;
 
