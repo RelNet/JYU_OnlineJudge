@@ -5,18 +5,18 @@ import java.sql.*;
 /*
  * 工具类，连接数据库*/
 public class JdbcConnection {
-    public static String use = null;
+    public static String user = null;
     public static String password = null;
     public static String ip = null;
     public static String port = null;
     public static String databasename = null;
 
-    public static String getUse() {
-        return use;
+    public static String getUser() {
+        return user;
     }
 
-    public static void setUse(String use) {
-        JdbcConnection.use = use;
+    public static void setUser(String user) {
+        JdbcConnection.user = user;
     }
 
     public static String getPassword() {
@@ -59,7 +59,7 @@ public class JdbcConnection {
         }
         //获取链接
         return DriverManager.getConnection("jdbc:mysql://"+ip+":"+port+"/"+databasename+"?serverTimezone=UTC",
-                use, password);
+                user, password);
 
     }
 

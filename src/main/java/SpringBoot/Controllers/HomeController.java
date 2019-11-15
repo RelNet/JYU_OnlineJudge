@@ -4,6 +4,7 @@ import Data.Users.MainUser;
 import Database.OjUserMessage.UserLogin;
 import JudgeSystem.StartJudge;
 import SpringBoot.SessionAndModelConstant;
+import SpringBoot.WebCache.HomeCache;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,9 @@ public class HomeController {
     // 发起主页get请求
     @GetMapping(path = "/")
     public String toHome(Model model, HttpSession session) {
-
+        model.addAttribute(HomeCache.topProblems);
+        model.addAttribute(HomeCache.topContests);
+        model.addAttribute(HomeCache.comingContests);
         return "index";
     }
 
@@ -40,6 +43,11 @@ public class HomeController {
         } else {
             model.addAttribute(SessionAndModelConstant.ErrorMessageString, "用户名或者密码错误");
         }
+
+        model.addAttribute(HomeCache.topProblems);
+        model.addAttribute(HomeCache.topContests);
+        model.addAttribute(HomeCache.comingContests);
+
         return "index";
     }
 
@@ -69,6 +77,15 @@ public class HomeController {
             case "problemset":
             case "/problemset":
                 return "problemset";
+            case "status":
+            case "/status":
+                return "status";
+            case "contest":
+            case "/contest":
+                return "contest";
+            case "team":
+            case "/team":
+                return "team";
             default:
                 return null;
         }

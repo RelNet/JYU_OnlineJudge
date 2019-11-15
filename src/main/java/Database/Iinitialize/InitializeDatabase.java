@@ -44,7 +44,7 @@ public class InitializeDatabase {
             databasename = args[i].substring(13,args[i].length());
         }
         CreatDatabase(username, password);
-        JdbcConnection.use = username;
+        JdbcConnection.user = username;
         JdbcConnection.password = password;
         JdbcConnection.port = port;
         JdbcConnection.ip = ip;

@@ -24,7 +24,7 @@ public class ProblemPageController {
     @GetMapping(path = "problempage/{problemid}")
     public String toTheProblem(@PathVariable("problemid") String problemID, Model model, HttpSession session) {
         model.addAttribute("problemid", problemID);
-
+        
         return "problempage";
     }
 }
