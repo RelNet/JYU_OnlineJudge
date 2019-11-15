@@ -1,3 +1,5 @@
+
+
 package Database.OjUserMessage;
 
 
@@ -12,7 +14,7 @@ public class UserLogin {
     /**
      * public boolean CheckUserName(String UserName);
      * 查询用户名有没有重复
-     * true表示用户名在数据库存在可用
+     * true表示用户名在数据库存在
      * false 表示用户名在数据库不存在
      */
     public boolean CheckUserName(String UserName) {

@@ -5,20 +5,64 @@ import java.sql.*;
 /*
  * 工具类，连接数据库*/
 public class JdbcConnection {
+    public static String use = null;
+    public static String password = null;
+    public static String ip = null;
+    public static String port = null;
+    public static String databasename = null;
 
-    static {//注册驱动
+    public static String getUse() {
+        return use;
+    }
+
+    public static void setUse(String use) {
+        JdbcConnection.use = use;
+    }
+
+    public static String getPassword() {
+        return password;
+    }
+
+    public static void setPassword(String password) {
+        JdbcConnection.password = password;
+    }
+
+    public static String getIp() {
+        return ip;
+    }
+
+    public static void setIp(String ip) {
+        JdbcConnection.ip = ip;
+    }
+
+    public static String getPort() {
+        return port;
+    }
+
+    public static void setPort(String port) {
+        JdbcConnection.port = port;
+    }
+
+    public static String getDatabasename() {
+        return databasename;
+    }
+
+    public static void setDatabasename(String databasename) {
+        JdbcConnection.databasename = databasename;
+    }
+
+    public Connection Get_Connection() throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        //获取链接
+        return DriverManager.getConnection("jdbc:mysql://"+ip+":"+port+"/"+databasename+"?serverTimezone=UTC",
+                use, password);
+
     }
 
-    public Connection Get_Connection() throws SQLException {
-        //获取链接
-        return DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/ojtext_database?serverTimezone=UTC",
-                "root", "cy6666330");
-    }
 
     public void Free(ResultSet rs, Statement stm, Connection con) {
         if (rs != null) {

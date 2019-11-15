@@ -1,3 +1,4 @@
+
 package Database.OjUserMessage;
 
 
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 public class UserRegister {
     /* public boolean CheckUserName(String UserName);
      * 查询用户名有没有重复
-     * true表示用户名在数据库存在可用
+     * true表示用户名在数据库存在
      * false 表示用户名在数据库不存在
      * */
     public boolean CheckUserName(String UserName) {
@@ -71,7 +72,6 @@ public class UserRegister {
             GetPreparedStatement.executeUpdate();
             GetConnectionDatabase.commit();
             //提交事务
-
         } catch (SQLException e) {
             flag = false;
             if (GetConnectionDatabase != null) {
