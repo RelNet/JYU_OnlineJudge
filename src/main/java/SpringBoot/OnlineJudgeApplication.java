@@ -22,6 +22,7 @@ public class OnlineJudgeApplication {
         SpringApplication.run(OnlineJudgeApplication.class, args);
         dealArgs(args);
         init();
+        System.out.println(JdbcConnection.getDatabasename() + "   " + JdbcConnection.getIp() + "   " + JdbcConnection.getPassword() + "   " + JdbcConnection.getPort() + "   " + JdbcConnection.getUser());
         HomeCache homeCache = new HomeCache();
         ProblemSetCache problemSetCache = new ProblemSetCache();
         StatusCache statusCache = new StatusCache();
