@@ -22,14 +22,16 @@ public class StartJudge {
     private static final Integer MAX_COMPILE_QUEUE_SIZE = 4000;
     private static final Long COMPILE_KEEP_ALIVE_TIME = 2L;
     private static final Integer MAX_COMPILE_CORE_POOL_SIZE = 1;
-    ExecutorService compileThreadPool = new ThreadPoolExecutor(MAX_COMPILE_CORE_POOL_SIZE, MAX_COMPILE_THREADS, COMPILE_KEEP_ALIVE_TIME, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(MAX_COMPILE_QUEUE_SIZE));
+    ExecutorService compileThreadPool = new ThreadPoolExecutor(MAX_COMPILE_CORE_POOL_SIZE, MAX_COMPILE_THREADS
+            , COMPILE_KEEP_ALIVE_TIME, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(MAX_COMPILE_QUEUE_SIZE));
 
     // 提交答案线程池，要与数据库进行交互
     private static final Integer MAX_WRITE_THREADS = 100;
     private static final Integer MAX_WRITE_QUEUE_SIZE = 5000;
     private static final Long WRITE_KEEP_ALIVE_TIME = 60L;
     private static final Integer MAX_WRITE_CORE_POOL_SIZE = 30;
-    ExecutorService writeAnswerToDatabaseThreadPool = new ThreadPoolExecutor(MAX_WRITE_CORE_POOL_SIZE, MAX_WRITE_THREADS, WRITE_KEEP_ALIVE_TIME, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(MAX_WRITE_QUEUE_SIZE));
+    ExecutorService writeAnswerToDatabaseThreadPool = new ThreadPoolExecutor(MAX_WRITE_CORE_POOL_SIZE, MAX_WRITE_THREADS
+            , WRITE_KEEP_ALIVE_TIME, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(MAX_WRITE_QUEUE_SIZE));
 
     // 编译型任务线程池设置
     ExecutorService runProgramThreadPool;

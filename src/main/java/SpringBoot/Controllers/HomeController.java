@@ -19,7 +19,7 @@ public class HomeController {
     // 发起主页get请求
     @GetMapping(path = "/")
     public String toHome(Model model, HttpSession session) {
-        model.addAttribute(HomeCache.topProblems);
+        model.addAttribute("topProblems",HomeCache.topProblems);
         model.addAttribute(HomeCache.topContests);
         model.addAttribute(HomeCache.comingContests);
         return "index";

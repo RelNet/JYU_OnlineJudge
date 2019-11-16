@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // 状态页面缓存类
-public class StatusCache extends Thread{
+public class StatusCache extends Thread {
     // 更新缓存时间间隔
     Long refreshRate = 1000L;
 
@@ -32,7 +32,7 @@ public class StatusCache extends Thread{
     @Override
     public void run() {
         // 每隔refreshRate毫秒从数据库中获取新的缓存
-        while(true) {
+        while (true) {
 
             try {
                 Thread.sleep(refreshRate);

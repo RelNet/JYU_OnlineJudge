@@ -2,6 +2,9 @@ package SpringBoot;
 
 import Database.JdbcConnection;
 import JudgeSystem.StartJudge;
+import SpringBoot.WebCache.HomeCache;
+import SpringBoot.WebCache.ProblemSetCache;
+import SpringBoot.WebCache.StatusCache;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -19,6 +22,12 @@ public class OnlineJudgeApplication {
         SpringApplication.run(OnlineJudgeApplication.class, args);
         dealArgs(args);
         init();
+        HomeCache homeCache = new HomeCache();
+        ProblemSetCache problemSetCache = new ProblemSetCache();
+        StatusCache statusCache = new StatusCache();
+        homeCache.start();
+        problemSetCache.start();
+        statusCache.start();
     }
 
     // 处理命令行参数
