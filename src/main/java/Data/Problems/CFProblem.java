@@ -2,11 +2,12 @@ package Data.Problems;
 
 import Database.JdbcConnection;
 
+import java.io.Serializable;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CFProblem extends MainProblemMessage {
+public class CFProblem extends MainProblemMessage  implements Serializable {
 
     public String InputDescribe = null;
     public String OutputDescribe = null;
@@ -15,6 +16,40 @@ public class CFProblem extends MainProblemMessage {
     //List里面的顺序要是inputoutput
     public List<InputOutput> SampleInputOutput = new ArrayList<InputOutput>();
 
+    /**
+     * GetMessage()
+     * @param ProblemID
+     * @return List的顺序是problem_descirbe，input_describe， output_describe，
+     * time_limit，memory_limit；
+     */
+
+    public List<String> GetCFPMessage(int ProblemID){
+        List<String> AnsList = new ArrayList<String>();
+        Connection GetConnectionDatabase = null;
+        PreparedStatement GetPreparedStatement = null;
+        ResultSet GetResultSet = null;
+        JdbcConnection JdbcLink = new JdbcConnection();
+        try {
+            GetConnectionDatabase = JdbcLink.Get_Connection();
+            String sql = "select problem_describe,input_describe," +
+                    "output_describe,time_limit,memory_limit from t_cf_fcf_problem_detail where problem_id = ?";
+            GetPreparedStatement = GetConnectionDatabase.prepareStatement(sql);
+            GetPreparedStatement.setInt(1, ProblemID);
+            GetResultSet = GetPreparedStatement.executeQuery();
+            if (GetResultSet.next()) {
+                AnsList.add(GetResultSet.getString("problem_describe"));
+                AnsList.add(GetResultSet.getString("input_describe"));
+                AnsList.add(GetResultSet.getString("output_describe"));
+                AnsList.add(GetResultSet.getString("time_limit"));
+                AnsList.add(GetResultSet.getString("memory_limit"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcLink.Free(GetResultSet, GetPreparedStatement, GetConnectionDatabase);
+        }
+        return AnsList;
+    }
     public List<InputOutput> getSampleInputOutput() {
         return SampleInputOutput;
     }

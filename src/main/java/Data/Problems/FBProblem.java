@@ -3,11 +3,12 @@ package Data.Problems;
 import Database.JdbcConnection;
 import JudgeSystem.ProblemType;
 
+import java.io.Serializable;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FBProblem extends MainProblemMessage {
+public class FBProblem extends MainProblemMessage  implements Serializable {
     public List<String> ans = new ArrayList<String>();
 
     public List<String> GetAns() {

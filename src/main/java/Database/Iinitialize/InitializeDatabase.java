@@ -12,7 +12,7 @@ public class InitializeDatabase {
     public static void main(String[] args){
         //username=******
         //password=******
-        //DatabaseName=***
+        //databasename=***
         //ip=***
         //port=**
         //3306
@@ -90,7 +90,7 @@ public class InitializeDatabase {
                     "  `student_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,\n" +
                     "  PRIMARY KEY (`user_name`),\n" +
                     "  CONSTRAINT `t_student_detail_ibfk_1` FOREIGN KEY (`user_name`) REFERENCES `t_student` (`user_name`) ON DELETE CASCADE ON UPDATE CASCADE\n" +
-                    ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci\n";
+                    ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci" ;
             GetStatement.executeUpdate(sql);
 
             sql = "CREATE TABLE `t_team` (\n" +
@@ -117,10 +117,10 @@ public class InitializeDatabase {
                     "  `title` varchar(255) NOT NULL,\n" +
                     "  `source` varchar(255) DEFAULT NULL,\n" +
                     "  `problem_type` int(11) NOT NULL,\n" +
-                    "  `accept_number` int(10) unsigned zerofill NOT NULL,\n" +
-                    "  `attempt_number` int(10) unsigned zerofill NOT NULL,\n" +
+                    "  `accept_number` int(10) unsigned zerofill DEFAULT NULL,\n" +
+                    "  `attempt_number` int(10) unsigned zerofill DEFAULT NULL,\n" +
                     "  PRIMARY KEY (`problem_id`)\n" +
-                    ") ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci\n";
+                    ") ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
             GetStatement.executeUpdate(sql);
 
             sql = "CREATE TABLE `t_cf_fcf_problem_detail` (\n" +
@@ -132,7 +132,7 @@ public class InitializeDatabase {
                     "  `memory_limit` varchar(255) NOT NULL,\n" +
                     "  PRIMARY KEY (`problem_id`),\n" +
                     "  CONSTRAINT `t_cf_fcf_problem_detail_ibfk_1` FOREIGN KEY (`problem_id`) REFERENCES `t_problem` (`problem_id`) ON DELETE CASCADE ON UPDATE CASCADE\n" +
-                    ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;";
+                    ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
             GetStatement.executeUpdate(sql);
 
             sql = "CREATE TABLE `t_cf_fcf_problem_sample` (\n" +
@@ -146,7 +146,7 @@ public class InitializeDatabase {
 
             sql = "CREATE TABLE `t_mcq_detail` (\n" +
                     "  `problem_id` int(11) NOT NULL,\n" +
-                    "  `option` text NOT NULL,\n" +
+                    "  `problem_option` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,\n" +
                     "  KEY `problem_id` (`problem_id`),\n" +
                     "  CONSTRAINT `t_mcq_detail_ibfk_1` FOREIGN KEY (`problem_id`) REFERENCES `t_problem` (`problem_id`) ON DELETE CASCADE ON UPDATE CASCADE\n" +
                     ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
@@ -164,10 +164,10 @@ public class InitializeDatabase {
                     "  `submit_id` int(11) NOT NULL AUTO_INCREMENT,\n" +
                     "  `problem_id` int(11) NOT NULL,\n" +
                     "  `submit_time` date NOT NULL,\n" +
-                    "  `language` varchar(255) NOT NULL,\n" +
-                    "  `run_time` int(10) unsigned zerofill NOT NULL,\n" +
-                    "  `run_memory` int(10) unsigned zerofill NOT NULL,\n" +
-                    "  `code` text NOT NULL,\n" +
+                    "  `language` int(11) DEFAULT NULL,\n" +
+                    "  `run_time` int(10) unsigned zerofill DEFAULT NULL,\n" +
+                    "  `run_memory` int(10) unsigned zerofill DEFAULT NULL,\n" +
+                    "  `code` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,\n" +
                     "  `status` int(11) NOT NULL,\n" +
                     "  PRIMARY KEY (`submit_id`)\n" +
                     ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
