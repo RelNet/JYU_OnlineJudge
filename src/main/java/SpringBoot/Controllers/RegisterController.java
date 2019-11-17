@@ -33,12 +33,16 @@ public class RegisterController {
     }
 
     @PostMapping(path = "welcome")
-    public String registerUser(StudentUser studentInformation, Model model, HttpSession session) {
+    public String registerUser(MainUser studentInformation, Model model, HttpSession session) {
+        System.out.println("?????????" + "s_" + studentInformation.getID() +
+                studentInformation.getPassword() + studentInformation.getClassName() + studentInformation.getRealName() +
+                studentInformation.getCollegeName() + studentInformation.getID());
+
         registerThreadPool.execute(new Runnable() {
             @Override
             public void run() {
                 // 插入数据库
-                new UserRegister().register(studentInformation.getUsername(),
+                new UserRegister().register("s_" + studentInformation.getID(),
                         studentInformation.getPassword(), studentInformation.getClassName(), studentInformation.getRealName(),
                         studentInformation.getCollegeName(), studentInformation.getID());
             }
@@ -49,8 +53,8 @@ public class RegisterController {
         return "welcome_to_join_us";
     }
 
-    @GetMapping(path = "welcome")
-    public String toWelcome() {
-        return "welcome_to_join_us";
-    }
+//    @GetMapping(path = "welcome")
+//    public String toWelcome() {
+//        return "welcome_to_join_us";
+//    }
 }

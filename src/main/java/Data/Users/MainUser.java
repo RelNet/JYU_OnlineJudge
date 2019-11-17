@@ -20,6 +20,18 @@ public class MainUser implements Serializable {
     private String realName;
     String className;
 
+    @Override
+    public String toString() {
+        return "MainUser{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", collegeName='" + collegeName + '\'' +
+                ", ID='" + ID + '\'' +
+                ", realName='" + realName + '\'' +
+                ", className='" + className + '\'' +
+                '}';
+    }
+
     public String getClassName() {
         return className;
     }

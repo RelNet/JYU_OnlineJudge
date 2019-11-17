@@ -19,7 +19,7 @@ public class HomeController {
     // 发起主页get请求
     @GetMapping(path = "/")
     public String toHome(Model model, HttpSession session) {
-        model.addAttribute("topProblems",HomeCache.topProblems);
+        model.addAttribute("topProblems", HomeCache.topProblems);
         model.addAttribute(HomeCache.topContests);
         model.addAttribute(HomeCache.comingContests);
         return "index";
@@ -29,6 +29,7 @@ public class HomeController {
     public String login(MainUser user,
                         Model model, HttpSession session) {
 
+        System.out.println("!!!" + user.getUsername() + "   " + user.getPassword());
         // 将登陆过的用户删除
         if (session.getAttribute(SessionAndModelConstant.LoginUserString) != null) {
             session.removeAttribute(SessionAndModelConstant.LoginUserString);
@@ -39,6 +40,9 @@ public class HomeController {
         if (userLogin.CheckUserName(user.getUsername())) {
             if (userLogin.CheckUserLogin(user.getUsername(), user.getPassword())) {
                 session.setAttribute(SessionAndModelConstant.LoginUserString, user.getUsername());
+                System.out.println(session.getAttribute(SessionAndModelConstant.LoginUserString) + "成功登陆!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            } else {
+                model.addAttribute(SessionAndModelConstant.ErrorMessageString, "用户名或者密码错误");
             }
         } else {
             model.addAttribute(SessionAndModelConstant.ErrorMessageString, "用户名或者密码错误");
@@ -55,6 +59,7 @@ public class HomeController {
     @PostMapping("/{path}")
     public String login(@PathVariable String path, MainUser user,
                         Model model, HttpSession session) {
+        System.out.println("!!!!!!!!!!!" + user.getUsername() + "   " + user.getPassword());
 
         if (session.getAttribute(SessionAndModelConstant.LoginUserString) != null) {
             session.removeAttribute(SessionAndModelConstant.LoginUserString);
@@ -64,6 +69,9 @@ public class HomeController {
         if (userLogin.CheckUserName(user.getUsername())) {
             if (userLogin.CheckUserLogin(user.getUsername(), user.getPassword())) {
                 session.setAttribute(SessionAndModelConstant.LoginUserString, user.getUsername());
+            } else {
+                model.addAttribute(SessionAndModelConstant.ErrorMessageString, "用户名或者密码错误");
+
             }
         } else {
             model.addAttribute(SessionAndModelConstant.ErrorMessageString, "用户名或者密码错误");
