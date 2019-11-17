@@ -2,12 +2,13 @@ package Data.Problems;
 
 import Database.JdbcConnection;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class FCFProblem extends CFProblem {
+public class FCFProblem extends CFProblem  implements Serializable {
     public String SampleCode = null;
 
     public String getSampleCode() {

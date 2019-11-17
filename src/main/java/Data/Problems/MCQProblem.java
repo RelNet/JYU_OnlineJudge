@@ -3,11 +3,12 @@ package Data.Problems;
 
 import Database.JdbcConnection;
 
+import java.io.Serializable;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MCQProblem extends MainProblemMessage{
+public class MCQProblem extends MainProblemMessage  implements Serializable {
     public List<String> ProblemOption = new ArrayList<String>();
     public  List<String> ProblemAnswer = new ArrayList<String>();
 
