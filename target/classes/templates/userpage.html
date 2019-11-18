@@ -36,16 +36,17 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li><a href="problemSet.html"><i class="fa fa-dashboard" ></i> 问题</a></li>
+                <li><a href="problemSet.html"><i class="fa fa-dashboard"></i> 问题</a></li>
                 <li><a href="contest.html"><i class="fa fa-bar-chart-o"></i> 比赛/考试</a></li>
                 <li><a href="status.html"><i class="fa fa-table"></i> 提交状态</a></li>
                 <li><a href="team.html"><i class="fa fa-edit"></i> 团队</a></li>
             </ul>
             <!--登陆状态栏-->
             <!--/*@thymesVar id="loginUser" type=""*/-->
-            <ul class="nav navbar-nav navbar-right navbar-user" >
+            <ul class="nav navbar-nav navbar-right navbar-user">
                 <li class="dropdown user-dropdown" th:if="${loginUser == null}">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-user"></i> 登录 <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 登录 <b
+                            class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a onclick="divSW()"><i class="fa fa-user"></i> 登录</a></li>
                         <li class="divider"></li>
@@ -55,7 +56,8 @@
             </ul>
             <ul class="nav navbar-nav navbar-right navbar-user" th:if="${loginUser != null}">
                 <li class="dropdown user-dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-user"></i>  <span th:text="${loginUser}">用户名</span><b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span
+                            th:text="${loginUser}">用户名</span><b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#"><i class="fa fa-power-off"></i> 注销</a></li>
                     </ul>
@@ -67,8 +69,8 @@
 </div><!-- /#page-wrapper -->
 
 <!--内容-->
-<div id="page-wrapper" >
-<!--    个人信息-->
+<div id="page-wrapper">
+    <!--    个人信息-->
     <div class="col-lg-4">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -105,44 +107,46 @@
         </div>
     </div>
     <!--</div>-->
-<!--    团队修改-->
+    <!--    团队修改-->
     <div class="row">
         <div class="col-lg-3">
-            <div class="panel panel-info" >
+            <div class="panel panel-info">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-6 text-right">
-                            <a class="announcement-heading"  style="text-decoration: none ;cursor:pointer">团队信息</a>
+                            <a class="announcement-heading" style="text-decoration: none ;cursor:pointer">团队信息</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-<!--        个人信息修改-->
+        <!--        个人信息修改-->
         <div class="col-lg-3">
-            <div class="panel panel-warning" >
-                <div class="panel-heading" style="background-color: rgba(49,23,255,0.59) ; border-color: rgba(0,0,0,0.53)">
+            <div class="panel panel-warning">
+                <div class="panel-heading"
+                     style="background-color: rgba(49,23,255,0.59) ; border-color: rgba(0,0,0,0.53)">
                     <div class="row">
                         <div class="col-xs-6 text-right">
-                            <a class="announcement-heading" style="color: white ; text-decoration: none ;cursor:pointer">信息修改</a>
+                            <a class="announcement-heading"
+                               style="color: white ; text-decoration: none ;cursor:pointer">信息修改</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-<!--        刷题记录-->
+        <!--        刷题记录-->
         <div class="col-lg-3">
-            <div class="panel panel-danger" >
+            <div class="panel panel-danger">
                 <div class="panel-heading" style="background-color:#626062">
                     <div class="row">
                         <div class="col-xs-6 text-right">
-                            <a class="announcement-heading" style="color: white ;text-decoration: none ;cursor:pointer" >刷题记录</a>
+                            <a class="announcement-heading" style="color: white ;text-decoration: none ;cursor:pointer">刷题记录</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-<!--        比赛记录-->
+        <!--        比赛记录-->
         <div class="col-lg-3">
             <div class="panel panel-success">
                 <div class="panel-heading">

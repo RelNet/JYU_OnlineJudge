@@ -58,7 +58,7 @@ public class JdbcConnection {
             e.printStackTrace();
         }
         //获取链接
-        return DriverManager.getConnection("jdbc:mysql://"+ip+":"+port+"/"+databasename+"?serverTimezone=UTC",
+        return DriverManager.getConnection("jdbc:mysql://" + ip + ":" + port + "/" + databasename + "?serverTimezone=UTC",
                 user, password);
 
     }

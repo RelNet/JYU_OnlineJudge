@@ -9,7 +9,7 @@ import java.util.List;
 // 主页缓存
 public class HomeCache extends Thread {
     // 热门题目
-    public static volatile List<MainProblemMessage> topProblems = new ArrayList<>();
+    public static volatile List<MainProblemMessage> topTags = new ArrayList<>();
 
     // 热门比赛
     public static volatile List<MainContest> topContests = new ArrayList<>();
@@ -17,8 +17,8 @@ public class HomeCache extends Thread {
     // 即将进行的比赛
     public static volatile List<MainContest> comingContests = new ArrayList<>();
 
-    // 默认10分钟刷新
-    Long refreshRate = 600000L;
+    // 默认60分钟刷新
+    static Long refreshRate = 3600000L;
 
     @Override
     public void run() {

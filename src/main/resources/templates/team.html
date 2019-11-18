@@ -36,16 +36,17 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li><a href="problemSet.html"><i class="fa fa-dashboard" ></i> 问题</a></li>
+                <li><a href="problemSet.html"><i class="fa fa-dashboard"></i> 问题</a></li>
                 <li><a href="contest.html"><i class="fa fa-bar-chart-o"></i> 比赛/考试</a></li>
                 <li><a href="status.html"><i class="fa fa-table"></i> 提交状态</a></li>
                 <li><a href="team.html"><i class="fa fa-edit"></i> 团队</a></li>
             </ul>
             <!--登陆状态栏-->
             <!--/*@thymesVar id="loginUser" type=""*/-->
-            <ul class="nav navbar-nav navbar-right navbar-user" >
+            <ul class="nav navbar-nav navbar-right navbar-user">
                 <li class="dropdown user-dropdown" th:if="${loginUser == null}">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-user"></i> 登录 <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 登录 <b
+                            class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a onclick="divSW()"><i class="fa fa-user"></i> 登录</a></li>
                         <li class="divider"></li>
@@ -55,7 +56,8 @@
             </ul>
             <ul class="nav navbar-nav navbar-right navbar-user" th:if="${loginUser != null}">
                 <li class="dropdown user-dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-user"></i>  <span th:text="${loginUser}">用户名</span><b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span
+                            th:text="${loginUser}">用户名</span><b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#"><i class="fa fa-power-off"></i> 注销</a></li>
                     </ul>
@@ -66,36 +68,38 @@
     <!--    标题栏-->
 </div><!-- /#page-wrapper -->
 
-    <!--登陆浮窗-->
-    <div class="modal fade in"  id="hide" tabindex="-1" role="dialog" style="display: block; padding-right: 16px; display: none" >
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close"  data-dismiss="modal" onclick="divSW()">
-                        <span>×</span>
-                    </button>
-                    <!--                <h4 class="modal-title" id="loginModalLabel" th:if="$session.login.username ">登录</h4>-->
-                </div>
-                <div class="modal-body">
-                    <form id="login-form" method="post" action="index.html">
-                        <div class="form-group">
-                            <!--<label for="login-username" class="form-control-label">Username:</label>-->
-                            <input type="text" class="form-control" id="login-username" name="username" placeholder="学号">
-                        </div>
-                        <div class="form-group">
-                            <!--<label for="login-password" class="form-control-label">Password:</label>-->
-                            <input type="password" class="form-control" id="login-password" name="password" placeholder="密码">
-                        </div>
-                        <input type="submit" style="display: none">
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <div class="alert alert-danger" role="alert" id="login-alert" style="display: none;"></div>
-                    <button type="button" class="btn btn-primary" id="btn-login">登录</button>
-                </div>
+<!--登陆浮窗-->
+<div class="modal fade in" id="hide" tabindex="-1" role="dialog"
+     style="display: block; padding-right: 16px; display: none">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" onclick="divSW()">
+                    <span>×</span>
+                </button>
+                <!--                <h4 class="modal-title" id="loginModalLabel" th:if="$session.login.username ">登录</h4>-->
+            </div>
+            <div class="modal-body">
+                <form id="login-form" method="post" action="index.html">
+                    <div class="form-group">
+                        <!--<label for="login-username" class="form-control-label">Username:</label>-->
+                        <input type="text" class="form-control" id="login-username" name="username" placeholder="学号">
+                    </div>
+                    <div class="form-group">
+                        <!--<label for="login-password" class="form-control-label">Password:</label>-->
+                        <input type="password" class="form-control" id="login-password" name="password"
+                               placeholder="密码">
+                    </div>
+                    <input type="submit" style="display: none">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="alert alert-danger" role="alert" id="login-alert" style="display: none;"></div>
+                <button type="button" class="btn btn-primary" id="btn-login">登录</button>
             </div>
         </div>
-    </div><!-- /#wrapper -->
+    </div>
+</div><!-- /#wrapper -->
 
 <!-- JavaScript -->
 <script src="js/fun/divSW.js"></script>

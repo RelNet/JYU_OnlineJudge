@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FBProblem extends MainProblemMessage  implements Serializable {
+public class FBProblem extends MainProblemMessage implements Serializable {
     public List<String> ans = new ArrayList<String>();
 
     public List<String> GetAns() {

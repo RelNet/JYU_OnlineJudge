@@ -8,23 +8,25 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MCQProblem extends MainProblemMessage  implements Serializable {
+public class MCQProblem extends MainProblemMessage implements Serializable {
     public List<String> ProblemOption = new ArrayList<String>();
-    public  List<String> ProblemAnswer = new ArrayList<String>();
+    public List<String> ProblemAnswer = new ArrayList<String>();
 
-    public List<String> GetProblemOption(){
+    public List<String> GetProblemOption() {
         return this.ProblemOption;
     }
-    public List<String> GetProblemAnswer(){
+
+    public List<String> GetProblemAnswer() {
         return this.ProblemAnswer;
     }
-    public void SetProblemOption(List<String> ProblemOption){
+
+    public void SetProblemOption(List<String> ProblemOption) {
         this.ProblemOption = ProblemOption;
     }
-    public void SetProblemAnswer(List<String> ProblemAnswer){
+
+    public void SetProblemAnswer(List<String> ProblemAnswer) {
         this.ProblemAnswer = ProblemAnswer;
     }
-
 
 
     @Override
@@ -71,7 +73,7 @@ public class MCQProblem extends MainProblemMessage  implements Serializable {
         return ProblemDescribe;
     }
 
-    public List<String> GetProblemAnswer(int ProblemID){
+    public List<String> GetProblemAnswer(int ProblemID) {
         List<String> AnsList = new ArrayList<String>();
         Connection GetConnectionDatabase = null;
         PreparedStatement GetPreparedStatement = null;
@@ -132,7 +134,7 @@ public class MCQProblem extends MainProblemMessage  implements Serializable {
         }
     }
 
-    public List<String> GetProblemOption(int ProblemID){
+    public List<String> GetProblemOption(int ProblemID) {
         List<String> option = new ArrayList<String>();
         Connection GetConnectionDatabase = null;
         PreparedStatement GetPreparedStatement = null;
@@ -155,7 +157,7 @@ public class MCQProblem extends MainProblemMessage  implements Serializable {
         return option;
     }
 
-    public void UpdateProblemOption(List<String> NewProblemOption , int ProblemID){
+    public void UpdateProblemOption(List<String> NewProblemOption, int ProblemID) {
         Connection GetConnectionDatabase = null;
         PreparedStatement GetPreparedStatement = null;
         JdbcConnection JdbcLink = new JdbcConnection();
@@ -168,7 +170,7 @@ public class MCQProblem extends MainProblemMessage  implements Serializable {
             GetPreparedStatement.setInt(1, ProblemID);
             GetPreparedStatement.executeUpdate();
             for (String temp : NewProblemOption) {
-                 sql = "insert into t_mcq_fb_detail(problem_id,problem_option) values( problem_id = ?, problem_option = ?)";
+                sql = "insert into t_mcq_fb_detail(problem_id,problem_option) values( problem_id = ?, problem_option = ?)";
                 GetPreparedStatement = GetConnectionDatabase.prepareStatement(sql);
                 GetPreparedStatement.setInt(1, ProblemID);
                 GetPreparedStatement.setString(2, temp);
@@ -191,7 +193,7 @@ public class MCQProblem extends MainProblemMessage  implements Serializable {
         }
     }
 
-    public void InsertDatabase(MCQProblem NewProblem){
+    public void InsertDatabase(MCQProblem NewProblem) {
         Connection GetConnectionDatabase = null;
         PreparedStatement GetPreparedStatement = null;
         ResultSet GetResultSet = null;
@@ -226,7 +228,7 @@ public class MCQProblem extends MainProblemMessage  implements Serializable {
                 GetPreparedStatement.executeUpdate();
             }
 
-            for(String temp :NewProblem.ProblemOption){
+            for (String temp : NewProblem.ProblemOption) {
                 sql = "insert into t_mcq_detail (problem_id , problem_option) values(?,?)";
                 GetPreparedStatement = GetConnectionDatabase.prepareStatement(sql);
                 GetPreparedStatement.setInt(1, Key);
@@ -252,7 +254,6 @@ public class MCQProblem extends MainProblemMessage  implements Serializable {
         }
 
     }
-
 
 
 }

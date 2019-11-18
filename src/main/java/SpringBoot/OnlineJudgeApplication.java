@@ -26,9 +26,9 @@ public class OnlineJudgeApplication {
         HomeCache homeCache = new HomeCache();
         ProblemSetCache problemSetCache = new ProblemSetCache();
         StatusCache statusCache = new StatusCache();
-        homeCache.start();
-        problemSetCache.start();
-        statusCache.start();
+//        homeCache.start();
+//        problemSetCache.start();
+//        statusCache.start();
     }
 
     // 处理命令行参数

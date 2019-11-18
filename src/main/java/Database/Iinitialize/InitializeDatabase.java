@@ -1,4 +1,5 @@
 package Database.Iinitialize;
+
 import Database.JdbcConnection;
 
 import java.sql.*;
@@ -9,7 +10,8 @@ public class InitializeDatabase {
     static String port = null;
     static String password = null;
     static String databasename = null;
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         //username=******
         //password=******
         //databasename=***
@@ -18,30 +20,30 @@ public class InitializeDatabase {
         //3306
         //ojtext_database
         String temp = null;
-        for(int i = 0 ; i < args.length ;i++){
-             temp = args[i].substring(0,2);
-             if(temp.equals((String) "ip")){
-                 ip = args[i].substring(3,args[i].length());
-             }
-             temp = args[i].substring(0,4);
-             if(temp.equals((String) "port")){
-                 port = args[i].substring(5,args[i].length());
-             }
-
-            if(args[i].length() <= 8)continue;
-
-
-             temp = args[i].substring(0,8);
-            if(temp.equals((String) "username")){
-                username = args[i].substring(9,args[i].length());
+        for (int i = 0; i < args.length; i++) {
+            temp = args[i].substring(0, 2);
+            if (temp.equals((String) "ip")) {
+                ip = args[i].substring(3, args[i].length());
             }
-            if(temp.equals((String) "password")){
-                password = args[i].substring(9,args[i].length());
+            temp = args[i].substring(0, 4);
+            if (temp.equals((String) "port")) {
+                port = args[i].substring(5, args[i].length());
             }
-            if(args[i].length() <= 12)continue;
-            temp = args[i].substring(0,12);
-            if(temp.equals((String) "databasename"))
-            databasename = args[i].substring(13,args[i].length());
+
+            if (args[i].length() <= 8) continue;
+
+
+            temp = args[i].substring(0, 8);
+            if (temp.equals((String) "username")) {
+                username = args[i].substring(9, args[i].length());
+            }
+            if (temp.equals((String) "password")) {
+                password = args[i].substring(9, args[i].length());
+            }
+            if (args[i].length() <= 12) continue;
+            temp = args[i].substring(0, 12);
+            if (temp.equals((String) "databasename"))
+                databasename = args[i].substring(13, args[i].length());
         }
         CreatDatabase(username, password);
         JdbcConnection.user = username;
@@ -51,7 +53,7 @@ public class InitializeDatabase {
         JdbcConnection.databasename = databasename;
     }
 
-    public static boolean CreatDatabase(String user,String password) {
+    public static boolean CreatDatabase(String user, String password) {
         Connection GetConnectionDatabase = null;
         Statement GetStatement = null;
         ResultSet GetResultSet = null;
@@ -62,7 +64,7 @@ public class InitializeDatabase {
              *利用原本存在的mysql数据库，创建一个新数据库
              */
             Class.forName("com.mysql.cj.jdbc.Driver");
-            GetConnectionDatabase = DriverManager.getConnection("jdbc:mysql://"+ip+":"+port+"/mysql?serverTimezone=UTC",
+            GetConnectionDatabase = DriverManager.getConnection("jdbc:mysql://" + ip + ":" + port + "/mysql?serverTimezone=UTC",
                     user, password);
             String sql = " create database ojtext_database";
             GetStatement = GetConnectionDatabase.createStatement();
@@ -70,7 +72,7 @@ public class InitializeDatabase {
             GetStatement.close();
             GetConnectionDatabase.close();
             //连接新的数据库,用新的数据库创建表
-            GetConnectionDatabase = DriverManager.getConnection("jdbc:mysql://"+ip+":"+port+"/"+databasename+"?serverTimezone=UTC",
+            GetConnectionDatabase = DriverManager.getConnection("jdbc:mysql://" + ip + ":" + port + "/" + databasename + "?serverTimezone=UTC",
                     user, password);
             GetStatement = GetConnectionDatabase.createStatement();
             //开启事务，只有建表语句全部成功才执行
@@ -90,7 +92,7 @@ public class InitializeDatabase {
                     "  `student_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,\n" +
                     "  PRIMARY KEY (`user_name`),\n" +
                     "  CONSTRAINT `t_student_detail_ibfk_1` FOREIGN KEY (`user_name`) REFERENCES `t_student` (`user_name`) ON DELETE CASCADE ON UPDATE CASCADE\n" +
-                    ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci" ;
+                    ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
             GetStatement.executeUpdate(sql);
 
             sql = "CREATE TABLE `t_team` (\n" +

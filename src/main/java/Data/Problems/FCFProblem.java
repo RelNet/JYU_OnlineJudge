@@ -1,6 +1,7 @@
 package Data.Problems;
 
 import Database.JdbcConnection;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 
 import java.io.Serializable;
 import java.sql.Connection;
@@ -8,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class FCFProblem extends CFProblem  implements Serializable {
+public class FCFProblem extends CFProblem implements Serializable {
     public String SampleCode = null;
 
     public String getSampleCode() {
@@ -19,7 +20,7 @@ public class FCFProblem extends CFProblem  implements Serializable {
         SampleCode = sampleCode;
     }
 
-    public String GetSampleCode(int ProblemID){
+    public String GetSampleCode(int ProblemID) {
         Connection GetConnectionDatabase = null;
         PreparedStatement GetPreparedStatement = null;
         ResultSet GetResultSet = null;
@@ -42,7 +43,7 @@ public class FCFProblem extends CFProblem  implements Serializable {
         return SampleCode;
     }
 
-    public void UpdateSampleCode(int ProblemID, String NewSampleCode){
+    public void UpdateSampleCode(int ProblemID, String NewSampleCode) {
         Connection GetConnectionDatabase = null;
         PreparedStatement GetPreparedStatement = null;
         JdbcConnection JdbcLink = new JdbcConnection();
@@ -60,7 +61,7 @@ public class FCFProblem extends CFProblem  implements Serializable {
         }
     }
 
-    public void InsertDatabase(FCFProblem NewProblem){
+    public void InsertDatabase(FCFProblem NewProblem) {
         int Key = NewProblem.InsertDatabase((CFProblem) NewProblem);
         Connection GetConnectionDatabase = null;
         PreparedStatement GetPreparedStatement = null;
@@ -81,5 +82,7 @@ public class FCFProblem extends CFProblem  implements Serializable {
     }
 
 
-
+    public int GetProblemSpaceNumber(int ProblemID) {
+        return 0;
+    }
 }

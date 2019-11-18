@@ -13,8 +13,8 @@ import java.util.concurrent.*;
 @Getter
 @Setter
 public class RunJAVA extends Run {
-    public RunJAVA(long time, String inID, String inProblemID, boolean hasIn, Long maxMemory) {
-        super(time, inID, inProblemID, hasIn);
+    public RunJAVA(Integer time, String inID, String inProblemID, boolean hasIn, Integer maxMemory) {
+        super(time, inID, inProblemID, hasIn, maxMemory);
         this.maxMemory = maxMemory * 2;
         this.timeout = time * 2;
         this.problemLanguage = "java";

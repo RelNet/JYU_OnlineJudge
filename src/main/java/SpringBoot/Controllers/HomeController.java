@@ -2,7 +2,6 @@ package SpringBoot.Controllers;
 
 import Data.Users.MainUser;
 import Database.OjUserMessage.UserLogin;
-import JudgeSystem.StartJudge;
 import SpringBoot.SessionAndModelConstant;
 import SpringBoot.WebCache.HomeCache;
 import org.springframework.stereotype.Controller;
@@ -12,16 +11,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
-import java.util.Map;
 
 @Controller
 public class HomeController {
     // 发起主页get请求
     @GetMapping(path = "/")
     public String toHome(Model model, HttpSession session) {
-        model.addAttribute("topProblems", HomeCache.topProblems);
-        model.addAttribute(HomeCache.topContests);
-        model.addAttribute(HomeCache.comingContests);
+        model.addAttribute("topTags", HomeCache.topTags);
+        model.addAttribute("topContests", HomeCache.topContests);
+        model.addAttribute("comingContests", HomeCache.comingContests);
         return "index";
     }
 
@@ -40,7 +38,7 @@ public class HomeController {
         if (userLogin.CheckUserName(user.getUsername())) {
             if (userLogin.CheckUserLogin(user.getUsername(), user.getPassword())) {
                 session.setAttribute(SessionAndModelConstant.LoginUserString, user.getUsername());
-                System.out.println(session.getAttribute(SessionAndModelConstant.LoginUserString) + "成功登陆!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                System.out.println(session.getAttribute(SessionAndModelConstant.LoginUserString) + "成功登陆!!!!!!!!!");
             } else {
                 model.addAttribute(SessionAndModelConstant.ErrorMessageString, "用户名或者密码错误");
             }
@@ -48,7 +46,7 @@ public class HomeController {
             model.addAttribute(SessionAndModelConstant.ErrorMessageString, "用户名或者密码错误");
         }
 
-        model.addAttribute(HomeCache.topProblems);
+        model.addAttribute(HomeCache.topTags);
         model.addAttribute(HomeCache.topContests);
         model.addAttribute(HomeCache.comingContests);
 
@@ -95,7 +93,7 @@ public class HomeController {
             case "/team":
                 return "team";
             default:
-                return null;
+                return "4xx";
         }
     }
 }

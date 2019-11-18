@@ -10,7 +10,7 @@ import java.util.List;
  */
 public abstract class CompileMain {
     // 提交ID
-    Long submitID;
+    Integer submitID;
 
     // 接收编译信息
     List<String> errorCodes;
@@ -19,7 +19,7 @@ public abstract class CompileMain {
 
     static final public String INITIAL_FILE_ADDRESS = "/submit";
 
-    CompileMain(Long inSubmitID) {
+    CompileMain(Integer inSubmitID) {
         submitID = inSubmitID;
         errorCodes = new ArrayList<String>();
     }

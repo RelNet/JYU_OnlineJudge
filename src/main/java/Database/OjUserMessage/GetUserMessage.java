@@ -59,7 +59,7 @@ public class GetUserMessage {
             GetPreparedStatement.setString(1, UserName);
             GetResultSet = GetPreparedStatement.executeQuery();
 
-            if(GetResultSet.next()) {
+            if (GetResultSet.next()) {
 
                 UserClass = GetResultSet.getString("class");
             }
@@ -155,7 +155,7 @@ public class GetUserMessage {
         return Password;
     }
 
-    public String GetUserID(String UserName){
+    public String GetUserID(String UserName) {
         Connection GetConnectionDatabase = null;
         PreparedStatement GetPreparedStatement = null;
         ResultSet GetResultSet = null;
@@ -166,22 +166,18 @@ public class GetUserMessage {
             //在t_student_detail这张表找用户名是UserName的班级
             String sql = "select student_id from t_student_detail where user_name = ?";
             GetPreparedStatement = GetConnectionDatabase.prepareStatement(sql);
-            GetPreparedStatement.setString(1,UserName);
+            GetPreparedStatement.setString(1, UserName);
             GetResultSet = GetPreparedStatement.executeQuery();
-            if(GetResultSet.next()) {
+            if (GetResultSet.next()) {
                 ID = GetResultSet.getString("student_id");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            JdbcLink.Free(GetResultSet,GetPreparedStatement,GetConnectionDatabase);
+        } finally {
+            JdbcLink.Free(GetResultSet, GetPreparedStatement, GetConnectionDatabase);
         }
         return ID;
     }
-
-
-
-
 
 
 }

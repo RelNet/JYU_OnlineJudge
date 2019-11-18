@@ -7,6 +7,7 @@ import JudgeSystem.JudgeMode;
 import JudgeSystem.JudgeSystemConstant;
 import JudgeSystem.ProblemType;
 import lombok.Getter;
+import org.attoparser.dom.INestableNode;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -17,13 +18,13 @@ public class MainSubmit implements Serializable {
     private List<String> courseCodes;
     private JudgeMode judgeMode;     // 记录是ACM还是IO判断方式
     private MainUser user;
-    private Long submitID;
+    private Integer submitID;
     private Date submitDate;
     private JudgeLanguage languageType;
     private MainProblem problem;
     private JudgeSystemConstant controlCode;
     private ProblemType problemType;
-    private Long contestID;
+    private Integer contestID;
 
     public JudgeMode getJudgeMode() {
         return judgeMode;
@@ -73,7 +74,15 @@ public class MainSubmit implements Serializable {
         this.courseCodes = courseCodes;
     }
 
-    public void setSubmitID(Long submitID) {
+    public Integer getContestID() {
+        return contestID;
+    }
+
+    public void setContestID(Integer contestID) {
+        this.contestID = contestID;
+    }
+
+    public void setSubmitID(Integer submitID) {
         this.submitID = submitID;
     }
 
@@ -93,7 +102,7 @@ public class MainSubmit implements Serializable {
         this.languageType = languageType;
     }
 
-    public Long getSubmitID() {
+    public Integer getSubmitID() {
         return submitID;
     }
 }

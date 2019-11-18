@@ -24,6 +24,59 @@ public class ProblemStatus implements Serializable {
     public java.sql.Date submitDate = java.sql.Date.valueOf(LocalDate.now());
     public Integer runTime;
     public Integer runMemory;
+
+    public String getCourseCodes() {
+        return courseCodes;
+    }
+
+    public void setCourseCodes(String courseCodes) {
+        this.courseCodes = courseCodes;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public Integer getSubmitID() {
+        return submitID;
+    }
+
+    public void setSubmitID(Integer submitID) {
+        this.submitID = submitID;
+    }
+
+    public void setSubmitDate(java.sql.Date submitDate) {
+        this.submitDate = submitDate;
+    }
+
+    public Integer getRunTime() {
+        return runTime;
+    }
+
+    public void setRunTime(Integer runTime) {
+        this.runTime = runTime;
+    }
+
+    public Integer getRunMemory() {
+        return runMemory;
+    }
+
+    public void setRunMemory(Integer runMemory) {
+        this.runMemory = runMemory;
+    }
+
+    public int getContestID() {
+        return contestID;
+    }
+
+    public void setContestID(int contestID) {
+        this.contestID = contestID;
+    }
+
     public JudgeLanguage languageType;
     public Integer problemID;
     public JudgeSystemConstant controlCode;
@@ -31,15 +84,15 @@ public class ProblemStatus implements Serializable {
     public int contestID;
 
     //page是第几页，每页显示25个数据,constID就是比赛ID，初始题库的比赛ID是0
-    public List<ProblemStatus> GetStatuspage(int page,int ContestID){
-        List<ProblemStatus> AnsList  = new ArrayList<ProblemStatus>();
+    public List<ProblemStatus> GetStatuspage(int page, int ContestID) {
+        List<ProblemStatus> AnsList = new ArrayList<ProblemStatus>();
         Connection GetConnectionDatabase = null;
         PreparedStatement GetPreparedStatement = null;
         ResultSet GetResultSet = null;
         JdbcConnection JdbcLink = new JdbcConnection();
         try {
             GetConnectionDatabase = JdbcLink.Get_Connection();
-            String sql = "select * from t_status where contest_id = "+ContestID+" limit "+((page-1)*25)+",25 order by problem_id";
+            String sql = "select * from t_status where contest_id = " + ContestID + " limit " + ((page - 1) * 25) + ",25 order by problem_id";
             GetPreparedStatement = GetConnectionDatabase.prepareStatement(sql);
             GetResultSet = GetPreparedStatement.executeQuery();
             while (GetResultSet.next()) {
@@ -87,7 +140,7 @@ public class ProblemStatus implements Serializable {
             GetPreparedStatement.setInt(7, NewStatus.controlCode.ordinal());
             GetPreparedStatement.setInt(8, NewStatus.judgeMode.ordinal());
             GetPreparedStatement.setString(9, NewStatus.user);
-            GetPreparedStatement.setInt(10,NewStatus.contestID);
+            GetPreparedStatement.setInt(10, NewStatus.contestID);
             GetPreparedStatement.executeUpdate();
             GetResultSet = GetPreparedStatement.getGeneratedKeys();
             if (GetResultSet.next()) {
@@ -100,9 +153,9 @@ public class ProblemStatus implements Serializable {
             sql = "insert into t_sp_link (problem_id,user_name, submit_id , status) values(?,?,?,?)";
             GetPreparedStatement = GetConnectionDatabase.prepareStatement(sql);
             GetPreparedStatement.setInt(1, NewStatus.problemID);
-            GetPreparedStatement.setString(2,NewStatus.user);
+            GetPreparedStatement.setString(2, NewStatus.user);
             GetPreparedStatement.setInt(3, Key);
-            GetPreparedStatement.setInt(4,NewStatus.controlCode.ordinal());
+            GetPreparedStatement.setInt(4, NewStatus.controlCode.ordinal());
             GetPreparedStatement.executeUpdate();
             GetConnectionDatabase.commit();
         } catch (SQLException e) {
@@ -122,9 +175,9 @@ public class ProblemStatus implements Serializable {
         return Key;
     }
 
-    private void UpdateMessage(String Column,int NewMessage, int SubmitID){
+    private void UpdateMessage(String Column, int NewMessage, int SubmitID) {
         String sql = null;
-        switch (Column){
+        switch (Column) {
             case "status": {
                 /**
                  * 未测试
@@ -138,7 +191,7 @@ public class ProblemStatus implements Serializable {
                     GetConnectionDatabase = JdbcLink.Get_Connection();
                     GetConnectionDatabase.setAutoCommit(false);
                     GetPreparedStatement = GetConnectionDatabase.prepareStatement(sql);
-                    GetPreparedStatement.setInt(1,NewMessage);
+                    GetPreparedStatement.setInt(1, NewMessage);
                     GetPreparedStatement.setInt(2, SubmitID);
                     GetPreparedStatement.executeUpdate();
                     GetConnectionDatabase.commit();
@@ -159,8 +212,12 @@ public class ProblemStatus implements Serializable {
                 sql = "update  t_status set status = ? where submit_id = ?";
                 break;
             }
-            case "run_time":sql = "update  t_status set run_time = ? where submit_id = ?";break;
-            case "run_memory":sql = "update  t_status set run_memory = ? where submit_id = ?";break;
+            case "run_time":
+                sql = "update  t_status set run_time = ? where submit_id = ?";
+                break;
+            case "run_memory":
+                sql = "update  t_status set run_memory = ? where submit_id = ?";
+                break;
         }
         Connection GetConnectionDatabase = null;
         PreparedStatement GetPreparedStatement = null;
@@ -169,7 +226,7 @@ public class ProblemStatus implements Serializable {
             GetConnectionDatabase = JdbcLink.Get_Connection();
             GetConnectionDatabase.setAutoCommit(false);
             GetPreparedStatement = GetConnectionDatabase.prepareStatement(sql);
-            GetPreparedStatement.setInt(1,NewMessage);
+            GetPreparedStatement.setInt(1, NewMessage);
             GetPreparedStatement.setInt(2, SubmitID);
             GetPreparedStatement.executeUpdate();
             GetConnectionDatabase.commit();
@@ -189,16 +246,18 @@ public class ProblemStatus implements Serializable {
         }
 
     }
+
     public void UpdateStatus(int SubmitID, JudgeSystemConstant NewStatus) {
         this.UpdateMessage("status", NewStatus.ordinal(), SubmitID);
     }
+
     public void UpdateRuntime(int SubmitID, int NewRuntime) {
         this.UpdateMessage("run_time", NewRuntime, SubmitID);
     }
+
     public void UpdateRunMemory(int SubmitID, int NewRunMemory) {
         this.UpdateMessage("run_memory", NewRunMemory, SubmitID);
     }
-
 
 
     public JudgeMode getJudgeMode() {

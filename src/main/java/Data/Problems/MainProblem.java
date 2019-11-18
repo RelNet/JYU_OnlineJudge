@@ -5,12 +5,12 @@ import JudgeSystem.ProblemType;
 import java.util.List;
 
 public class MainProblem {
-    private Long problemID;
+    private Integer problemID;
     private List<String> problemContent;
     private List<ProblemIOInfo> IOList;
     private ProblemType problemType;
 
-    public Long getProblemID() {
+    public Integer getProblemID() {
         return problemID;
     }
 
@@ -22,13 +22,17 @@ public class MainProblem {
         this.problemType = problemType;
     }
 
-    public void setProblemID(Long problemID) { this.problemID = problemID; }
+    public void setProblemID(Integer problemID) {
+        this.problemID = problemID;
+    }
 
     public List<String> getProblemContent() {
         return problemContent;
     }
 
-    public void setProblemContent(List<String> problemContent) { this.problemContent = problemContent; }
+    public void setProblemContent(List<String> problemContent) {
+        this.problemContent = problemContent;
+    }
 
     public List<ProblemIOInfo> getIOList() {
         return IOList;

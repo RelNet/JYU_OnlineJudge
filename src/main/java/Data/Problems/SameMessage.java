@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SameMessage  implements Serializable {
+public class SameMessage implements Serializable {
     public String ProblemDescribe;
     public int AcceptNumber;
     public int AttemptNumber;
@@ -17,12 +17,10 @@ public class SameMessage  implements Serializable {
     public String title;
 
     /**
-     *
      * @param ProblemID
      * @return 返回的是SameMessage类
-     *
      */
-    public SameMessage GetMessage(int ProblemID){
+    public SameMessage GetMessage(int ProblemID) {
         SameMessage AnsList = new SameMessage();
         Connection GetConnectionDatabase = null;
         PreparedStatement GetPreparedStatement = null;

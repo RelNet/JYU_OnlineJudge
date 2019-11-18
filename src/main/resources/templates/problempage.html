@@ -13,75 +13,63 @@
 */
         var flag = false;   // flag 如果为true（即用户名合法）就允许表单提交， 如果为false（即用户名不合法）阻止提交
         // 当鼠标聚焦于用户名
-        function focus_username()
-        {
+        function focus_username() {
             // 找到后面的div, id = result_name
             var nameObj = document.getElementById("one");
             nameObj.innerHTML = "用户名不能包含特殊字符且为5~20位";
-            nameObj.style.color="#ff0a00";
-            <span>输入</span>
+            nameObj.style.color = "#ff0a00";
+        <
+            span > 输入 < /span>
         }
+
         // 当鼠标不聚焦于用户名input
-        function blur_username()
-        {
+        function blur_username() {
             // 找到id=result_name的div
             var nameObj = document.getElementById("one");
             // 判断用户名是否合法
             var str2 = check_user_name(document.form1.username.value);
-            nameObj.style.color="red";
-            if ("该用户名合法" ==  str2)
-            {
+            nameObj.style.color = "red";
+            if ("该用户名合法" == str2) {
                 flag = true;
                 nameObj.innerHTML = str2;
-            }
-            else
-            {
+            } else {
                 nameObj.innerHTML = str2;
             }
 
         }
+
         // 检查用户名是否合法        合法就返回"该用户名合法"
-        function check_user_name(str)
-        {
+        function check_user_name(str) {
             var str2 = "该用户名合法";
-            if ("" == str)
-            {
+            if ("" == str) {
                 str2 = "用户名为空";
                 return str2;
-            }
-            else if ((str.length < 5) || (str.length > 20))
-            {
+            } else if ((str.length < 5) || (str.length > 20)) {
                 str2 = "用户名必须为5 ~ 20位";
                 return str2;
-            }
-            else if (check_other_char(str))
-            {
+            } else if (check_other_char(str)) {
                 str2 = "不能含有特殊字符";
                 return str2;
             }
             return str2;
         }
+
         // 验证用户名是否含有特殊字符
-        function check_other_char(str)
-        {
+        function check_other_char(str) {
             var arr = ["&", "\\", "/", "*", ">", "<", "@", "!"];
-            for (var i = 0; i < arr.length; i++)
-            {
-                for (var j = 0; j < str.length; j++)
-                {
-                    if (arr[i] == str.charAt(j))
-                    {
+            for (var i = 0; i < arr.length; i++) {
+                for (var j = 0; j < str.length; j++) {
+                    if (arr[i] == str.charAt(j)) {
                         return true;
                     }
                 }
             }
             return false;
         }
+
         // 根据验证结果确认是否提交
-        function check_submit()
-        {
-            if (flag == false)
-            {
+        function check_submit() {
+            if (flag == false) {
                 return false;
             }
             return true;
@@ -115,16 +103,17 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li><a href="problemSet.html"><i class="fa fa-dashboard" ></i> 问题</a></li>
+                <li><a href="problemSet.html"><i class="fa fa-dashboard"></i> 问题</a></li>
                 <li><a href="contest.html"><i class="fa fa-bar-chart-o"></i> 比赛/考试</a></li>
                 <li><a href="status.html"><i class="fa fa-table"></i> 提交状态</a></li>
                 <li><a href="team.html"><i class="fa fa-edit"></i> 团队</a></li>
             </ul>
             <!--登陆状态栏-->
             <!--/*@thymesVar id="loginUser" type=""*/-->
-            <ul class="nav navbar-nav navbar-right navbar-user" >
+            <ul class="nav navbar-nav navbar-right navbar-user">
                 <li class="dropdown user-dropdown" th:if="${loginUser == null}">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-user"></i> 登录 <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 登录 <b
+                            class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a onclick="divSW()"><i class="fa fa-user"></i> 登录</a></li>
                         <li class="divider"></li>
@@ -134,7 +123,8 @@
             </ul>
             <ul class="nav navbar-nav navbar-right navbar-user" th:if="${loginUser != null}">
                 <li class="dropdown user-dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-user"></i>  <span th:text="${loginUser}">用户名</span><b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span
+                            th:text="${loginUser}">用户名</span><b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#"><i class="fa fa-power-off"></i> 注销</a></li>
                     </ul>
@@ -146,11 +136,12 @@
 </div><!-- /#page-wrapper -->
 <!-- JavaScript -->
 <!--登陆浮窗-->
-<div class="modal fade in"  id="hide" tabindex="-1" role="dialog" style="display: block; padding-right: 16px; display: none" >
+<div class="modal fade in" id="hide" tabindex="-1" role="dialog"
+     style="display: block; padding-right: 16px; display: none">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close"  data-dismiss="modal" onclick="divSW()">
+                <button type="button" class="close" data-dismiss="modal" onclick="divSW()">
                     <span>×</span>
                 </button>
                 <!--                <h4 class="modal-title" id="loginModalLabel" th:if="$session.login.username ">登录</h4>-->
@@ -163,7 +154,8 @@
                     </div>
                     <div class="form-group">
                         <!--<label for="login-password" class="form-control-label">Password:</label>-->
-                        <input type="password" class="form-control" id="login-password" name="password" placeholder="密码">
+                        <input type="password" class="form-control" id="login-password" name="password"
+                               placeholder="密码">
                     </div>
                     <input type="submit" style="display: none">
                 </form>

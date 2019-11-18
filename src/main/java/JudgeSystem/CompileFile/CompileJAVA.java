@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class CompileJAVA extends CompileMain {
-    public CompileJAVA(Long inSubmitID) {
+    public CompileJAVA(Integer inSubmitID) {
         super(inSubmitID);
     }
 

@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CFProblem extends MainProblemMessage  implements Serializable {
+public class CFProblem extends MainProblemMessage implements Serializable {
 
     public String InputDescribe = null;
     public String OutputDescribe = null;
@@ -18,12 +18,13 @@ public class CFProblem extends MainProblemMessage  implements Serializable {
 
     /**
      * GetMessage()
+     *
      * @param ProblemID
      * @return List的顺序是problem_descirbe，input_describe， output_describe，
      * time_limit，memory_limit；
      */
 
-    public List<String> GetCFPMessage(int ProblemID){
+    public List<String> GetCFPMessage(int ProblemID) {
         List<String> AnsList = new ArrayList<String>();
         Connection GetConnectionDatabase = null;
         PreparedStatement GetPreparedStatement = null;
@@ -50,6 +51,7 @@ public class CFProblem extends MainProblemMessage  implements Serializable {
         }
         return AnsList;
     }
+
     public List<InputOutput> getSampleInputOutput() {
         return SampleInputOutput;
     }
@@ -209,7 +211,7 @@ public class CFProblem extends MainProblemMessage  implements Serializable {
         return this.GetMessage("memory_limit", ProblemID);
     }
 
-    public List<InputOutput> GetSampleInputOutput(int ProblemID){
+    public List<InputOutput> GetSampleInputOutput(int ProblemID) {
         List<InputOutput> Sample = new ArrayList<InputOutput>();
         Connection GetConnectionDatabase = null;
         PreparedStatement GetPreparedStatement = null;
@@ -235,7 +237,7 @@ public class CFProblem extends MainProblemMessage  implements Serializable {
         return Sample;
     }
 
-    public void UpdateSampleInputOutput(int ProblemID,List<InputOutput> NewSampleInput){
+    public void UpdateSampleInputOutput(int ProblemID, List<InputOutput> NewSampleInput) {
         Connection GetConnectionDatabase = null;
         PreparedStatement GetPreparedStatement = null;
         JdbcConnection JdbcLink = new JdbcConnection();
@@ -251,7 +253,7 @@ public class CFProblem extends MainProblemMessage  implements Serializable {
                 sql = "insert into t_cf_fcf_problem_sample(problem_id,input, output) values(?,?,?)";
                 GetPreparedStatement = GetConnectionDatabase.prepareStatement(sql);
                 GetPreparedStatement.setInt(1, ProblemID);
-                GetPreparedStatement.setString(2,temp.getInput());
+                GetPreparedStatement.setString(2, temp.getInput());
                 GetPreparedStatement.setString(3, temp.getOutput());
                 GetPreparedStatement.executeUpdate();
             }
@@ -274,11 +276,9 @@ public class CFProblem extends MainProblemMessage  implements Serializable {
     }
 
     /**
-     *
      * 返回的是插入数据的主键
-     *
      */
-    public int InsertDatabase(CFProblem NewProblem){
+    public int InsertDatabase(CFProblem NewProblem) {
         Connection GetConnectionDatabase = null;
         PreparedStatement GetPreparedStatement = null;
         ResultSet GetResultSet = null;
@@ -313,7 +313,7 @@ public class CFProblem extends MainProblemMessage  implements Serializable {
                 sql = "insert into t_cf_fcf_problem_sample(problem_id,input, output) values(?,?,?)";
                 GetPreparedStatement = GetConnectionDatabase.prepareStatement(sql);
                 GetPreparedStatement.setInt(1, Key);
-                GetPreparedStatement.setString(2,temp.getInput());
+                GetPreparedStatement.setString(2, temp.getInput());
                 GetPreparedStatement.setString(3, temp.getOutput());
                 GetPreparedStatement.executeUpdate();
             }
@@ -335,9 +335,6 @@ public class CFProblem extends MainProblemMessage  implements Serializable {
         return Key;
 
     }
-
-
-
 
 
 }

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class CompileGPP extends CompileMain {
-    public CompileGPP(Long inSubmitID) {
+    public CompileGPP(Integer inSubmitID) {
         super(inSubmitID);
     }
 

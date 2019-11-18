@@ -14,17 +14,19 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import JudgeSystem.StartJudge;
+
 public class Run {
-    long timeout;
+    Integer timeout;
     String submitID;
     File compiledFile;
     String problemID;
     boolean hasInput;
-    Long maxMemory;
+    Integer maxMemory;
 
     // 样例中使用最多的内存和时间
-    Long usedTime = 0L;
-    Long usedMemory = 0L;
+    Integer usedTime = 0;
+    Integer usedMemory = 0;
 
     // 运行程序的命令
     String[] commandStrings;
@@ -43,7 +45,7 @@ public class Run {
         return timeout;
     }
 
-    public void setTimeout(long timeout) {
+    public void setTimeout(Integer timeout) {
         this.timeout = timeout;
     }
 
@@ -79,27 +81,27 @@ public class Run {
         this.hasInput = hasInput;
     }
 
-    public Long getMaxMemory() {
+    public Integer getMaxMemory() {
         return maxMemory;
     }
 
-    public void setMaxMemory(Long maxMemory) {
+    public void setMaxMemory(Integer maxMemory) {
         this.maxMemory = maxMemory;
     }
 
-    public Long getUsedTime() {
+    public Integer getUsedTime() {
         return usedTime;
     }
 
-    public void setUsedTime(Long usedTime) {
+    public void setUsedTime(Integer usedTime) {
         this.usedTime = usedTime;
     }
 
-    public Long getUsedMemory() {
+    public Integer getUsedMemory() {
         return usedMemory;
     }
 
-    public void setUsedMemory(Long usedMemory) {
+    public void setUsedMemory(Integer usedMemory) {
         this.usedMemory = usedMemory;
     }
 
@@ -132,11 +134,12 @@ public class Run {
     // 限制内存使用命令 后面要加上具体点内存数字，单位KB
     static final String LIMIT_MEMORY_COMMAND_STRING = "ulimit -m ";
 
-    Run(long time, String inID, String inProblemID, boolean hasIn) {
+    Run(Integer time, String inID, String inProblemID, boolean hasIn, Integer maxMemory) {
         timeout = time;
         submitID = inID;
         problemID = inProblemID;
         hasInput = hasIn;
+        this.maxMemory = maxMemory;
         compiledFile = new File(CompileMain.INITIAL_FILE_ADDRESS + "/" + submitID + "/t" + submitID);
     }
 
@@ -175,10 +178,11 @@ public class Run {
                 e.printStackTrace();
             }
         }
+        // 将结果列表写入数据库
+
         return true;
     }
 
-    ;
 
     // 处理任务
     private void dealTask(File inputFile, File outputFile, Integer fileNumber) {
@@ -273,7 +277,7 @@ public class Run {
                                     startIndexOfMemory = i;
                                 }
                             }
-                            Long runningMemory = Long.parseLong(memoryMessage.substring(startIndexOfMemory));
+                            Integer runningMemory = Integer.parseInt(memoryMessage.substring(startIndexOfMemory));
                             if (runningMemory > maxMemory) {
                                 controllerCodeList[Integer.parseInt(problemID)] = JudgeSystemConstant.MLE;
                                 return;
