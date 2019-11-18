@@ -19,17 +19,17 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
     // 预先检查
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-//        Object user = request.getSession().getAttribute("loginUser");
-//        if (user == null) {
-//            // 没有登陆
-//            request.setAttribute("message", "你没有权限");
-//            request.getRequestDispatcher("/").forward(request, response);
-//            return false;
-//        } else {
-//            // 已经登陆
-//            return true;
-//        }
-        return true;
+        Object user = request.getSession().getAttribute("loginUser");
+        if (user == null) {
+            // 没有登陆
+            request.setAttribute("message", "你没有登陆");
+            request.getRequestDispatcher("/").forward(request, response);
+
+            return false;
+        } else {
+            // 已经登陆
+            return true;
+        }
     }
 
     @Override

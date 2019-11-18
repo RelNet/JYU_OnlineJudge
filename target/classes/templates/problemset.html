@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../static/img/favicon.ico" type="icon">
+    <link rel="icon" href="img/favicon.ico" type="icon">
     <title>JYU Online Judge</title>
     <script type="text/javascript"></script>
     <!-- Bootstrap core CSS -->
@@ -31,23 +31,21 @@
                 <li><a href="team.html"><i class="fa fa-edit"></i> 团队</a></li>
             </ul>
 
-            <ul class="nav navbar-nav navbar-right navbar-user" th:if="$(session.login.username)">
+            <ul class="nav navbar-nav navbar-right navbar-user" th:if="${#session.getValue('loginUser') == null}">
                 <li class="dropdown user-dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 登录 <b
                             class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a onclick="divSW()"><i class="fa fa-user"></i> 登录</a></li>
                         <li class="divider"></li>
-                        <li><a href="/welcome"><i class="fa fa-gear"></i>注册</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-power-off"></i> 注销</a></li>
+                        <li><a href="register"><i class="fa fa-gear"></i>注册</a></li>
                     </ul>
                 </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right navbar-user" th:if="$(not #session.login.username)">
+            <ul class="nav navbar-nav navbar-right navbar-user" th:if="${#session.getValue('loginUser') != null}">
                 <li class="dropdown user-dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span
-                            th:text="login.username">用户名</span><b class="caret"></b></a>
+                            th:text="${#session.getValue('loginUser')}">用户名</span><b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#"><i class="fa fa-power-off"></i> 注销</a></li>
                     </ul>

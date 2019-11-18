@@ -12,18 +12,12 @@ public class WebConfig extends WebMvcConfigurationSupport {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 不拦截的路径
-        String[] excludePaths = {"/", "/problemset/**", "/problempage/**", "/register", "/status/**", "/team/**"
-                , "/contest/**", "css/**", "/img/**", "/js/**", "/font-awesome/**"};
+        String[] excludePaths = {"/", "problemset/**", "problempage/**", "register", "status/**", "team/**"
+                , "contest/**", "css/**", "img/**", "js/**", "font-awesome/**"};
         registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**").excludePathPatterns(excludePaths);
-        super.addInterceptors(registry);
     }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("index");
-        registry.addViewController("/problemset").setViewName("problemset");
-        registry.addViewController("/problempage/**").setViewName("problempage");
-        registry.addViewController("/status").setViewName("status");
-        registry.addViewController("/team").setViewName("team");
     }
 }
