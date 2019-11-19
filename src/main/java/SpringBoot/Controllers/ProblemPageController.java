@@ -1,9 +1,12 @@
 package SpringBoot.Controllers;
 
 import Data.Problems.*;
+import Data.Submit.MainSubmit;
 import Data.Users.MainUser;
+import Database.ProblemPage;
 import JudgeSystem.ProblemType;
-import JudgeSystem.StartJudge;
+import JudgeSystem.*;
+import SpringBoot.SessionAndModelConstant;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +18,24 @@ import java.util.Map;
 @Controller
 public class ProblemPageController {
     static StartJudge startJudge = new StartJudge();
+    static final Object addMissionLock = new Object();
 
     // 从problempage提交之后，转到状态页面
     @PostMapping(path = "status/{contestid}")
     public String submitCourseCodes(@PathVariable("contestid") Integer contestID, MainProblem problem
-            ,Model model, HttpSession session) {
+            , Model model, HttpSession session) {
 
+        Object username = session.getAttribute(SessionAndModelConstant.LoginUserString);
+        if (username != null) {
+            MainSubmit submit = new MainSubmit();
+            submit.setUsername(username.toString());
+            synchronized (addMissionLock) {
+                startJudge.addMission(submit);
+            }
+        } else {
+            model.addAttribute(SessionAndModelConstant.ErrorMessageString, "你没有权限提交");
+            return "4xx";
+        }
 
         return "status";
     }

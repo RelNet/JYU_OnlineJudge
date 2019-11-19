@@ -124,7 +124,8 @@ public class Run {
     static long RUNNING_KEEP_ALIVE_TIME = 500L;
     // 每一题最大的样例容量
     static int MAX_TASK_SIZE = 100;
-    ExecutorService dealTaskThreadPool = new ThreadPoolExecutor(MAX_RUNNING_CORE_TASK_NUMBER, MAX_RUNNING_TASK_NUMBER, RUNNING_KEEP_ALIVE_TIME, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(MAX_TASK_SIZE));
+    ExecutorService dealTaskThreadPool = new ThreadPoolExecutor(MAX_RUNNING_CORE_TASK_NUMBER, MAX_RUNNING_TASK_NUMBER
+            , RUNNING_KEEP_ALIVE_TIME, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(MAX_TASK_SIZE));
 
     // 这个是暂定的问题存放路径
     public static final String PROBLEM_SET_PATH = "/problems";
@@ -183,122 +184,139 @@ public class Run {
         return true;
     }
 
+    /**
+     * 垃圾Java，贼他妈臃肿
+     * 系统级调用贼难用
+     * 早知道用python或者go了
+     *
+     * @param inputFile
+     * @param outputFile
+     * @param fileNumber
+     */
+
+    final Object dealTaskLock = new Object();
 
     // 处理任务
     private void dealTask(File inputFile, File outputFile, Integer fileNumber) {
-        dealTaskThreadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                RunLinuxCMD order;
+        synchronized (dealTaskLock) {
+            dealTaskThreadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    RunLinuxCMD order;
 
-                // 运行用户程序
-                try {
-                    order = new RunLinuxCMD(commandStrings, inputFile, outputFile);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-
-                // order pid的String
-                String pidString = order.getPid().toString();
-
-                // 挂起进程命令
-                String[] stopCommandStrings = {
-                        "/bin/sh", "-c",
-                        "kill -stop " + pidString
-                };
-                // 运行进程命令
-                String[] keepRunCommandStrings = {
-                        "/bin/sh", "-c",
-                        "kill -cont " + pidString
-                };
-                // 检查内存命令
-                String[] checkMemoryCommandStrings = {
-                        "/bin/sh", "-c",
-                        "ps -e -o 'pid,rsz' | grep -w " + pidString
-                };
-
-                try {
-                    RunLinuxCMD action = new RunLinuxCMD(stopCommandStrings);
-                    action.waitFor();
-                } catch (IOException | InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-
-                // 循环次数
-                long times = timeout / 50 + 1;
-                // 通过返回值判断程序是否结束,并限制运行时间
-                while (times-- != 0 && order.existValue() != 0) {
-                    if (times == 0) {
-                        // 写入TLE数据进入结果列表
-                        controllerCodeList[Integer.parseInt(problemID)] = JudgeSystemConstant.TLE;
+                    // 运行用户程序
+                    try {
+                        order = new RunLinuxCMD(commandStrings, inputFile, outputFile);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                         return;
                     }
+
+                    // order pid的String
+                    String pidString = order.getPid().toString();
+
+                    // 挂起进程命令
+                    String[] stopCommandStrings = {
+                            "/bin/sh", "-c",
+                            "kill -stop " + pidString
+                    };
+                    // 运行进程命令
+                    String[] keepRunCommandStrings = {
+                            "/bin/sh", "-c",
+                            "kill -cont " + pidString
+                    };
+                    // 检查内存命令
+                    String[] checkMemoryCommandStrings = {
+                            "/bin/sh", "-c",
+                            "ps -e -o 'pid,rsz' | grep -w " + pidString
+                    };
+
                     try {
-                        RunLinuxCMD action = new RunLinuxCMD(keepRunCommandStrings);
+                        RunLinuxCMD action = new RunLinuxCMD(stopCommandStrings);
                         action.waitFor();
                     } catch (IOException | InterruptedException e) {
                         e.printStackTrace();
                     }
 
-                    // 检查段错误
-                    BufferedReader orderErrorMessageReader = new BufferedReader(new InputStreamReader(order.getErrorStream()));
-                    try {
-                        String errorString = orderErrorMessageReader.readLine();
-                        if (errorString.contains("Segmentation Fault")) {
-                            controllerCodeList[Integer.parseInt(problemID)] = JudgeSystemConstant.RE;
+
+                    // 循环次数
+                    long times = timeout / 50 + 1;
+                    // 通过返回值判断程序是否结束,并限制运行时间
+                    while (times-- != 0 && order.existValue() != 0) {
+                        if (times == 0) {
+                            // 写入TLE数据进入结果列表
+                            controllerCodeList[Integer.parseInt(problemID)] = JudgeSystemConstant.TLE;
+                            order.forceKill();
+                            return;
                         }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-
-                    // 让进程运行50ms
-                    try {
-                        Thread.sleep(50);
                         try {
-                            RunLinuxCMD action = new RunLinuxCMD(stopCommandStrings);
+                            RunLinuxCMD action = new RunLinuxCMD(keepRunCommandStrings);
                             action.waitFor();
                         } catch (IOException | InterruptedException e) {
                             e.printStackTrace();
                         }
-                        RunLinuxCMD action = new RunLinuxCMD(checkMemoryCommandStrings);
-                        action.waitFor();
-                        BufferedReader memoryMessageReader = new BufferedReader(new InputStreamReader(action.getInputStream()));
-                        String memoryMessage = memoryMessageReader.readLine();
 
-                        // 检查内存
-                        int indexOfPid = memoryMessage.indexOf(pidString);
-                        if (indexOfPid != -1) {
-                            int startIndexOfMemory = memoryMessage.length() - 1;
-                            for (int i = indexOfPid + pidString.length(); i < memoryMessage.length(); i++) {
-                                if (memoryMessage.charAt(i) != ' ') {
-                                    startIndexOfMemory = i;
-                                }
+                        // 检查段错误
+                        BufferedReader orderErrorMessageReader = new BufferedReader(new InputStreamReader(order.getErrorStream()));
+                        try {
+                            String errorString = orderErrorMessageReader.readLine();
+                            if (errorString.contains("Segmentation Fault")) {
+                                controllerCodeList[Integer.parseInt(problemID)] = JudgeSystemConstant.RE;
+                                order.forceKill();
                             }
-                            Integer runningMemory = Integer.parseInt(memoryMessage.substring(startIndexOfMemory));
-                            if (runningMemory > maxMemory) {
-                                controllerCodeList[Integer.parseInt(problemID)] = JudgeSystemConstant.MLE;
-                                return;
-                            } else {
-                                if (runningMemory > usedMemory) {
-                                    usedMemory = runningMemory;
-                                }
-                            }
-                        } else {
-                            break;
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-                    } catch (InterruptedException | IOException e) {
-                        e.printStackTrace();
-                    }
-                }
 
-                File standardFile = new File("/problem/" + problemID + "/" + fileNumber.toString());
-                // 判断结果的正确性，并写入结果列表
-                ResultJudge resultJudge = new ResultJudge(outputFile, standardFile);
-                controllerCodeList[Integer.parseInt(problemID)] = resultJudge.runJudge();
-            }
-        });
+
+                        // 让进程运行50ms
+                        try {
+                            Thread.sleep(50);
+                            try {
+                                RunLinuxCMD action = new RunLinuxCMD(stopCommandStrings);
+                                action.waitFor();
+                            } catch (IOException | InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            RunLinuxCMD action = new RunLinuxCMD(checkMemoryCommandStrings);
+                            action.waitFor();
+                            BufferedReader memoryMessageReader = new BufferedReader(new InputStreamReader(action.getInputStream()));
+                            String memoryMessage = memoryMessageReader.readLine();
+
+                            // 检查内存
+                            int indexOfPid = memoryMessage.indexOf(pidString);
+                            if (indexOfPid != -1) {
+                                int startIndexOfMemory = memoryMessage.length() - 1;
+                                for (int i = indexOfPid + pidString.length(); i < memoryMessage.length(); i++) {
+                                    if (memoryMessage.charAt(i) != ' ') {
+                                        startIndexOfMemory = i;
+                                    }
+                                }
+                                Integer runningMemory = Integer.parseInt(memoryMessage.substring(startIndexOfMemory));
+                                if (runningMemory > maxMemory) {
+                                    controllerCodeList[Integer.parseInt(problemID)] = JudgeSystemConstant.MLE;
+                                    order.forceKill();
+                                    return;
+                                } else {
+                                    if (runningMemory > usedMemory) {
+                                        usedMemory = runningMemory;
+                                    }
+                                }
+                            } else {
+                                break;
+                            }
+                        } catch (InterruptedException | IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    File standardFile = new File("/problem/" + problemID + "/" + fileNumber.toString());
+                    // 判断结果的正确性，并写入结果列表
+                    ResultJudge resultJudge = new ResultJudge(outputFile, standardFile);
+                    controllerCodeList[Integer.parseInt(problemID)] = resultJudge.runJudge();
+                    order.forceKill();
+                }
+            });
+        }
     }
 }

@@ -2,7 +2,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>比赛题目页面</title>
     <style type="text/css">
         .bottom-table{
             background:rgba(255, 232, 232, 0.41);
@@ -67,9 +67,7 @@
         }
     </style>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.0.1/css/bootstrap.css" rel="stylesheet">
-    <link href="font-awesome" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <!--    &lt;!&ndash; Add custom CSS here &ndash;&gt;-->
     <!--    <link href="css/sb-admin.css" rel="stylesheet">-->
     <!--    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">-->
@@ -120,16 +118,12 @@
 </nav>
 <div >
 </div>
-<form action="problem" method="post" style="text-align: center">
-    <input type="text" class="form-control form-inline" style="width: 20% ;display: inline-block;" >
-    <select class="form-control form-inline" style="width: 8%;display: inline-block">
-        <option>选择题</option>
-        <option>填空题</option>
-        <option>编译题</option>
-        <option>填空编译题</option>
-    </select>
-    <input type="submit" value="确认" class="btn btn-info"style="display: inline-block">
-</form>
+<div class="row" >
+    <div id="prob-title-contest" >
+<!--        比赛名称-->
+        <h2 id="problem-title" class="pencolor" style="text-align: center" th:text="${比赛名字}">JYU新生练习赛</h2>
+    </div>
+</div>
 
 <div class="bottom-table" style="width: 80%;margin: 0 auto">
     <div class="bs-docs-example">
@@ -140,16 +134,14 @@
                 <th style="width: 40%">题目</th>
                 <th style="width: 20%">通过率</th>
                 <th style="width: 10%">通过状态</th>
-                <th style="width: 30%">来源</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="problem : ${problemlist}">
-                <td th:text="${problem.problemID}">Nash</td>
-                <td><a th:href="@{problempage/{problem.problemID}/{problem.problemType}}" th:text="${problem.problemTitle}" style="text-decoration: none ;cursor:pointer">Software Engineer</a></td>
-                <td th:text="${problem.} / ${problem.}"></td>
+                <td th:text="${problem.problemID}">比赛题目编号</td>
+                <td><a th:href="@{problempage/{problem.problemID}/{problem.problemType}}" th:text="${problem.problemTitle}" style="text-decoration: none ;cursor:pointer">题目名字</a></td>
+                <td th:text="${problem.} / ${problem.}">通过率</td>
                 <td th:text="${problem.} / ${pass.}"><i class="myicon-tick-checked"></i>已通过 <i class="myicon-tick-uncheck"></i>未通过</td>
-                <td style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis" th:text="problem.source">35</td>
             </tr>
             </tbody>
         </table>
@@ -185,18 +177,18 @@
     </div>
 </div><!-- /#wrapper -->
 <script>
-var dv = document.getElementById("hide");
-var hide = false;
-function divSW() {
-if(hide){
-dv.style.display ="none";
-hide = false;
-}
-else{
-dv.style.display = "block";
-hide = true;
-}
-}
+    var dv = document.getElementById("hide");
+    var hide = false;
+    function divSW() {
+        if(hide){
+            dv.style.display ="none";
+            hide = false;
+        }
+        else{
+            dv.style.display = "block";
+            hide = true;
+        }
+    }
 </script>
 </body>
 <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.js"></script>

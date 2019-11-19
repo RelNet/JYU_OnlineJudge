@@ -25,7 +25,10 @@ public class RegisterController {
     static long REGISTER_KEEP_ALIVE_TIME = 5L;
     // 等待注册的队列长度
     static int MAX_WAITING_REGISTER_SIZE = 100;
-    ExecutorService registerThreadPool = new ThreadPoolExecutor(MAX_REGISTER_CORE_TASK_NUMBER, MAX_REGISTER_TASK_NUMBER, REGISTER_KEEP_ALIVE_TIME, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(MAX_WAITING_REGISTER_SIZE));
+    static ExecutorService registerThreadPool = new ThreadPoolExecutor(MAX_REGISTER_CORE_TASK_NUMBER, MAX_REGISTER_TASK_NUMBER
+            , REGISTER_KEEP_ALIVE_TIME, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(MAX_WAITING_REGISTER_SIZE));
+
+    static final Object registerThreadPoolLock = new Object();
 
     @GetMapping(path = "register")
     public String toRegister() {
@@ -38,15 +41,17 @@ public class RegisterController {
                 studentInformation.getPassword() + studentInformation.getClassName() + studentInformation.getRealName() +
                 studentInformation.getCollegeName() + studentInformation.getID());
 
-        registerThreadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                // 插入数据库
-                new UserRegister().register("s_" + studentInformation.getID(),
-                        studentInformation.getPassword(), studentInformation.getClassName(), studentInformation.getRealName(),
-                        studentInformation.getCollegeName(), studentInformation.getID());
-            }
-        });
+        synchronized (registerThreadPoolLock) {
+            registerThreadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    // 插入数据库
+                    new UserRegister().register("s_" + studentInformation.getID(),
+                            studentInformation.getPassword(), studentInformation.getClassName(), studentInformation.getRealName(),
+                            studentInformation.getCollegeName(), studentInformation.getID());
+                }
+            });
+        }
 
         session.setAttribute(SessionAndModelConstant.LoginUserString, studentInformation.getUsername());
 

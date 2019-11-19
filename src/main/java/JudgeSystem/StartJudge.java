@@ -16,8 +16,7 @@ import JudgeSystem.run.program.RunJAVA;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.sql.Time;
 import java.util.*;
 import java.util.concurrent.*;
@@ -27,11 +26,6 @@ import static JudgeSystem.run.program.Run.PROBLEM_SET_PATH;
 @Getter
 @Setter
 public class StartJudge {
-
-    public StartJudge() {
-
-    }
-
     // 任务处理线程池
     private static final Integer MAX_DISTRIBUTE_THREADS = 10;
     private static final Integer MAX_DISTRIBUTE_QUEUE_SIZE = 2000;
@@ -40,13 +34,14 @@ public class StartJudge {
     ExecutorService distributeThreadPool = new ThreadPoolExecutor(MAX_DISTRIBUTE_CORE_POOL_SIZE, MAX_DISTRIBUTE_THREADS
             , DISTRIBUTE_KEEP_ALIVE_TIME, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(MAX_DISTRIBUTE_QUEUE_SIZE));
 
-    // 这个是编译线程池的相关设置
+    // 这个是编译线程池
     private static final Integer MAX_COMPILE_THREADS = 3;
     private static final Integer MAX_COMPILE_QUEUE_SIZE = 4000;
     private static final Long COMPILE_KEEP_ALIVE_TIME = 2L;
     private static final Integer MAX_COMPILE_CORE_POOL_SIZE = 1;
     ExecutorService compileThreadPool = new ThreadPoolExecutor(MAX_COMPILE_CORE_POOL_SIZE, MAX_COMPILE_THREADS
             , COMPILE_KEEP_ALIVE_TIME, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(MAX_COMPILE_QUEUE_SIZE));
+    final Object compileLock = new Object();
 
     // 提交答案线程池，要与数据库进行交互
     private static final Integer MAX_WRITE_THREADS = 100;
@@ -55,6 +50,7 @@ public class StartJudge {
     private static final Integer MAX_WRITE_CORE_POOL_SIZE = 30;
     ExecutorService writeAnswerToDatabaseThreadPool = new ThreadPoolExecutor(MAX_WRITE_CORE_POOL_SIZE, MAX_WRITE_THREADS
             , WRITE_KEEP_ALIVE_TIME, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(MAX_WRITE_QUEUE_SIZE));
+    final Object writeLock = new Object();
 
     // 编译型任务线程池设置
     private static final Integer MAX_RUN_THREADS = 3;
@@ -63,9 +59,10 @@ public class StartJudge {
     private static final Integer MAX_RUN_CORE_POOL_SIZE = 3;
     ExecutorService runProgramThreadPool = new ThreadPoolExecutor(MAX_RUN_CORE_POOL_SIZE, MAX_RUN_THREADS
             , RUN_KEEP_ALIVE_TIME, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(MAX_RUN_QUEUE_SIZE));
+    final Object runLock = new Object();
 
 
-    void addMission(MainSubmit submit) {
+    public void addMission(MainSubmit submit) {
         distributeThreadPool.execute(new Runnable() {
             @Override
             public void run() {
@@ -89,6 +86,7 @@ public class StartJudge {
                     for (int i = 0; i < answerList1.size() && noteIsRight; i++) {
                         if (!answerList1.get(i).equals(userAnswerList.get(i))) {
                             noteIsRight = false;
+                            break;
                         }
                     }
                 }
@@ -98,19 +96,21 @@ public class StartJudge {
                 problemStatus1.setContestID(submit.getContestID());
                 problemStatus1.setProblemID(submit.getProblem().getProblemID());
                 problemStatus1.setJudgeMode(submit.getJudgeMode());
-                problemStatus1.setUser(submit.getUser().getUsername());
+                problemStatus1.setUser(submit.getUsername());
                 problemStatus1.setContestID(submit.getContestID());
                 if (noteIsRight) {
                     problemStatus1.setControlCode(JudgeSystemConstant.AC);
                 } else {
                     problemStatus1.setControlCode(JudgeSystemConstant.WA);
                 }
-                writeAnswerToDatabaseThreadPool.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        problemStatus1.InsertStatus(problemStatus1);
-                    }
-                });
+                synchronized (writeLock) {
+                    writeAnswerToDatabaseThreadPool.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            problemStatus1.InsertStatus(problemStatus1);
+                        }
+                    });
+                }
                 break;
             case FB:
                 // 从数据库获取答案集
@@ -124,6 +124,7 @@ public class StartJudge {
                     for (int i = 0; i < answerList2.size() && noteIsRight1; i++) {
                         if (!answerList2.get(i).equals(userAnswerList2.get(i))) {
                             noteIsRight1 = false;
+                            break;
                         }
                     }
                 }
@@ -133,26 +134,28 @@ public class StartJudge {
                 problemStatus2.setContestID(submit.getContestID());
                 problemStatus2.setProblemID(submit.getProblem().getProblemID());
                 problemStatus2.setJudgeMode(submit.getJudgeMode());
-                problemStatus2.setUser(submit.getUser().getUsername());
+                problemStatus2.setUser(submit.getUsername());
                 problemStatus2.setContestID(submit.getContestID());
                 if (noteIsRight1) {
                     problemStatus2.setControlCode(JudgeSystemConstant.AC);
                 } else {
                     problemStatus2.setControlCode(JudgeSystemConstant.WA);
                 }
-                writeAnswerToDatabaseThreadPool.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        problemStatus2.InsertStatus(problemStatus2);
-                    }
-                });
+                synchronized (writeLock) {
+                    writeAnswerToDatabaseThreadPool.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            problemStatus2.InsertStatus(problemStatus2);
+                        }
+                    });
+                }
                 break;
             case FCF:
                 StringBuilder tempSourceCode = new StringBuilder(new FCFProblem().GetSampleCode(submit.getProblem().getProblemID()));
                 int spaceIndex = tempSourceCode.indexOf("/space");
                 // 通过/space转义符替换内容
                 for (int i = 0; i < submit.getCourseCodes().size() && spaceIndex != -1; i++) {
-                    tempSourceCode.replace(spaceIndex, spaceIndex + 8, " " + submit.getCourseCodes().get(i) + " ");
+                    tempSourceCode.replace(spaceIndex, spaceIndex + 7, " " + submit.getCourseCodes().get(i) + " ");
                     spaceIndex = tempSourceCode.indexOf("/space");
                 }
                 runProgram(submit, tempSourceCode.toString());
@@ -182,7 +185,7 @@ public class StartJudge {
         problemStatus3.setContestID(submit.getContestID());
         problemStatus3.setProblemID(submit.getProblem().getProblemID());
         problemStatus3.setJudgeMode(submit.getJudgeMode());
-        problemStatus3.setUser(submit.getUser().getUsername());
+        problemStatus3.setUser(submit.getUsername());
         problemStatus3.setContestID(submit.getContestID());
         submit.setSubmitID(problemStatus3.InsertStatus(problemStatus3));
 
@@ -203,63 +206,74 @@ public class StartJudge {
         try {
             sourceFile.createNewFile();
             // 写入源代码到文件
+            PrintStream printStream = new PrintStream(new FileOutputStream(sourceFile));
+            printStream.print(sourceString);
+            printStream.close();
 
+            synchronized (compileLock) {
+                compileThreadPool.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        CompileMain compiler;
+                        switch (submit.getLanguageType()) {
+                            case JAVA:
+                                compiler = new CompileJAVA(submit.getSubmitID());
+                                compiler.compileIt();
+                                compiler.setErrorCodes();
+                                if (compiler.hasCompileError()) {
+                                    synchronized (writeLock) {
+                                        writeAnswerToDatabaseThreadPool.execute(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                problemStatus3.UpdateStatus(submit.getSubmitID(), JudgeSystemConstant.CE);
+                                            }
+                                        });
+                                    }
+                                    return;
+                                } else {
+                                    synchronized (runLock) {
+                                        runProgramThreadPool.execute(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Run runProblem = new RunJAVA(Integer.parseInt(problemInfo.get(3)), submit.getSubmitID().toString()
+                                                        , submit.getProblem().getProblemID().toString(), hasInputFiles, Integer.parseInt(problemInfo.get(4)));
+                                            }
+                                        });
+                                    }
+                                }
 
-            compileThreadPool.execute(new Runnable() {
-                @Override
-                public void run() {
-                    CompileMain compiler;
-                    switch (submit.getLanguageType()) {
-                        case JAVA:
-                            compiler = new CompileJAVA(submit.getSubmitID());
-                            compiler.compileIt();
-                            compiler.setErrorCodes();
-                            if (compiler.hasCompileError()) {
-                                writeAnswerToDatabaseThreadPool.execute(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        problemStatus3.UpdateStatus(submit.getSubmitID(), JudgeSystemConstant.CE);
+                            case GPP:
+                                compiler = new CompileGPP(submit.getSubmitID());
+                                compiler.compileIt();
+                                compiler.setErrorCodes();
+                                if (compiler.hasCompileError()) {
+                                    synchronized (writeLock) {
+                                        writeAnswerToDatabaseThreadPool.execute(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                problemStatus3.UpdateStatus(submit.getSubmitID(), JudgeSystemConstant.CE);
+                                            }
+                                        });
                                     }
-                                });
-                                return;
-                            } else {
-                                runProgramThreadPool.execute(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Run runProblem = new RunJAVA(Integer.parseInt(problemInfo.get(3)), submit.getSubmitID().toString()
-                                                , submit.getProblem().getProblemID().toString(), hasInputFiles, Integer.parseInt(problemInfo.get(4)));
+                                } else {
+                                    synchronized (runLock) {
+                                        runProgramThreadPool.execute(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Run runProblem = new RunCPP(Integer.parseInt(problemInfo.get(3)), submit.getSubmitID().toString()
+                                                        , submit.getProblem().getProblemID().toString(), hasInputFiles, Integer.parseInt(problemInfo.get(4)));
+                                            }
+                                        });
                                     }
-                                });
-                            }
-
-                        case GPP:
-                            compiler = new CompileGPP(submit.getSubmitID());
-                            compiler.compileIt();
-                            compiler.setErrorCodes();
-                            if (compiler.hasCompileError()) {
-                                writeAnswerToDatabaseThreadPool.execute(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        problemStatus3.UpdateStatus(submit.getSubmitID(), JudgeSystemConstant.CE);
-                                    }
-                                });
-                            } else {
-                                runProgramThreadPool.execute(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Run runProblem = new RunCPP(Integer.parseInt(problemInfo.get(3)), submit.getSubmitID().toString()
-                                                , submit.getProblem().getProblemID().toString(), hasInputFiles, Integer.parseInt(problemInfo.get(4)));
-                                    }
-                                });
-                            }
-                        default:
+                                }
+                            default:
+                        }
                     }
-                }
-            });
+                });
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }
 

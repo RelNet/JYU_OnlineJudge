@@ -22,5 +22,6 @@ public class RunJAVA extends Run {
                 "/bin/sh", "-c",
                 "java " + CompileMain.INITIAL_FILE_ADDRESS + "/" + submitID + "/t" + submitID
         };
+        runIt();
     }
 }

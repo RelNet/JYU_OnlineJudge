@@ -11,5 +11,6 @@ public class RunCPP extends Run {
                 "/bin/sh", "-c",
                 "./" + CompileMain.INITIAL_FILE_ADDRESS + "/" + submitID + "/t" + submitID
         };
+        runIt();
     }
 }

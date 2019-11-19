@@ -17,7 +17,7 @@ import java.util.List;
 public class MainSubmit implements Serializable {
     private List<String> courseCodes;
     private JudgeMode judgeMode;     // 记录是ACM还是IO判断方式
-    private MainUser user;
+    private String username;
     private Integer submitID;
     private Date submitDate;
     private JudgeLanguage languageType;
@@ -86,12 +86,12 @@ public class MainSubmit implements Serializable {
         this.submitID = submitID;
     }
 
-    public MainUser getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(MainUser user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public JudgeLanguage getLanguageType() {

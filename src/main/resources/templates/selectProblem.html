@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://vjudge.net/contest/343778#problem/A -->
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>
+        选择题页面
+    </title>
+    <style type="text/css">
+        .pencolor{
+            color: #5bc0de;
+        }
+    </style>
+    <script type="text/x-mathjax-config;executed=true">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['$$$','$$$']], displayMath: [['$$$$$$','$$$$$$']]}
+        });
+    </script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.0.1/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<!--主页栏-->
+<nav class="navbar navbar-dark bg-inverse" style="background-color:black">
+    <div class="collapse navbar-toggleable-sm" id="navbarResponsive" style="display: block">
+        <a class="navbar-brand" href="/" style="color:white">
+            Home
+        </a>
+        <ul class="nav navbar-nav">
+            <li class="nav-item active" id="nav-problem">
+                <a class="nav-link" href="problem" style="color: white">问题</a>
+            </li>
+            <li class="nav-item" id="nav-status">
+                <a class="nav-link" href="contest" style="color:white ">比赛/考试</a>
+            </li>
+            <li class="nav-item" id="nav-contest">
+                <a class="nav-link" href="status" style="color:white">提交状态</a>
+            </li>
+            <li class="nav-item" id="nav-user">
+                <a class="nav-link" href="team" style="color:white">团队</a>
+            </li>
+        </ul>
+        <!--登陆状态栏-->
+        <!--/*@thymesVar id="loginUser" type=""*/-->
+        <ul class="nav navbar-nav navbar-right navbar-user" th:if="${#session.getValue('loginUser') == null}">
+            <li class="dropdown user-dropdown" >
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 登录 <b
+                        class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a onclick="divSW()"><i class="fa fa-user"></i> 登录</a></li>
+                    <li class="divider"></li>
+                    <li><a href="register"><i class="fa fa-gear"></i>注册</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right navbar-user" th:if="${#session.getValue('loginUser') != null}">
+            <li class="dropdown user-dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span
+                        th:text="${#session.getValue('loginUser')}">用户名</span><b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#"><i class="fa fa-power-off"></i> 注销</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!--提交框框-->
+<div class="modal-content" style="width: 50%;margin: 0 auto;display: none" id="submitwindows">
+    <div class="modal-body">
+        <h1 style="text-align: center;color: #66afe9">确认提交答案？</h1>
+<!--        地址代填-->
+        <button type="button" class="btn btn-primary" onclick="submitforms('/')">确认</button>
+        <button type="button" class="btn btn-default" onclick="divSW1()">取消</button>
+    </div>
+</div>
+<div class="tab-pane active" id="problem" role="tabpanel" aria-expanded="true">
+    <div id="contest_problem" class="container">
+        <div class="row">
+            <div id="prob-operation" class="row">
+            <!--                题目标题栏-->
+            <div class="col-md-9 container" id="prob-right-panel">
+                <!--                题目描述栏-->
+                <form action="" method="post">
+                <div class = "container">
+                    <div class = "row">
+                        <div class ="col-md-12" >
+                            <h5 class= "text-left">1</h5>
+                            <div class="well" style ="width: 100%;height: 50%;background-color:rgba(255, 232, 232, 0.41)">
+                                <p class = "text-left pencolor" style="white-space:normal; word-break:break-all;overflow:hidden;">
+                                    A+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+B
+                                    A+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+B
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+<!--                        多项选择题-->
+<!--                        <提交路径待补></提交路径待补>-->
+
+                        <label><input name="Fruit" type="checkbox" value="" />苹果 </label>
+                        <label><input name="Fruit" type="checkbox" value="" />桃子 </label>
+                        <label><input name="Fruit" type="checkbox" value="" />香蕉 </label>
+                        <label><input name="Fruit" type="checkbox" value="" />梨 </label>
+                    <br>
+                    <div class = "row">
+                        <div class ="col-md-12" >
+                            <h5 class= "text-left">2</h5>
+                            <div class="well" style ="width: 100%;height: 50%;background-color:rgba(255, 232, 232, 0.41)">
+                                <p class = "text-left pencolor" style="white-space:normal; word-break:break-all;overflow:hidden;">
+                                    A+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+B
+                                    A+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+BA+B
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                        <label><input name="Fruit" type="radio" value="1"  />苹果 </label>
+                        <label><input name="Fruit" type="radio" value="1" />桃子 </label>
+                        <label><input name="Fruit" type="radio" value="1" />香蕉 </label>
+                        <label><input name="Fruit" type="radio" value="1" />梨 </label>
+                </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <input type="submit" class="btn btn-primary" id="problem-submit" onclick="alert('提交成功!')"></input>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div><!-- /#wrapper -->
+<!--<script>-->
+<!--    var ds = document.getElementById("submitwindows");-->
+<!--    var submitwindows = false;-->
+<!--    function divSW1() {-->
+<!--        if(submitwindows){-->
+<!--            ds.style.display ="none";-->
+<!--            submitwindows = false;-->
+<!--        }-->
+<!--        else{-->
+<!--            ds.style.display = "block";-->
+<!--            submitwindows = true;-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
+<!--<script>-->
+<!--    function submitforms(path) {-->
+<!--        $('form1').action = path;-->
+<!--        $('form1').submit();-->
+<!--    }-->
+<!--</script>-->
+</body>
+
+</html>
