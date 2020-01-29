@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://vjudge.net/contest/343778#problem/A -->
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>
+        团队信息
+    </title>
+    <style type="text/css">
+        .pencolor{
+            color: #5bc0de;
+        }
+    </style>
+    <script type="text/x-mathjax-config;executed=true">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['$$$','$$$']], displayMath: [['$$$$$$','$$$$$$']]}
+        });
+    </script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.0.1/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<!--主页栏-->
+<nav class="navbar navbar-dark bg-inverse" style="background-color:black">
+    <div class="collapse navbar-toggleable-sm" id="navbarResponsive" style="display: block">
+        <ul class="nav navbar-nav">
+            <li  id="nav-index">
+                <a class="nav-link" href="/" style="color: white">Home</a>
+            </li>
+            <li  id="nav-problem">
+                <a class="nav-link" href="problem" style="color: white">问题</a>
+            </li>
+            <li class="nav-item" id="nav-status">
+                <a class="nav-link" href="contest" style="color:white ">比赛/考试</a>
+            </li>
+            <li class="nav-item" id="nav-contest">
+                <a class="nav-link" href="status" style="color:white">提交状态</a>
+            </li>
+            <li class="nav-item" id="nav-user">
+                <a class="nav-link" href="team" style="color:white">团队</a>
+            </li>
+        </ul>
+        <!--登陆状态栏-->
+        <!--/*@thymesVar id="loginUser" type=""*/-->
+        <ul class="nav navbar-nav navbar-right navbar-user" th:if="${#session.getValue('loginUser') == null}">
+            <li class="dropdown user-dropdown" >
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 登录 <b
+                        class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a onclick="divSW()"><i class="fa fa-u
+                    ser"></i> 登录</a></li>
+                    <li class="divider"></li>
+                    <li><a href="register"><i class="fa fa-gear"></i>注册</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right navbar-user" th:if="${#session.getValue('loginUser') != null}">
+            <li class="dropdown user-dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span
+                        th:text="${#session.getValue('loginUser')}">用户名</span><b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#"><i class="fa fa-power-off"></i> 注销</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container" align="center">
+    <div style="background-color:#fffdea;width: 50%" align="center">
+        <div>
+        <ul>
+            <span style="font-size: 20px">姓名:</span><li style="list-style-type: none;font-size: 15px;color: #953b39">黄子涵</li>
+            <span style="font-size: 20px">学号:</span><li style="list-style-type: none;font-size: 15px;color: #953b39">181111111</li>
+            <span style="font-size: 20px">加入团队的数量:</span><li style="list-style-type: none;font-size: 15px;color: #953b39">3</li>
+        </ul>
+             <div >
+                 <a href="creatTeam"><input type="button" class="btn btn-info" value="创建团队"></input></a>
+                 <a href="joinTeam"><input type="button" class="btn btn-danger" value="加入团队"></button></a>
+                 <a href="checkMessge"><input type="button" class="btn btn-default"value="验证消息"></button></a>
+             </div>
+        </div>
+
+    </div>
+    <br>
+    <div style="background-color: #2a6496;border-radius: 10px">
+        <br>
+<!--        提交待填-->
+        <div align="center">
+        <form action="Messge" method="post">
+        <input type="text" class="form-control form-inline" style="width: 50% ;display: inline-block;" placeholder="搜索团队">
+        <input type="submit" value="确认" class="btn btn-info"style="display: inline-block">
+        </form>
+        </div>
+        <br>
+        <div class="bottom-table" style="width: 80%;margin: 0 auto">
+            <div class="bs-docs-example">
+                <table class="table table-hover" style="table-layout: fixed">
+                    <tr>
+                        <div style="background-color:pink;border-radius:5px">
+                            <div class="modal-body">
+                                <span style="font-size: 25px;color:white;opacity: 1">团队名称</span>
+                                &nbsp;
+                                <span style="font-size: 25px;color:white;opacity: 1">团队人数</span>
+                                &nbsp;
+                                <span style="font-size: 25px;color:white;opacity: 1">团队拥有者</span>
+                                &nbsp;
+                                <span style="font-size: 25px;color:white;opacity: 1">所在团队身份</span>
+                                <span style="font-size: 25px;color: #2d6987">哈希码</span>
+                            </div>
+                        </div>
+                    </tr>
+                    <br>
+                    <tr>
+                        <div style="background-color:pink;border-radius:5px">
+                            <div class="modal-body">
+                                <span style="font-size: 25px;color:white;opacity: 1">团队名称</span>
+                                &nbsp;
+                                <span style="font-size: 25px;color:white;opacity: 1">团队人数</span>
+                                &nbsp;
+                                <span style="font-size: 25px;color:white;opacity: 1">团队拥有者</span>
+                                &nbsp;
+                                <span style="font-size: 25px;color:white;opacity: 1">所在团队身份</span>
+                                <span style="font-size: 25px;color: #2d6987">哈希码</span>
+                            </div>
+                        </div>
+                    </tr>
+                    <br>
+                    <tr>
+                        <div style="background-color:pink;border-radius:5px">
+                            <div class="modal-body">
+                                <span style="font-size: 25px;color:white;opacity: 1">团队名称</span>
+                                &nbsp;
+                                <span style="font-size: 25px;color:white;opacity: 1">团队人数</span>
+                                &nbsp;
+                                <span style="font-size: 25px;color:white;opacity: 1">团队拥有者</span>
+                                &nbsp;
+                                <span style="font-size: 25px;color:white;opacity: 1">所在团队身份</span>
+                                <span style="font-size: 25px;color: #2d6987">哈希码</span>
+                            </div>
+                        </div>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="modal-footer"></div>
+    </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../static/img/favicon.ico" type="icon">
+    <title>JYU Online Judge</title>
+    <script type="text/javascript"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Add custom CSS here -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.0.1/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!--主页栏-->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Home</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li><a href="problemSet.html"><i class="fa fa-dashboard"></i> 问题</a></li>
+                <li><a href="contest.html"><i class="fa fa-bar-chart-o"></i> 比赛/考试</a></li>
+                <li><a href="status.html"><i class="fa fa-table"></i> 提交状态</a></li>
+                <li><a href="team.html"><i class="fa fa-edit"></i> 团队</a></li>
+            </ul>
+            <!--登陆状态栏-->
+            <!--/*@thymesVar id="loginUser" type=""*/-->
+            <ul class="nav navbar-nav navbar-right navbar-user">
+                <li class="dropdown user-dropdown" th:if="${loginUser == null}">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 登录 <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a onclick="divSW()"><i class="fa fa-user"></i> 登录</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/welcome"><i class="fa fa-gear"></i>注册</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right navbar-user" th:if="${loginUser != null}">
+                <li class="dropdown user-dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span
+                            th:text="${loginUser}">用户名</span><b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="fa fa-power-off"></i> 注销</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+    <!--    标题栏-->
+</div><!-- /#page-wrapper -->
+
+<!--登陆浮窗-->
+<div class="modal fade in" id="hide" tabindex="-1" role="dialog"
+     style="display: block; padding-right: 16px; display: none">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" onclick="divSW()">
+                    <span>×</span>
+                </button>
+                <!--                <h4 class="modal-title" id="loginModalLabel" th:if="$session.login.username ">登录</h4>-->
+            </div>
+            <div class="modal-body">
+                <form id="login-form" method="post" action="index.html">
+                    <div class="form-group">
+                        <!--<label for="login-username" class="form-control-label">Username:</label>-->
+                        <input type="text" class="form-control" id="login-username" name="username" placeholder="学号">
+                    </div>
+                    <div class="form-group">
+                        <!--<label for="login-password" class="form-control-label">Password:</label>-->
+                        <input type="password" class="form-control" id="login-password" name="password"
+                               placeholder="密码">
+                    </div>
+                    <input type="submit" style="display: none">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="alert alert-danger" role="alert" id="login-alert" style="display: none;"></div>
+                <button type="button" class="btn btn-primary" id="btn-login">登录</button>
+            </div>
+        </div>
+    </div>
+</div><!-- /#wrapper -->
+
+<!-- JavaScript -->
+<script src="js/fun/divSW.js"></script>
+<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/3.0.1/js/bootstrap.js"></script>
+</body>
+</html>

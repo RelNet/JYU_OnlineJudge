@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://vjudge.net/contest/343778#problem/A -->
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>
+        团队页面
+    </title>
+    <style type="text/css">
+        .pencolor{
+            color: #5bc0de;
+        }
+    </style>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.0.1/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<!--主页栏-->
+<nav class="navbar navbar-dark bg-inverse" style="background-color:black">
+    <div class="collapse navbar-toggleable-sm" id="navbarResponsive" style="display: block">
+        <ul class="nav navbar-nav">
+            <li  id="nav-index">
+                <a class="nav-link" href="/" style="color: white">Home</a>
+            </li>
+            <li  id="nav-problem">
+
+                <a class="nav-link" href="problem" style="color: white">问题</a>
+            </li>
+            <li class="nav-item" id="nav-status">
+                <a class="nav-link" href="contest" style="color:white ">比赛/考试</a>
+            </li>
+            <li class="nav-item" id="nav-contest">
+                <a class="nav-link" href="status" style="color:white">提交状态</a>
+            </li>
+            <li class="nav-item" id="nav-user">
+                <a class="nav-link" href="team" style="color:white">团队</a>
+            </li>
+        </ul>
+        <!--登陆状态栏-->
+        <!--/*@thymesVar id="loginUser" type=""*/-->
+        <ul class="nav navbar-nav navbar-right navbar-user" th:if="${#session.getValue('loginUser') == null}">
+            <li class="dropdown user-dropdown" >
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 登录 <b
+                        class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a onclick="divSW()"><i class="fa fa-user"></i> 登录</a></li>
+                    <li class="divider"></li>
+                    <li><a href="register"><i class="fa fa-gear"></i>注册</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right navbar-user" th:if="${#session.getValue('loginUser') != null}">
+            <li class="dropdown user-dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span
+                        th:text="${#session.getValue('loginUser')}">用户名</span><b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#"><i class="fa fa-power-off"></i> 注销</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div>
+    <div class="modal-header" align="center" >
+        <span align="center" style="float: left;font-size: 25px">团队名字</span>
+        <span>团队人数</span>&nbsp;<span>团队拥有者</span>
+    </div>
+<div class="modal-body">
+    <h3>管理员</h3>
+    <a href="AddAdmin"><input type="button" class="btn btn-default" value="添加"></input></a>
+    <a href="DefaultAdmin"><input type="button" class="btn btn-danger" value="删除"></input></a>
+    <div class="bottom-table" style="width: 80%;margin: 0 auto">
+        <div class="bs-docs-example">
+            <table class="table table-hover" style="table-layout: fixed">
+                <thead>
+                <tr>
+                    <th style="width: 10%">编号</th>
+                    <th style="width: 20%">姓名</th>
+                    <th style="width: 20%">学院</th>
+                    <th style="width: 10%">班级</th>
+                    <th style="width: 20%">学号</th>
+                    <th style="width: 10%">身份</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="problem : ${problemlist}">
+                    <td th:text="${problem.problemID}">1</td>
+                    <td><a th:href="@{problempage/{problem.problemID}/{problem.problemType}}" th:text="${problem.problemTitle}" style="cursor:pointer">黄子涵</a></td>
+                    <td th:text="${problem.} / ${problem.}">计算机</td>
+                    <td th:text="${problem.} / ${pass.}">1806</td>
+                    <td th:text="${problem.} / ${pass.}">181111111</td>
+                    <td th:text="${problem.} / ${pass.}">队长</td>
+                </tr>
+                <tr th:each="problem : ${problemlist}">
+                    <td th:text="${problem.problemID}">1</td>
+                    <td><a th:href="@{problempage/{problem.problemID}/{problem.problemType}}" th:text="${problem.problemTitle}" style="cursor:pointer">林六六</a></td>
+                    <td th:text="${problem.} / ${problem.}">计算机</td>
+                    <td th:text="${problem.} / ${pass.}">1801</td>
+                    <td th:text="${problem.} / ${pass.}">181110000</td>
+                    <td th:text="${problem.} / ${pass.}">管理员</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+    <div class="modal-body">
+        <h3>队员</h3>
+        <a href="AddTeammembers"><input type="button" class="btn btn-default" value="添加"></input></a>
+        <a href="TickTeammembers"><input type="button" class="btn btn-danger" value="删除"></input></a>
+        <div class="bottom-table" style="width: 80%;margin: 0 auto">
+            <div class="bs-docs-example">
+                <table class="table table-hover" style="table-layout: fixed">
+                    <thead>
+                    <tr>
+                        <th style="width: 10%">编号</th>
+                        <th style="width: 20%">姓名</th>
+                        <th style="width: 20%">学院</th>
+                        <th style="width: 20%">班级</th>
+                        <th style="width: 20%">学号</th>
+                        <th style="width: 10%">身份</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="problem : ${problemlist}">
+                        <td th:text="${problem.problemID}">1</td>
+                        <td><a th:href="@{problempage/{problem.problemID}/{problem.problemType}}" th:text="${problem.problemTitle}" style="cursor:pointer">李耀西</a></td>
+                        <td th:text="${problem.} / ${problem.}">计算机</td>
+                        <td th:text="${problem.} / ${pass.}">1806</td>
+                        <td th:text="${problem.} / ${pass.}">181110111</td>
+                        <td th:text="${problem.} / ${pass.}">队员</td>
+                    </tr>
+                    <tr th:each="problem : ${problemlist}">
+                        <td th:text="${problem.problemID}">1</td>
+                        <td><a th:href="@{problempage/{problem.problemID}/{problem.problemType}}" th:text="${problem.problemTitle}" style="cursor:pointer">林祈康</a></td>
+                        <td th:text="${problem.} / ${problem.}">计算机</td>
+                        <td th:text="${problem.} / ${pass.}">1801</td>
+                        <td th:text="${problem.} / ${pass.}">181110100</td>
+                        <td th:text="${problem.} / ${pass.}">队员</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

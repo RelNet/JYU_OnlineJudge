@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .bottom-table{
+            background:rgba(255, 232, 232, 0.41);
+            padding: 2rem 2rem 2rem 2rem;
+            margin: 0 1rem;
+        }
+        .table{
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 20px;
+            border-spacing:0 0;
+            border-collapse: collapse;
+        }
+        .table-hover{
+            color: #5bc0de;
+        }
+    </style>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.0.1/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Add custom CSS here -->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+</head>
+<body style="background-color:rgba(255, 232, 232, 0.41)">
+<div >
+<nav class="navbar navbar-dark bg-inverse" style="background-color:black">
+    <div class="collapse navbar-toggleable-sm" id="navbarResponsive" style="display: block">
+        <ul class="nav navbar-nav">
+            <li  id="nav-index">
+                <a class="nav-link" href="/" style="color: white">Home</a>
+            </li>
+            <li  id="nav-problem">
+                <a class="nav-link" href="problem" style="color: white">问题</a>
+            </li>
+            <li class="nav-item" id="nav-status">
+                <a class="nav-link" href="contest" style="color:white ">比赛/考试</a>
+            </li>
+            <li class="nav-item" id="nav-contest">
+                <a class="nav-link" href="status" style="color:white">提交状态</a>
+            </li>
+            <li class="nav-item" id="nav-user">
+                <a class="nav-link" href="team" style="color:white">团队</a>
+            </li>
+        </ul>
+        <!--登陆状态栏-->
+        <!--/*@thymesVar id="loginUser" type=""*/-->
+        <ul class="nav navbar-nav navbar-right navbar-user" th:if="${#session.getValue('loginUser') == null}">
+            <li class="dropdown user-dropdown" >
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 登录 <b
+                        class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a onclick="divSW()"><i class="fa fa-user"></i> 登录</a></li>
+                    <li class="divider"></li>
+                    <li><a href="register"><i class="fa fa-gear"></i>注册</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right navbar-user" th:if="${#session.getValue('loginUser') != null}">
+            <li class="dropdown user-dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span
+                        th:text="${#session.getValue('loginUser')}">用户名</span><b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#"><i class="fa fa-power-off"></i> 注销</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div >
+</div>
+    <div style="width: 50%;margin: 0 auto">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-clock-o"></i> 个人信息</h3>
+            </div>
+            <div class="panel-body">
+                <div class="list-group">
+                    <form method="get">
+                    <a href="#" class="list-group-item">
+                        <span class="badge" th:text="${realName}"></span>
+                        <i class="fa fa-calendar"></i> 姓名
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge" th:text="${class}"></span>
+                        <i class="fa fa-comment"></i> 班级
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge" th:text="${academy}"></span>
+                        <i class="fa fa-truck"></i> 学院
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge" th:text="${id}"></span>
+                        <i class="fa fa-money"></i> 学号
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge" th:text="${session.problemnum}"></span>
+                        <i class="fa fa-user"></i> 提交题目数
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge" th:text="${session.passnum}"></span>
+                        <i class="fa fa-check"></i> 通过题目数
+                    </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--</div>-->
+    <div class="row" style="margin: 0 auto" th:if="${isYourPermission != false}">
+        <div class="col-lg-6" style="width:50%;height: 100%;margin: 0 auto">
+            <div class="panel panel-info" >
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6 text-right">
+                            <a class="announcement-heading"  style="text-decoration: none ;cursor:pointer">团队信息</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6" style="width:50%;height: 100%;margin: 0 auto">
+            <div class="panel panel-warning" >
+                <div class="panel-heading" style="background-color: rgba(49,23,255,0.59) ; border-color: rgba(0,0,0,0.53)">
+                    <div class="row">
+                        <div class="col-xs-6 text-right">
+                            <a class="announcement-heading" style="color: white ; text-decoration: none ;cursor:pointer">个人信息修改</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6" style="width:50%;height: 100%;margin: 0 auto">
+            <div class="panel panel-danger" >
+                <div class="panel-heading" style="background-color:#626062">
+                    <div class="row">
+                        <div class="col-xs-6 text-right">
+                            <a class="announcement-heading" style="color: white ;text-decoration: none ;cursor:pointer" >刷题记录</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6" style="width:50%;height: 100%;margin: 0 auto">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6 text-right">
+                            <a class="announcement-heading" style="text-decoration: none ;cursor:pointer">比赛记录</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- /#page-wrapper -->
+</div>
+</div>
+<script>
+    var dv = document.getElementById("hide");
+    var hide = false;
+    function divSW() {
+        if(hide){
+            dv.style.display ="none";
+            hide = false;
+        }
+        else{
+            dv.style.display = "block";
+            hide = true;
+        }
+    }
+</script>
+</body>
+<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/3.0.1/js/bootstrap.js"></script>
+</html>

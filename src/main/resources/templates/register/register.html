@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../static/img/favicon.ico" type="icon">
+    <title>JYU Online Judge</title>
+    <style type="text/css">
+        .modal {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1040;
+            display: none;
+            overflow: auto;
+            overflow-y: scroll;
+        }
+
+        .fade.in {
+            opacity: 1;
+        }
+
+        .modal-dialog {
+            position: relative;
+            z-index: 1050;
+            width: auto;
+            padding: 10px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        @media screen and (min-width: 768px) {
+            .modal-dialog {
+                width: 600px;
+                padding-top: 30px;
+                padding-bottom: 30px;
+            }
+
+            .modal-content {
+                -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            }
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: #ffffff;
+            border: 1px solid #999999;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            outline: none;
+            -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+            background-clip: padding-box;
+        }
+
+        .modal-header {
+            /*min-height: 16.428571429px;*/
+            padding: 15px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .modal-title {
+            margin: 0;
+            line-height: 1.428571429;
+        }
+
+        .modal-body {
+            position: relative;
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-control {
+            display: block;
+            width: 95%;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.428571429;
+            color: #555555;
+            vertical-align: middle;
+            background-color: #ffffff;
+            background-image: none;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+            transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+        }
+
+        .modal-footer {
+            padding: 19px 20px 20px;
+            margin-top: 15px;
+            text-align: right;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .alert-danger {
+            color: #b94a48;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1.428571429;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+        }
+
+        .btn-primary {
+            color: #ffffff;
+            background-color: #428bca;
+            border-color: #357ebd;
+        }
+
+
+    </style>
+    <!--    <script type="text/javascript">-->
+    <!--        $(document).ready(function () {-->
+    <!--            $("#b1").click(function () {-->
+    <!--                alert("ok1");-->
+    <!--            });-->
+    <!--            $("#b1").click(function () {-->
+    <!--                $("#b1").unbind();-->
+    <!--    </script>-->
+    <!-- Bootstrap core CSS -->
+    <!-- Add custom CSS here -->
+    <link href="../../static/css/sb-admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+</head>
+<body style="background-image: url(../../static/img/laopo2.jpeg);">
+<div class="modal fade in" tabindex="-1" role="dialog" style="display: block; padding-right: 16px">
+    <div class="modal-dialog" role="document" style="opacity:0.8">
+        <div class="modal-header">
+            <h4 class="modal-title" id="registerLabel">注册</h4>
+        </div>
+        <div class="modal-body">
+            <form action="welcome" id="register-form" method="post">
+                <div class="form-group">
+                    <!--<label for="login-username" class="form-control-label">Username:</label>-->
+                    <input type="text" class="form-control" id="register-ID" name="ID" placeholder="学号">
+                </div>
+
+                <div class="form-group">
+                    <!--<label for="login-username" class="form-control-label">Username:</label>-->
+                    <input type="text" class="form-control" id="register-realname" name="realName"
+                           placeholder="真实姓名">
+                </div>
+                <div class="form-group">
+                    <!--<label for="login-username" class="form-control-label">Username:</label>-->
+                    <input type="text" class="form-control" id="register-class " name="className" placeholder="班级">
+                </div>
+                <div class="form-group">
+                    <!--<label for="login-username" class="form-control-label">Username:</label>-->
+                    <input type="text" class="form-control" id="register-college" name="collegeName"
+                           placeholder="学院">
+                </div>
+                <div class="form-group">
+                    <!--<label for="login-password" class="form-control-label">Password:</label>-->
+                    <input type="password" class="form-control" id="register-password" name="password"
+                           placeholder="密码">
+                </div>
+                <div class="form-group">
+                    <!--<label for="login-usern<link rel="stylesheet" media="screen" href="css/laopo2.css"/>ame" class="form-control-label">Username:</label>-->
+                    <input type="password" class="form-control" id="register-repeatpsd" name="repeatpsd"
+                           placeholder="确认密码">
+                </div>
+                <input type="submit" style="display: none">
+                <input value="按钮" type="submit"/>
+            </form>
+        </div>
+        <div class="alert alert-danger" role="alert" id="register-alert" style="display: none;"></div>
+        <!--                <button type="button" class="btn btn-primary" id="btn-register" onclick="location.href='welcome_to_join_us.html'">注册</button>-->
+        <!--                <button type="button" class="btn btn-primary" id="b1" onclick="location.href='welcome'">注册</button>-->
+    </div>
+</div>
+</div>
+</div><!-- /#wrapper -->
+<!--<script>-->
+<!--    function chick() {-->
+<!--        if (document.getElementById("register-password").value != "" && document.getElementById("register-repeatpsd").value != "") {-->
+<!--            if (document.getElementById("register-password").value == document.getElementById("register-repeatpsd").value) {-->
+<!--                alert("密码正确！点击正确跳转");-->
+<!--                location.href = 'welcome';-->
+<!--            } else {-->
+<!--                alert("密码错误！")-->
+<!--            }-->
+<!--        }-->
+<!--    }-->
+
+<!--</script>-->
+</body>
+<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/3.0.1/js/bootstrap.js"></script>
+</html>

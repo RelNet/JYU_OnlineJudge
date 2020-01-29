@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>创建比赛</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style type="text/css">
+        .bottom-table {
+            background: rgba(255, 232, 232, 0.41);
+            padding: 2rem 2rem 2rem 2rem;
+            margin: 0 1rem;
+        }
+
+        .table {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 20px;
+            border-spacing: 0 0;
+            border-collapse: collapse;
+        }
+
+        .table-hover {
+            color: #5bc0de;
+        }
+
+        #up {
+            margin-top: 5px;
+            height: 25px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+    </style>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.0.1/css/bootstrap.css" rel="stylesheet">
+
+    <!--    &lt;!&ndash; Add custom CSS here &ndash;&gt;-->
+    <!--    <link href="css/sb-admin.css" rel="stylesheet">-->
+    <!--    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">-->
+</head>
+<body>
+<nav class="navbar navbar-dark bg-inverse" style="background-color:black">
+    <div class="collapse navbar-toggleable-sm" id="navbarResponsive" style="display: block">
+        <a class="navbar-brand" href="https://vjudge.net/" style="color:white">
+            Home
+        </a>
+        <ul class="nav navbar-nav">
+            <li class="nav-item active" id="nav-problem">
+                <a class="nav-link" href="https://vjudge.net/problem" style="color: white">问题</a>
+            </li>
+            <li class="nav-item" id="nav-status">
+                <a class="nav-link" href="https://vjudge.net/status" style="color:white ">比赛/考试</a>
+            </li>
+            <li class="nav-item" id="nav-contest">
+                <a class="nav-link" href="https://vjudge.net/contest" style="color:white">提交状态</a>
+            </li>
+            <li class="nav-item" id="nav-user">
+                <a class="nav-link" href="https://vjudge.net/user" style="color:white">团队</a>
+            </li>
+        </ul>
+        <!--登陆状态栏-->
+        <!--/*@thymesVar id="loginUser" type=""*/-->
+        <ul class="nav navbar-nav navbar-right navbar-user" th:if="${#session.getValue('loginUser') == null}">
+            <li class="dropdown user-dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 登录 <b
+                        class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a onclick="divSW()"><i class="fa fa-user"></i> 登录</a></li>
+                    <li class="divider"></li>
+                    <li><a href="register"><i class="fa fa-gear"></i>注册</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right navbar-user" th:if="${#session.getValue('loginUser') != null}">
+            <li class="dropdown user-dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span
+                        th:text="${#session.getValue('loginUser')}">用户名</span><b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#"><i class="fa fa-power-off"></i> 注销</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="modal-dialog" role="document" style="width: 80%">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title" id="loginModalLabel">创建比赛</h4>
+        </div>
+        <div>
+            <form name="date">
+                <h4>&nbsp;&nbsp;&nbsp;比赛基本信息</h4>
+                <div class="modal-body">
+                    <span style="font-size:20px">比赛类型</span>
+                    <div id="bottons">
+                        <label><input name="Fruit" type="radio" value="1" class="btn btn-default"/>公开</label>
+                        <label><input name="Fruit" type="radio" value="1" class="btn btn-default"/>私密</label>
+                    </div>
+                </div>
+                <div>
+                    <div class="modal-body">
+                        <span style="font-size:20px">比赛名字</span>
+                        <div>
+                            <input class="form-control" placeholder="输入比赛名">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="modal-body">
+                        <span style="font-size:20px">比赛开始时间</span>
+                        <div>
+                        <select name="year" οnchange="selectYear(this.value)">
+                            <option value="">选择 年</option>
+                        </select>
+                        <select name="month" οnchange="selectMonth(this.value)">
+                            <option value="">选择 月</option>
+                        </select>
+                        <select name="day">
+                            <option value="">选择 日</option>
+                        </select>
+                        <select name="hour">
+                            <option value="">选择 时</option>
+                        </select>
+                        <select name="minute">
+                            <option value="">选择 分</option>
+                        </select>
+                        </div>
+                    </div>
+                </div>
+
+<!--                <div>-->
+<!--                    <div class="modal-body">-->
+<!--                        <span style="font-size:20px">比赛开始时间</span>-->
+<!--                        <div>-->
+<!--                            <select name="year" οnchange="selectYear(this.value)">-->
+<!--                                <option value="">选择 年</option>-->
+<!--                            </select>-->
+<!--                            <select name="month" οnchange="selectMonth(this.value)">-->
+<!--                                <option value="">选择 月</option>-->
+<!--                            </select>-->
+<!--                            <select name="day">-->
+<!--                                <option value="">选择 日</option>-->
+<!--                            </select>-->
+<!--                            <select name="hour">-->
+<!--                                <option value="">选择 时</option>-->
+<!--                            </select>-->
+<!--                            <select name="minute">-->
+<!--                                <option value="">选择 分</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+                <div>
+                    <div class="modal-body" style="width: 30%;">
+                        <span style="font-size:20px">比赛时间长度</span>
+                        <div>
+                            <input class="form-control" placeholder="输入比赛时间长度">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="modal-body">
+                        <span style="font-size:20px">比赛赛制</span>
+                        <div>
+                            <label><input name="rule" type="radio" value="1" class="btn btn-default"/>IO</label>
+                            <label><input name="rule" type="radio" value="1" class="btn btn-default"/>acm</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-header">
+                    <h4 class="modal-title">比赛题目集</h4>
+                    <table class="table table-hover" style="table-layout: fixed">
+                        <thead>
+                        <tr>
+                            <th style="width: 10%">编号</th>
+                            <th style="width: 20%">题目编号</th>
+                            <th style="width: 20%">别名</th>
+                            <th style="width: 20%">题目名字</th>
+                            <th style="width: 20%"><a href="javascript:void(0)">
+                                <input type="button" class="btn btn-default" value="添加"></a></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="problem : ${problemlist}">
+                            <td th:text="${problem.problemID}">1</td>
+                            <td th:text="${problem.} / ${problem.}">1258</td>
+                            <td th:text="${problem.} / ${pass.}">你好</td>
+                            <td th:text="${problem.} / ${pass.}">181110111</td>
+                            <td>
+                                <a href="javascript:void(0)">
+                                    <input type="button" class="btn btn-danger" value="删除" >
+                                </a>
+                            </td>
+                        </tr>
+                        <tr th:each="problem : ${problemlist}">
+                            <td th:text="${problem.problemID}">2</td>
+                            <td th:text="${problem.} / ${problem.}">3396</td>
+                            <td th:text="${problem.} / ${pass.}">你坏</td>
+                            <td th:text="${problem.} / ${pass.}">181110100</td>
+                            <td><input type="button" class="btn btn-danger" value="删除"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+
+    </div>
+</div>
+<script language="JavaScript">
+    function dateStart()
+    {
+        //月份对应天数
+        MonHead = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        //给年下拉框赋内容
+        var y  = new Date().getFullYear();
+        for (var i = y; i < y+2; i++)
+            document.date.year.options.add(new Option(" "+ i +" 年", i));
+
+        //给小时下拉框赋内容
+        for (var i = 1; i < 13; i++)
+            document.date.hour.options.add(new Option(" " + i + " 点", i));
+
+        //给分钟下拉框赋内容
+        for (var i = 1; i < 60; i++)
+            document.date.minute.options.add(new Option(" " + i + " 分", i));
+
+        //给月下拉框赋内容
+        for (var i = 1; i < 13; i++)
+            document.date.month.options.add(new Option(" " + i + " 月", i));
+
+        document.date.year.value = y;
+        document.date.month.value = new Date().getMonth() + 1;
+        var n = MonHead[new Date().getMonth()];
+        if (  new Date().getMonth() ==1 && IsPinYear(yearvalue)  )
+            n++;
+        writeDay(n); //赋日期下拉框
+        document.date.day.value = new Date().getDate();
+    }
+
+    if(document.attachEvent)
+        window.attachEvent("onload", dateStart);
+    else
+        window.addEventListener('load', dateStart, false);
+
+    function selectYear(str) //年发生变化时日期发生变化(主要是判断闰平年)
+    {
+        var monthvalue = document.date.month.options[document.date.month.selectedIndex].value;
+        if (monthvalue == "")
+        {
+            var e = document.date.day;
+            optionsClear(e);
+            return;
+        }
+        var n = MonHead[monthvalue - 1];
+        if (  monthvalue ==2 && IsPinYear(str)  )
+            n++;
+        writeDay(n);
+    }
+
+    function selectMonth(str)   //月发生变化时日期联动
+    {
+        var yearvalue = document.date.year.options[document.date.year.selectedIndex].value;
+        if (yearvalue == "")
+        {
+            var e = document.date.day;
+            optionsClear(e);
+            return;
+        }
+        var n = MonHead[str - 1];
+        if (  str ==2 && IsPinYear(yearvalue)  )
+            n++;
+        writeDay(n);
+    }
+
+    function writeDay(n)   //据条件写日期的下拉框
+    {
+        var e = document.date.day; optionsClear(e);
+        for (var i=1; i<(n+1); i++)
+            e.options.add(new Option(" "+ i + " 日", i));
+    }
+
+
+
+
+    function IsPinYear(year)//判断是否闰平年
+    {
+        return(  0 == year%4 && ( year%100 !=0 || year%400 == 0 )  );
+    }
+
+    function optionsClear(e)
+    {
+        e.options.length = 1;
+    }
+</script>
+</body>
+<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/3.0.1/js/bootstrap.js"></script>
+</html>
