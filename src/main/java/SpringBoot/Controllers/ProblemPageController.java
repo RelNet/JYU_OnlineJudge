@@ -4,7 +4,6 @@ import Data.Problems.*;
 import Data.Submit.MainSubmit;
 import Database.OJProblemStatus.ProblemStatus;
 import JudgeSystem.*;
-import JudgeSystem.CompileFile.CompileGPP;
 import SpringBoot.WebCache.StatusCache;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,7 +15,6 @@ import java.util.List;
 
 @Controller
 public class ProblemPageController {
-    static StartJudge startJudge = new StartJudge();
     static final Object addMissionLock = new Object();
 
     // 从problempage提交之后，转到状态页面
@@ -46,10 +44,6 @@ public class ProblemPageController {
                     break;
                 default:
                     return "4xx";
-            }
-            synchronized (addMissionLock) {
-                submit.setJudgeMode(JudgeMode.ACM);
-                startJudge.addMission(submit);
             }
         } else {
             model.addAttribute("errorMessage", "你没有权限提交");

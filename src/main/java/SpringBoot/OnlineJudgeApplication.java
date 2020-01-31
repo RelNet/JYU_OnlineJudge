@@ -1,27 +1,37 @@
 package SpringBoot;
 
 import Database.JdbcConnection;
-import JudgeSystem.StartJudge;
+import JudgeSystem.JudgeConfig;
+import SpringBoot.Error.ConfigFileNotFind;
 import SpringBoot.WebCache.HomeCache;
 import SpringBoot.WebCache.ProblemSetCache;
 import SpringBoot.WebCache.StatusCache;
+import org.apache.commons.io.FileUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @SpringBootApplication
 public class OnlineJudgeApplication {
-    // 默认有4个核心
-    private static Integer CPUs = 4;
-    // 默认单位是MB
-    private static Integer Memory = 4096;
+    public static Map<String, JudgeConfig> judgeConfigMap = new HashMap<>();
 
     public static void main(String[] args) {
         SpringApplication.run(OnlineJudgeApplication.class, args);
-        dealArgs(args);
-        init();
+        try {
+            dealJson();
+        } catch (ConfigFileNotFind configFileNotFind) {
+            configFileNotFind.printStackTrace();
+            return;
+        }
+        dealArgs();
         System.out.println(JdbcConnection.getDatabasename() + "   " + JdbcConnection.getIp() + "   " + JdbcConnection.getPassword() + "   " + JdbcConnection.getPort() + "   " + JdbcConnection.getUser());
         HomeCache homeCache = new HomeCache();
         ProblemSetCache problemSetCache = new ProblemSetCache();
@@ -32,75 +42,55 @@ public class OnlineJudgeApplication {
     }
 
     // 处理命令行参数
-    private static void dealArgs(String... args) {
-        for (String arg : args) {
-            dealArg(arg);
-        }
+    private static void dealArgs() {
+
     }
 
-    // 根据参数不同进行不同的配置
-    private static void dealArg(String arg) {
-        // '='的位置
-        int indexOfEqual = arg.indexOf('=');
-        if (indexOfEqual == -1 || indexOfEqual == arg.length() - 1) {
+    // 读取json进行配置
+    private static void dealJson() throws ConfigFileNotFind {
+        File databaseJsonFile = new File(OnlineJudgeApplication.class.getResource("/SystemConfig/data_server.json").getPath());
+        if (!databaseJsonFile.exists()) {
+            throw new ConfigFileNotFind("数据库配置");
+        }
+
+        String databaseConfigString;
+        try {
+            databaseConfigString = FileUtils.readFileToString(databaseJsonFile, "UTF-8");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("读取database配置文件出错");
             return;
         }
-        String messageString = arg.substring(indexOfEqual + 1);
-        String settingMessageString = arg.substring(0, indexOfEqual);
+        JSONObject databaseJson = new JSONObject(databaseConfigString);
+        JdbcConnection.setDatabasename(databaseJson.getString("database_name"));
+        JdbcConnection.setIp(databaseJson.getString("ip"));
+        JdbcConnection.setPort(databaseJson.getString("port"));
+        JdbcConnection.setUser(databaseJson.getString("username"));
+        JdbcConnection.setPassword(databaseJson.getString("password"));
 
-        switch (settingMessageString) {
-            case "CUPs":
-                try {
-                    Integer message = Integer.getInteger(messageString);
-                    CPUs = message;
-                    break;
-                } catch (SecurityException e) {
-                    e.printStackTrace();
-                    return;
-                }
-            case "Memory":
-                try {
-                    Integer message = Integer.getInteger(messageString);
-                    Memory = message;
-                    break;
-                } catch (SecurityException e) {
-                    e.printStackTrace();
-                    return;
-                }
-            case "username":
-                JdbcConnection.setUser(messageString);
-                break;
-            case "password":
-                JdbcConnection.setPassword(messageString);
-                break;
-            case "ip":
-                if (isIP(messageString)) {
-                    JdbcConnection.setIp(messageString);
-                }
-                break;
-            case "databasename":
-                JdbcConnection.setDatabasename(messageString);
-                break;
-            case "port":
-                try {
-                    Integer message = Integer.getInteger(messageString);
-                    JdbcConnection.setPort(messageString);
-                    break;
-                } catch (SecurityException e) {
-                    e.printStackTrace();
-                    return;
-                }
-            default:
 
+        File judgeServerJsonFile = new File(OnlineJudgeApplication.class.getResource("/SystemConfig/judge_server.json").getPath());
+        if (!judgeServerJsonFile.exists()) {
+            throw new ConfigFileNotFind("judge服务器配置");
         }
-    }
 
-    // 初始化一些配置
-    private static void init() {
-        // 根据CPU性能配置计算型线程池大小
-
-        // 根据Memory大小配置IO型线程池大小
-
+        String judgeConfigString;
+        try {
+            judgeConfigString = FileUtils.readFileToString(judgeServerJsonFile, "UTF-8");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("读取judge配置文件出错");
+            return;
+        }
+        JSONObject judgeJson = new JSONObject(judgeConfigString);
+        JSONArray judgeServerArray = judgeJson.getJSONArray("server");
+        for (int i = 0; i < judgeServerArray.length(); i++) {
+            JSONObject tempJudge = judgeServerArray.getJSONObject(i);
+            String tempJudgeIp = tempJudge.getString("ip");
+            String tempJudgePort = tempJudge.getString("port");
+            JudgeConfig tempConfig = new JudgeConfig(tempJudgeIp, tempJudgePort);
+            judgeConfigMap.put(tempJudgeIp, tempConfig);
+        }
     }
 
     // 判断IPv4格式地址是否合法
