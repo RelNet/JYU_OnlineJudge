@@ -1,8 +1,6 @@
 package SpringBoot.Controllers;
 
 import Database.ProblemPage;
-import SpringBoot.OnlineJudgeApplication;
-import SpringBoot.WebCache.ProblemSetCache;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;

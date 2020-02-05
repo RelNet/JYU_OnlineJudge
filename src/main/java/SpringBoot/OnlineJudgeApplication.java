@@ -3,14 +3,12 @@ package SpringBoot;
 import Database.JdbcConnection;
 import JudgeSystem.JudgeConfig;
 import SpringBoot.Error.ConfigFileNotFind;
-import SpringBoot.WebCache.HomeCache;
-import SpringBoot.WebCache.ProblemSetCache;
-import SpringBoot.WebCache.StatusCache;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @SpringBootApplication
+@EnableCaching
 public class OnlineJudgeApplication {
     public static Map<String, JudgeConfig> judgeConfigMap = new HashMap<>();
 
@@ -33,12 +32,7 @@ public class OnlineJudgeApplication {
         }
         dealArgs();
         System.out.println(JdbcConnection.getDatabasename() + "   " + JdbcConnection.getIp() + "   " + JdbcConnection.getPassword() + "   " + JdbcConnection.getPort() + "   " + JdbcConnection.getUser());
-        HomeCache homeCache = new HomeCache();
-        ProblemSetCache problemSetCache = new ProblemSetCache();
-        StatusCache statusCache = new StatusCache();
-//        homeCache.start();
-//        problemSetCache.start();
-        statusCache.start();
+        
     }
 
     // 处理命令行参数

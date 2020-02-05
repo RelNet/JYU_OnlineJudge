@@ -4,7 +4,6 @@ import Data.Problems.*;
 import Data.Submit.MainSubmit;
 import Database.OJProblemStatus.ProblemStatus;
 import JudgeSystem.*;
-import SpringBoot.WebCache.StatusCache;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
