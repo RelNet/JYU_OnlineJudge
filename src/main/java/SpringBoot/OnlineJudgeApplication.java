@@ -6,9 +6,12 @@ import SpringBoot.Error.ConfigFileNotFind;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +22,10 @@ import java.util.regex.Pattern;
 
 @SpringBootApplication
 @EnableCaching
+@EnableAsync
 public class OnlineJudgeApplication {
+    private static final Logger logger = LoggerFactory.getLogger(OnlineJudgeApplication.class);
+
     public static Map<String, JudgeConfig> judgeConfigMap = new HashMap<>();
 
     public static void main(String[] args) {

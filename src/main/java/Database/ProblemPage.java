@@ -5,6 +5,7 @@ import JudgeSystem.JudgeLanguage;
 import JudgeSystem.JudgeMode;
 import JudgeSystem.ProblemType;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProblemPage {
+public class ProblemPage implements Serializable {
     public Integer problem_id;
     public String title;
     public String source;

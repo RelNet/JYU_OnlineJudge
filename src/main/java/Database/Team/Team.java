@@ -3,11 +3,12 @@ package Database.Team;
 import Data.Team.TeamMessage;
 import Database.JdbcConnection;
 
+import java.io.Serializable;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Team extends TeamMessage {
+public class Team extends TeamMessage implements Serializable {
     /**
      * 下面你的其他方法使用前最好都先用下这个检查用户名
      * 判断这个用户有没有属于这个团队中

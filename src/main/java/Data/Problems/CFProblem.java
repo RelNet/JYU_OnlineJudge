@@ -16,6 +16,22 @@ public class CFProblem extends MainProblemMessage implements Serializable {
     //List里面的顺序要是inputoutput
     public List<InputOutput> SampleInputOutput = new ArrayList<InputOutput>();
 
+    @Override
+    public String toString() {
+        return "CFProblem{" +
+                "InputDescribe='" + InputDescribe + '\'' +
+                ", OutputDescribe='" + OutputDescribe + '\'' +
+                ", TimeLimit='" + TimeLimit + '\'' +
+                ", MemoryLimit='" + MemoryLimit + '\'' +
+                ", SampleInputOutput=" + SampleInputOutput +
+                ", ProblemDescribe='" + ProblemDescribe + '\'' +
+                ", AcceptNumber=" + AcceptNumber +
+                ", AttemptNumber=" + AttemptNumber +
+                ", source='" + source + '\'' +
+                ", title='" + title + '\'' +
+                '}';
+    }
+
     /**
      * GetMessage()
      *

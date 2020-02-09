@@ -28,6 +28,18 @@ public class MCQProblem extends MainProblemMessage implements Serializable {
         this.ProblemAnswer = ProblemAnswer;
     }
 
+    @Override
+    public String toString() {
+        return "MCQProblem{" +
+                "ProblemOption=" + ProblemOption +
+                ", ProblemAnswer=" + ProblemAnswer +
+                ", ProblemDescribe='" + ProblemDescribe + '\'' +
+                ", AcceptNumber=" + AcceptNumber +
+                ", AttemptNumber=" + AttemptNumber +
+                ", source='" + source + '\'' +
+                ", title='" + title + '\'' +
+                '}';
+    }
 
     @Override
     public void UpdateProblemDescribe(String NewProblemDescribe, int ProblemID) {

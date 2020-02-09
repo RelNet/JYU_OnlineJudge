@@ -30,6 +30,18 @@ public class FBProblem extends MainProblemMessage implements Serializable {
     }
 
     @Override
+    public String toString() {
+        return "FBProblem{" +
+                "ans=" + ans +
+                ", ProblemDescribe='" + ProblemDescribe + '\'' +
+                ", AcceptNumber=" + AcceptNumber +
+                ", AttemptNumber=" + AttemptNumber +
+                ", source='" + source + '\'' +
+                ", title='" + title + '\'' +
+                '}';
+    }
+
+    @Override
     public String GetProblemDescribe(int ProblemID) {
         Connection GetConnectionDatabase = null;
         PreparedStatement GetPreparedStatement = null;
