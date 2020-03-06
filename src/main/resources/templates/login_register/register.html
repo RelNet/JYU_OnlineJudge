@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>注册页</title>
+
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="container">
+    <div class="row align-items-center">
+        <span class="col"></span>
+        <form class="col-6 shadow p-3 mb-5 bg-white rounded rounded-lg border border-light border-left-0" method="post"
+              action="welcome">
+            <div class="form-group form-group-lg">
+                <label for="username">用户名</label>
+                <input type="text" class="form-control" id="username" name="username">
+            </div>
+            <div class="form-group form-group-lg">
+                <label for="password">密码</label>
+                <input type="password" class="form-control" id="password" name="password">
+            </div>
+            <div class="form-group form-group-lg">
+                <label for="school">学校</label>
+                <select name="school" id="school" class="form-control">
+                    <option th:each="school : ${schools}" th:text="${school}">JYU</option>
+                </select>
+            </div>
+            <div class="form-group form-group-lg">
+                <label for="studentId">学号</label>
+                <input type="text" class="form-control" id="studentId" name="studentId">
+            </div>
+            <div class="form-group form-group-lg">
+                <label for="classId">班级</label>
+                <input type="text" class="form-control" id="classId" name="classId">
+            </div>
+            <br>
+            <input type="submit" class="btn btn-primary btn-outline-success text-white btn-lg btn-block" value="注册">
+        </form>
+        <span class="col"></span>
+    </div>
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

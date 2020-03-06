@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>主页</title>
+
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="container">
+    <!--    导航栏-->
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark row">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="home">主页</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="set/1">题集</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contest/1">比赛</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="status/1">状态</a>
+                </li>
+            </ul>
+            <div class="dropdown offset-md-9">
+                <a class="dropdown-toggle text-info" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true"
+                   aria-expanded="false"
+                   th:text="${#session.getValue('username')}">
+                    HZH
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" th:href="@{'user/'+${#session.getValue('userId')}}">个人主页</a>
+                    <a class="dropdown-item" href="/">登出</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!--    通知-->
+    <br>
+    <div class="row">
+        <span class="col"></span>
+        <div class="col-9 border rounded">
+            <h2>通知</h2>
+            <ul class="list-group">
+                <li class="list-group-item text-danger text-break">此为测试系统</li>
+            </ul>
+        </div>
+        <span class="col"></span>
+    </div>
+
+    <!--    正在进行的比赛-->
+    <br>
+    <br>
+    <div class="row">
+        <span class="col"></span>
+        <div class="col-9 border rounded">
+            <h2>正在进行的比赛</h2>
+            <div class="list-group">
+                <a class="list-group-item list-group-item-action text-break" href="#"></a>
+            </div>
+        </div>
+        <span class="col"></span>
+    </div>
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

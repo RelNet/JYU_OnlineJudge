@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>欢迎</title>
+
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <span class="col"></span>
+        <h2>欢迎你的加入</h2>
+        <span class="col"></span>
+    </div>
+    <div class="row">
+        <span class="col"></span>
+        <h4 class="text-danger">你的登录id（注意保存）：</h4>
+        <p th:text="${id}">123</p>
+        <span class="col"></span>
+    </div>
+    <div class="row">
+        <span class="col"></span>
+        <a href="/">返回登录页面</a>
+        <span class="col"></span>
+    </div>
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

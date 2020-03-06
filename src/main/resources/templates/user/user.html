@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>管理员</title>
+
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="container">
+    <!--    导航栏-->
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark row">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">主页</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/set/1">题集</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contestset/1">比赛</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/status/1">状态</a>
+                </li>
+            </ul>
+            <div class="dropdown offset-md-9">
+                <a class="dropdown-toggle text-info" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true"
+                   aria-expanded="false"
+                   th:text="${#session.getValue('username')}">
+                    HZH
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/user">个人主页</a>
+                    <a class="dropdown-item" href="/">登出</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!--    个人信息卡片-->
+    <br>
+    <br>
+    <div class="row">
+        <span class="col"></span>
+        <div class="col-6 card">
+            <div class="card-body">
+                <h2 th:text="${#session.getValue('username')}" class="card-title">HZH的个人信息</h2>
+                <br>
+                <div class="form-inline">
+                    <h5 class="card-subtitle mb-2 text-muted">账号类型:</h5>
+                    <h5 th:if="${userType} == 0" class="card-text">管理员</h5>
+                    <h5 th:if="${userType} == 1" class="card-text">教师</h5>
+                    <h5 th:if="${userType} == 2" class="card-text">学生</h5>
+                </div>
+                <br>
+                <div class="form-inline">
+                    <h5 class="card-subtitle mb-2 text-muted">学校:</h5>
+                    <h5 th:text="${user.getSchool()}" class="card-text">JYU</h5>
+                </div>
+                <br>
+                <div class="form-inline">
+                    <h5 class="card-subtitle mb-2 text-muted">班级:</h5>
+                    <h5 th:text="${user.getClassId()}" class="card-text">算盘123</h5>
+                </div>
+                <br>
+                <div class="form-inline">
+                    <h5 class="card-subtitle mb-2 text-muted">学号:</h5>
+                    <h5 th:text="${user.getStudentId()}" class="card-text">123456789</h5>
+                </div>
+            </div>
+        </div>
+
+        <span class="col"></span>
+
+        <!--    管理员界面-->
+        <div th:if="${userType} == 0" class="col-4 rounded shadow">
+            <h3>控制面板</h3>
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="user-group">
+                    <a class="btn btn-secondary btn-primary text-light" href="#">所有用户</a>
+                    <a class="btn btn-primary text-light" href="#">我自己</a>
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="team-group">
+                    <a class="btn btn-secondary btn-primary text-light" href="#">全部团队</a>
+                    <a class="btn btn-primary text-light" href="#">我的团队</a>
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="team-group">
+                    <a class="btn btn-primary text-light" href="#">添加题目</a>
+                </div>
+            </div>
+        </div>
+
+        <!--        教师界面-->
+        <div th:if="${userType} == 1" class="col-4 rounded shadow">
+            <h3>控制面板</h3>
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="user-group">
+                    <a class="btn btn-secondary btn-primary text-light" href="#">所有用户</a>
+                    <a class="btn btn-primary text-light" href="#">我自己</a>
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="team-group">
+                    <a class="btn btn-primary text-light" href="#">我的团队</a>
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="team-group">
+                    <a class="btn btn-primary text-light" href="#">添加题目</a>
+                </div>
+            </div>
+        </div>
+
+        <!--        学生界面-->
+        <div th:if="${userType} == 2" class="col-4 rounded shadow">
+            <h3>控制面板</h3>
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="user-group">
+                    <a class="btn btn-primary text-light" href="#">我自己</a>
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="team-group">
+                    <a class="btn btn-primary text-light" href="#">我的团队</a>
+                </div>
+            </div>
+        </div>
+
+        <span class="col"></span>
+    </div>
+
+    <!--    失败的题目-->
+    <br>
+    <div class="row">
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                            未通过的题目
+                        </button>
+                    </h2>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                     data-parent="#accordionExample">
+                    <div class="card-body">
+                        <a th:each="problem : ${user.getFailedList()}" th:text="${problem}"
+                           th:href="@{/problem/{id}(id = ${problem})}" class="btn-sm">test</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--    提交过的题目-->
+    <br>
+    <div class="row">
+        <div class="accordion" id="accordionTwo">
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            提交过的题目
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionTwo">
+                    <div class="card-body">
+                        <a th:each="problem : ${user.getSubmitList()}" th:text="${problem}"
+                           th:href="@{/problem/{id}(id = ${problem})}" class="btn-sm">test</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--    通过的题目-->
+    <br>
+    <div class="row">
+        <div class="accordion" id="accordionThree">
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            通过的题目
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionThree">
+                    <div class="card-body">
+                        <a th:each="problem : ${user.getAcceptList()}" th:text="${problem}"
+                           th:href="@{/problem/{id}(id = ${problem})}" class="btn-sm">test</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
