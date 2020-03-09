@@ -4,7 +4,8 @@ package judge;
 import java.io.Serializable;
 
 // OJ判题结果枚举类
-public enum JudgeSystemConstant implements Serializable {
+public enum JudgeSystemConstant {
+    WAITING,
     AC,
     WA,
     PE,
@@ -13,16 +14,12 @@ public enum JudgeSystemConstant implements Serializable {
     MLE,
     RE,
     CE,
-    RJ,// Rejudge
-    WAITING;
-
-    @Override
-    public String toString() {
-        return "JudgeSystemConstant{}";
-    }
+    RJ;// Rejudge
 
     public static JudgeSystemConstant IntToEnum(int value) {
         switch (value) {
+            case 0:
+                return WAITING;
             case 1:
                 return AC;
             case 2:
@@ -41,10 +38,35 @@ public enum JudgeSystemConstant implements Serializable {
                 return CE;
             case 9:
                 return RJ;
-            case 10:
-                return WAITING;
             default:
                 return null;
+        }
+    }
+
+    public static Integer EnumToInt(JudgeSystemConstant constant) {
+        switch (constant) {
+            case WAITING:
+                return 0;
+            case AC:
+                return 1;
+            case WA:
+                return 2;
+            case PE :
+                return 3;
+            case TLE:
+                return 4;
+            case OLE:
+                return 5;
+            case MLE:
+                return 6;
+            case RE:
+                return 7;
+            case CE:
+                return 8;
+            case RJ:
+                return 9;
+            default:
+                return -1;
         }
     }
 }

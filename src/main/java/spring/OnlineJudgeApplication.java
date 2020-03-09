@@ -38,7 +38,6 @@ public class OnlineJudgeApplication {
         }
         dealArgs();
         System.out.println(JdbcConnection.getDatabasename() + "   " + JdbcConnection.getIp() + "   " + JdbcConnection.getPassword() + "   " + JdbcConnection.getPort() + "   " + JdbcConnection.getUser());
-
     }
 
     // 处理命令行参数

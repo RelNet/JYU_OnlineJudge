@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>状态</title>
+
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="container">
+    <!--    导航栏-->
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark row">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">主页</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/set/1">题集</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contestset/1">比赛</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/status/0/1">状态</a>
+                </li>
+            </ul>
+            <div class="dropdown offset-md-9">
+                <a class="dropdown-toggle text-info" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true"
+                   aria-expanded="false">
+                    HZH
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/user/">个人主页</a>
+                    <a class="dropdown-item" href="/">登出</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <br>
+    <div class="row">
+        <span class="col"></span>
+        <p>
+            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button"
+               aria-expanded="false" aria-controls="collapseExample">
+                页码
+            </a>
+        </p>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <a th:each="pa : ${pages}" th:text="${pa}" th:href="@{/status/{con}/{p}(con = ${})(p=${pa})}">1</a>
+            </div>
+        </div>
+        <span class="col"></span>
+    </div>
+
+    <br>
+    <div class="row">
+        <span class="col"></span>
+        <div class="col-11">
+            <ul class="list-group list-group-horizontal text-break">
+                <li class="list-group-item col-2">提交ID</li>
+                <li class="list-group-item col-2">题目ID</li>
+                <li class="list-group-item col-2">用户ID</li>
+                <li class="list-group-item col-2">状态</li>
+                <li class="list-group-item col-2">语言</li>
+                <li class="list-group-item col-2">提交时间</li>
+            </ul>
+            <a th:each="submit : ${status.getSubmits()}" th:href="1">
+                <ul class="list-group list-group-horizontal text-break">
+                    <li class="list-group-item col-2">132</li>
+                    <li class="list-group-item col-2">332</li>
+                    <li class="list-group-item col-2">测试</li>
+                    <li class="list-group-item col-2">测试状态</li>
+                    <li class="list-group-item col-2">测试语言</li>
+                    <li class="list-group-item col-2">测试时间</li>
+                </ul>
+            </a>
+        </div>
+        <span class="col"></span>
+    </div>
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

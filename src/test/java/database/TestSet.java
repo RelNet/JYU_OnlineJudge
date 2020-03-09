@@ -1,10 +1,7 @@
 package database;
 
-import data.problem.Problem;
-import database.set.SetService;
+import database.problem.SetService;
 import org.junit.Test;
-
-import java.util.ArrayList;
 
 public class TestSet {
     @Test

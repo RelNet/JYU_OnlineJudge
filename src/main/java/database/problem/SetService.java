@@ -1,4 +1,4 @@
-package database.set;
+package database.problem;
 
 import data.problem.Problem;
 import database.Connect;
@@ -23,16 +23,16 @@ public class SetService implements Cloneable {
         return temp;
     }
 
-    private final String GET_SET = "select id, title, submit, accept, source from problem where id between ";
+    private final String GET_SET = "select id, title, submit, accept, source from problem limit ";
     private final String GET_MAX_PAGE = "select count(*) from problem";
 
     public ArrayList<Problem> get(Integer page) {
         ArrayList<Problem> list = new ArrayList<>();
         try {
             Connection connection = Connect.getConnection();
-            Integer start = (page - 1) * 50 + 1;
+            Integer start = (page - 1) * 50;
             Integer end = page * 50;
-            PreparedStatement statement = connection.prepareStatement(GET_SET + start.toString() + " and " + end.toString());
+            PreparedStatement statement = connection.prepareStatement(GET_SET + start.toString() + ", " + end.toString());
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Problem temp = new Problem();

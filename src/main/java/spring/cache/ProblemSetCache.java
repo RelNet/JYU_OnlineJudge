@@ -1,32 +1,30 @@
 package spring.cache;
 
 import data.problem.Problem;
-import database.set.SetService;
+import database.problem.SetService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 获取ProblemSet缓存
  */
 @Service
-public class SetCache {
-    private static final Logger logger = LoggerFactory.getLogger(SetCache.class);
+public class ProblemSetCache {
+    private static final Logger logger = LoggerFactory.getLogger(ProblemSetCache.class);
 
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
     private Duration TIMEOUT = Duration.ofMinutes(5);
 
-    private String SET_CACHE_NAME = "set";
-    private String MAX_SET_CACHE_NAME = "set_max";
+    private String SET_CACHE_NAME = "problem_set";
+    private String MAX_SET_CACHE_NAME = "problem_set_max";
 
     /**
      * 缓存第page页
@@ -49,7 +47,7 @@ public class SetCache {
      *
      * @return
      */
-    public ArrayList<Integer> maxPage() {
+    public ArrayList<Integer> pages() {
         ArrayList<Integer> max = (ArrayList<Integer>) redisTemplate.opsForValue().get(MAX_SET_CACHE_NAME);
         if (null == max) {
             SetService service = SetService.copy();

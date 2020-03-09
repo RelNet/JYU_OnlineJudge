@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import spring.cache.SetCache;
+import spring.cache.ProblemSetCache;
 import spring.cache.UserInfoCache;
 
 import javax.servlet.http.HttpSession;
@@ -17,11 +17,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 @Controller
-public class SetController {
-    private static final Logger logger = LoggerFactory.getLogger(SetController.class);
+public class ProblemSetController {
+    private static final Logger logger = LoggerFactory.getLogger(ProblemSetController.class);
 
     @Autowired
-    private SetCache setCache;
+    private ProblemSetCache problemSetCache;
 
     @Autowired
     private UserInfoCache userInfoCache;
@@ -33,13 +33,13 @@ public class SetController {
         if (null == userId) {
             return "error/401";
         }
-        ArrayList<Problem> list = setCache.get(page);
+        ArrayList<Problem> list = problemSetCache.get(page);
         UserInfo userInfo = userInfoCache.get(userId);
         getPrivateSet(list, userInfo.getAccept());
         modelMap.addAttribute("problems", list);
-        modelMap.addAttribute("pages", setCache.maxPage());
+        modelMap.addAttribute("pages", problemSetCache.pages());
 
-        return "set/set";
+        return "problem/set";
     }
 
     /**
